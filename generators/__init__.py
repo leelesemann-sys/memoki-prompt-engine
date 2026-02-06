@@ -1,0 +1,1 @@
+"""Bildgeneratoren für Memory-Karten."""

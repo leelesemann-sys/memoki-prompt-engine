@@ -1,0 +1,22 @@
+[
+  {
+    "paar": ["Fernseher", "Fernbedienung"],
+    "kategorie": "Elektronik"
+  },
+  {
+    "paar": ["Schuh", "Schnürsenkel"],
+    "kategorie": "Kleidung"
+  },
+  {
+    "paar": ["Topf", "Deckel"],
+    "kategorie": "Küche"
+  },
+  {
+    "paar": ["Nadel", "Faden"],
+    "kategorie": "Handarbeit"
+  },
+  {
+    "paar": ["Hammer", "Nagel"],
+    "kategorie": "Werkzeug"
+  }
+]
