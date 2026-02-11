@@ -1,6 +1,6 @@
 """Zentrale Konfiguration für llm-semantic-memory.
 
-Lädt API-Keys und Modell-Einstellungen aus .env-Datei.
+Lädt API-Keys und Modell-Einstellungen aus .env-Datei oder Streamlit Secrets.
 """
 
 import os
@@ -8,8 +8,18 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+def _get_secret(key: str, default: str = "") -> str:
+    """Liest Secret aus Streamlit Secrets (Cloud) oder .env (lokal)."""
+    try:
+        import streamlit as st
+        return st.secrets.get(key, os.getenv(key, default))
+    except Exception:
+        return os.getenv(key, default)
+
+
 # Google AI Studio (Gemini)
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
+GOOGLE_API_KEY = _get_secret("GOOGLE_API_KEY")
 GOOGLE_CHAT_MODEL = "gemini-2.5-flash"  # Text-Chat für MEMOKI Agent
 GOOGLE_IMAGE_MODEL = "gemini-3-pro-image-preview"
 GOOGLE_IMAGE_MODEL_FAST = "gemini-2.5-flash-image"  # Fallback für Mathe-Karten
