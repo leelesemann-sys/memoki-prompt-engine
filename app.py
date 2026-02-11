@@ -24,7 +24,7 @@ st.set_page_config(
     page_title="MEMOKI – KI-Memory-Spiele-Macher",
     page_icon="🎴",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
 # --- Custom CSS ---
