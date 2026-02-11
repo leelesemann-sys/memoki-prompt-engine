@@ -477,13 +477,20 @@ with right_col:
         deck = st.session_state.deck
         total_pairs = len(deck.cards) // 2
 
-        # --- Modus-Buttons ---
-        btn_col1, btn_col2 = st.columns(2)
+        # --- ZIP für Download vorbereiten ---
+        sorted_for_zip = sorted(deck.cards, key=lambda c: (c.pair_id, c.label))
+        zip_buf = io.BytesIO()
+        with zipfile.ZipFile(zip_buf, "w", zipfile.ZIP_DEFLATED) as zf:
+            for card in sorted_for_zip:
+                if card.image is not None:
+                    img_buf = io.BytesIO()
+                    card.image.save(img_buf, format="PNG")
+                    safe_label = card.label.replace(" ", "_").replace("/", "-")
+                    zf.writestr(f"Paar{card.pair_id:02d}_{safe_label}.png", img_buf.getvalue())
+
+        # --- Aktions-Buttons ---
+        btn_col1, btn_col2, btn_col3 = st.columns(3)
         with btn_col1:
-            if st.button("👁️ Karten zeigen", use_container_width=True):
-                st.session_state.view_mode = "preview"
-                st.rerun()
-        with btn_col2:
             if st.button("🎮 Mischen & Spielen", use_container_width=True):
                 random.shuffle(deck.cards)
                 st.session_state.flipped = set()
@@ -493,6 +500,18 @@ with right_col:
                 st.session_state.moves = 0
                 st.session_state.view_mode = "play"
                 st.rerun()
+        with btn_col2:
+            if st.button("👁️ Karten zeigen", use_container_width=True):
+                st.session_state.view_mode = "preview"
+                st.rerun()
+        with btn_col3:
+            st.download_button(
+                "📥 Alle Karten herunterladen (ZIP)",
+                data=zip_buf.getvalue(),
+                file_name="memoki-karten.zip",
+                mime="application/zip",
+                use_container_width=True,
+            )
 
         # === PREVIEW-MODUS ===
         if st.session_state.view_mode == "preview":
@@ -521,23 +540,6 @@ with right_col:
                     else:
                         st.markdown("*(kein Bild)*")
                     st.caption(f"#{card.pair_id} – {card.label}")
-
-            # --- ZIP-Download ---
-            zip_buf = io.BytesIO()
-            with zipfile.ZipFile(zip_buf, "w", zipfile.ZIP_DEFLATED) as zf:
-                for card in sorted_cards:
-                    if card.image is not None:
-                        img_buf = io.BytesIO()
-                        card.image.save(img_buf, format="PNG")
-                        safe_label = card.label.replace(" ", "_").replace("/", "-")
-                        zf.writestr(f"Paar{card.pair_id:02d}_{safe_label}.png", img_buf.getvalue())
-            st.download_button(
-                "📥 Alle Karten herunterladen (ZIP)",
-                data=zip_buf.getvalue(),
-                file_name="memoki-karten.zip",
-                mime="application/zip",
-                use_container_width=True,
-            )
 
         # === SPIEL-MODUS ===
         else:
