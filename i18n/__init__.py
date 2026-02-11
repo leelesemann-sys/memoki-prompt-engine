@@ -23,8 +23,8 @@ LANGUAGES: dict[str, dict] = {
 }
 
 LANG_OPTIONS = [
-    ("de", "DE"),
-    ("en", "EN"),
+    ("de", "Deutsch"),
+    ("en", "English"),
 ]
 
 DEFAULT_LANG = "de"
@@ -71,16 +71,29 @@ def get_mode_data() -> dict:
     return de.MODE_DATA
 
 
+def _on_lang_change():
+    """Callback fuer Sprachwechsel via pills."""
+    _code_map = {label: code for code, label in LANG_OPTIONS}
+    selected_label = st.session_state.get("lang_pills")
+    if selected_label and selected_label in _code_map:
+        new_code = _code_map[selected_label]
+        if new_code != get_lang():
+            set_lang(new_code)
+
+
 def render_lang_selector():
-    """Rendert einen Sprachumschalter in der Sidebar."""
+    """Rendert einen kompakten Sprachumschalter (DE | EN) als Pills."""
     if "lang" not in st.session_state:
         st.session_state.lang = DEFAULT_LANG
 
-    cols = st.columns(len(LANG_OPTIONS))
-    for i, (code, label) in enumerate(LANG_OPTIONS):
-        with cols[i]:
-            is_active = get_lang() == code
-            btn_type = "primary" if is_active else "secondary"
-            if st.button(label, key=f"lang_{code}", type=btn_type, use_container_width=True):
-                set_lang(code)
-                st.rerun()
+    labels = [label for _, label in LANG_OPTIONS]
+    current = get_lang()
+    default_label = dict(LANG_OPTIONS).get(current, labels[0])
+
+    st.pills(
+        label="🌐",
+        options=labels,
+        default=default_label,
+        key="lang_pills",
+        on_change=_on_lang_change,
+    )

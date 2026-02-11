@@ -19,7 +19,7 @@ STRINGS: dict[str, str] = {
     "mode.classic.desc": "2x the same image",
     "mode.paare.name": "Pairs Memory",
     "mode.paare.desc": "Related objects (TV & Remote)",
-    "mode.teekesselchen.name": "Homonym Memory",
+    "mode.teekesselchen.name": "Teapot Memory",
     "mode.teekesselchen.desc": "Same word, different picture (Bat & Bat)",
     "mode.mathe_abstrakt.name": "Math Memory I",
     "mode.mathe_abstrakt.desc": "Number \u2194 abstract shapes (5 \u2194 squares)",
@@ -60,7 +60,7 @@ STRINGS: dict[str, str] = {
     "greeting.hello": "Hello! I\u2019m **MEMOKI** \U0001f0cf\n\n",
     "greeting.mode_chosen": "You chose **{mode_name}** \u2013 great choice!\n\n",
     "greeting.teekesselchen": (
-        "I\u2019ll pick the words from my collection of 130 homonyms.\n"
+        "I\u2019ll pick the words from my collection of 119 homonyms.\n"
         "Just tell me:\n"
         "- What **style**? (Cartoon, Photo, Watercolor \u2026)\n"
         "- For **whom**? (Kids, Teenagers, Adults?)"
@@ -106,11 +106,11 @@ STRINGS: dict[str, str] = {
 
     # Teekesselchen
     "gen.tk.status": "\U0001f9c6 Generating {num_pairs} homonym pairs...",
-    "gen.tk.selecting": "\U0001f4dd Picking {num_pairs} homonyms from 130 words...",
+    "gen.tk.selecting": "\U0001f4dd Picking {num_pairs} homonyms from 119 words...",
     "gen.tk.words_ok": "\u2705 Words: {words}",
     "gen.tk.images": "\U0001f5bc\ufe0f Generating {count} images in parallel (2 per word)...",
-    "gen.tk.done": "\u2705 Done! Your Homonym Memory is ready!",
-    "gen.tk.complete_msg": "\U0001f389 Your **Homonym Memory** with {num_pairs} word pairs is ready! Find the two meanings!",
+    "gen.tk.done": "\u2705 Done! Your Teapot Memory is ready!",
+    "gen.tk.complete_msg": "\U0001f389 Your **Teapot Memory** with {num_pairs} word pairs is ready! Find the two meanings!",
 
     # Math Abstract
     "gen.ma.status": "\U0001f522 Generating Math Memory with {num_pairs} numbers...",
@@ -244,7 +244,7 @@ Note: "shape" only needed for mathe_abstrakt, omit for other modes.
     "hiw.nav.architecture": "\U0001f3d7\ufe0f Architecture Overview",
     "hiw.nav.classic": "\U0001f0cf Classic Memory",
     "hiw.nav.paare": "\U0001f46b Pairs Memory",
-    "hiw.nav.teekesselchen": "\U0001f9c6 Homonym Memory",
+    "hiw.nav.teekesselchen": "\U0001f9c6 Teapot Memory",
     "hiw.nav.mathe_abstrakt": "\U0001f522 Math I (Abstract)",
     "hiw.nav.mathe_konkret": "\U0001f9ee Math II (Concrete)",
     "hiw.nav.style": "\U0001f3a8 Style & Audience",
@@ -467,7 +467,7 @@ MODE_DATA = {
 
     "teekesselchen": {
         "icon": "\U0001f9c6",
-        "title": "Homonym Memory",
+        "title": "Teapot Memory",
         "what": (
             "Homonyms are words with multiple meanings. "
             "For example: *Bank* (park bench vs. financial institution), *Bat* (animal vs. sports equipment), "
@@ -476,7 +476,7 @@ MODE_DATA = {
             "Players must recognize that both images represent the same word."
         ),
         "how": [
-            ("1. No theme needed", "Homonyms come from the curated knowledge base <code>teekesselchen_v2.json</code>."),
+            ("1. No theme needed", "Homonyms come from the curated, language-specific knowledge base (<code>teekesselchen_en.json</code> / <code>teekesselchen_de.json</code>)."),
             ("2. Select words", "<code>load_teekesselchen()</code> randomly selects N entries with both meanings."),
             ("3. Build prompts", "A separate image prompt is created for each meaning, clearly depicting the specific interpretation."),
             ("4. Generate images", "Both meanings are generated as separate cards."),

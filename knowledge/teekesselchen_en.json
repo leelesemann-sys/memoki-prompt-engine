@@ -1,0 +1,1684 @@
+{
+  "metadata": {
+    "description": "Curated English homonyms for MEMOKI Teapot Memory",
+    "language": "en",
+    "source": "manually curated",
+    "version": "1.1",
+    "last_updated": "2026-02-11",
+    "criteria": [
+      "Both meanings must be visually representable",
+      "No abstract concepts",
+      "No outdated or regional terms",
+      "Kid-friendly",
+      "Correct German translations included"
+    ]
+  },
+  "entries": [
+    {
+      "id": 1,
+      "word": "Bat",
+      "meaning_a": {
+        "de": "Fledermaus",
+        "en": "bat (animal)",
+        "prompt": "small flying bat animal with spread wings at night"
+      },
+      "meaning_b": {
+        "de": "Baseballschläger",
+        "en": "baseball bat",
+        "prompt": "wooden baseball bat"
+      }
+    },
+    {
+      "id": 2,
+      "word": "Bank",
+      "meaning_a": {
+        "de": "Parkbank",
+        "en": "park bench",
+        "prompt": "wooden park bench in a garden"
+      },
+      "meaning_b": {
+        "de": "Geldinstitut",
+        "en": "bank (finance)",
+        "prompt": "bank building exterior with columns"
+      }
+    },
+    {
+      "id": 3,
+      "word": "Bark",
+      "meaning_a": {
+        "de": "Baumrinde",
+        "en": "tree bark",
+        "prompt": "close-up of rough tree bark texture"
+      },
+      "meaning_b": {
+        "de": "Bellen (Hund)",
+        "en": "dog bark",
+        "prompt": "dog barking with open mouth"
+      }
+    },
+    {
+      "id": 4,
+      "word": "Bow",
+      "meaning_a": {
+        "de": "Schleife",
+        "en": "ribbon bow",
+        "prompt": "decorative ribbon bow tied in a knot"
+      },
+      "meaning_b": {
+        "de": "Bogen (Waffe)",
+        "en": "archery bow",
+        "prompt": "archery bow with arrow"
+      }
+    },
+    {
+      "id": 5,
+      "word": "Crane",
+      "meaning_a": {
+        "de": "Kranich",
+        "en": "crane bird",
+        "prompt": "elegant crane bird standing in water"
+      },
+      "meaning_b": {
+        "de": "Baukran",
+        "en": "construction crane",
+        "prompt": "tall yellow construction crane on a building site"
+      }
+    },
+    {
+      "id": 6,
+      "word": "Date",
+      "meaning_a": {
+        "de": "Dattel",
+        "en": "date (fruit)",
+        "prompt": "brown dried date fruit"
+      },
+      "meaning_b": {
+        "de": "Kalendertag",
+        "en": "calendar date",
+        "prompt": "calendar page showing a circled date"
+      }
+    },
+    {
+      "id": 7,
+      "word": "Fan",
+      "meaning_a": {
+        "de": "Ventilator",
+        "en": "electric fan",
+        "prompt": "electric desk fan with spinning blades"
+      },
+      "meaning_b": {
+        "de": "Fächer",
+        "en": "hand fan",
+        "prompt": "decorative hand-held folding fan"
+      }
+    },
+    {
+      "id": 8,
+      "word": "Jam",
+      "meaning_a": {
+        "de": "Marmelade",
+        "en": "jam (food)",
+        "prompt": "glass jar of strawberry jam with label"
+      },
+      "meaning_b": {
+        "de": "Stau",
+        "en": "traffic jam",
+        "prompt": "traffic jam with many cars on a highway"
+      }
+    },
+    {
+      "id": 9,
+      "word": "Key",
+      "meaning_a": {
+        "de": "Schlüssel",
+        "en": "door key",
+        "prompt": "shiny metal door key"
+      },
+      "meaning_b": {
+        "de": "Taste (Klavier)",
+        "en": "piano key",
+        "prompt": "piano keyboard keys close-up"
+      }
+    },
+    {
+      "id": 10,
+      "word": "Lead",
+      "meaning_a": {
+        "de": "Bleistift-Mine",
+        "en": "pencil lead",
+        "prompt": "graphite pencil lead tip writing on paper"
+      },
+      "meaning_b": {
+        "de": "Hundeleine",
+        "en": "dog lead",
+        "prompt": "dog on a leash being walked"
+      }
+    },
+    {
+      "id": 11,
+      "word": "Match",
+      "meaning_a": {
+        "de": "Streichholz",
+        "en": "match (fire)",
+        "prompt": "single burning match with flame"
+      },
+      "meaning_b": {
+        "de": "Sportspiel",
+        "en": "sport match",
+        "prompt": "tennis match on a court with players"
+      }
+    },
+    {
+      "id": 12,
+      "word": "Nail",
+      "meaning_a": {
+        "de": "Nagel (Metall)",
+        "en": "iron nail",
+        "prompt": "metal iron nail"
+      },
+      "meaning_b": {
+        "de": "Fingernagel",
+        "en": "fingernail",
+        "prompt": "hand with painted fingernails"
+      }
+    },
+    {
+      "id": 13,
+      "word": "Palm",
+      "meaning_a": {
+        "de": "Palme",
+        "en": "palm tree",
+        "prompt": "tropical palm tree on a beach"
+      },
+      "meaning_b": {
+        "de": "Handfläche",
+        "en": "palm (hand)",
+        "prompt": "open hand showing palm"
+      }
+    },
+    {
+      "id": 14,
+      "word": "Pen",
+      "meaning_a": {
+        "de": "Kugelschreiber",
+        "en": "writing pen",
+        "prompt": "ballpoint pen writing on paper"
+      },
+      "meaning_b": {
+        "de": "Gehege",
+        "en": "animal pen",
+        "prompt": "animal pen enclosure with fence on a farm"
+      }
+    },
+    {
+      "id": 15,
+      "word": "Ring",
+      "meaning_a": {
+        "de": "Fingerring",
+        "en": "finger ring",
+        "prompt": "gold ring with gemstone"
+      },
+      "meaning_b": {
+        "de": "Boxring",
+        "en": "boxing ring",
+        "prompt": "boxing ring in an arena"
+      }
+    },
+    {
+      "id": 16,
+      "word": "Seal",
+      "meaning_a": {
+        "de": "Robbe",
+        "en": "seal (animal)",
+        "prompt": "cute seal animal lying on a rock"
+      },
+      "meaning_b": {
+        "de": "Siegel",
+        "en": "wax seal",
+        "prompt": "red wax seal stamp on an envelope"
+      }
+    },
+    {
+      "id": 17,
+      "word": "Spring",
+      "meaning_a": {
+        "de": "Frühling",
+        "en": "spring (season)",
+        "prompt": "spring season with blooming flowers and butterflies"
+      },
+      "meaning_b": {
+        "de": "Sprungfeder",
+        "en": "metal spring",
+        "prompt": "metal coil spring"
+      }
+    },
+    {
+      "id": 18,
+      "word": "Trunk",
+      "meaning_a": {
+        "de": "Baumstamm",
+        "en": "tree trunk",
+        "prompt": "thick tree trunk in a forest"
+      },
+      "meaning_b": {
+        "de": "Elefantenrüssel",
+        "en": "elephant trunk",
+        "prompt": "elephant trunk spraying water"
+      }
+    },
+    {
+      "id": 19,
+      "word": "Wave",
+      "meaning_a": {
+        "de": "Meereswelle",
+        "en": "ocean wave",
+        "prompt": "ocean wave curling with white foam"
+      },
+      "meaning_b": {
+        "de": "Winken",
+        "en": "hand wave",
+        "prompt": "person waving hand in greeting"
+      }
+    },
+    {
+      "id": 20,
+      "word": "Chip",
+      "meaning_a": {
+        "de": "Kartoffelchip",
+        "en": "potato chip",
+        "prompt": "crispy potato chip snack"
+      },
+      "meaning_b": {
+        "de": "Computerchip",
+        "en": "computer chip",
+        "prompt": "green computer microchip circuit board"
+      }
+    },
+    {
+      "id": 21,
+      "word": "Club",
+      "meaning_a": {
+        "de": "Keule",
+        "en": "wooden club",
+        "prompt": "wooden caveman club"
+      },
+      "meaning_b": {
+        "de": "Verein/Disco",
+        "en": "nightclub",
+        "prompt": "nightclub building with neon lights"
+      }
+    },
+    {
+      "id": 22,
+      "word": "Cone",
+      "meaning_a": {
+        "de": "Eistüte",
+        "en": "ice cream cone",
+        "prompt": "ice cream cone with scoops"
+      },
+      "meaning_b": {
+        "de": "Verkehrskegel",
+        "en": "traffic cone",
+        "prompt": "orange traffic cone on a road"
+      }
+    },
+    {
+      "id": 23,
+      "word": "Drill",
+      "meaning_a": {
+        "de": "Bohrmaschine",
+        "en": "power drill",
+        "prompt": "electric power drill tool"
+      },
+      "meaning_b": {
+        "de": "Übung (Militär)",
+        "en": "military drill",
+        "prompt": "soldiers marching in military drill formation"
+      }
+    },
+    {
+      "id": 24,
+      "word": "Fly",
+      "meaning_a": {
+        "de": "Fliege (Insekt)",
+        "en": "fly (insect)",
+        "prompt": "house fly insect close-up"
+      },
+      "meaning_b": {
+        "de": "Fliegen",
+        "en": "fly (airplane)",
+        "prompt": "airplane flying through clouds in the sky"
+      }
+    },
+    {
+      "id": 25,
+      "word": "Horn",
+      "meaning_a": {
+        "de": "Tierhorn",
+        "en": "animal horn",
+        "prompt": "rhinoceros with a large horn"
+      },
+      "meaning_b": {
+        "de": "Musikinstrument",
+        "en": "french horn",
+        "prompt": "brass french horn musical instrument"
+      }
+    },
+    {
+      "id": 26,
+      "word": "Iron",
+      "meaning_a": {
+        "de": "Bügeleisen",
+        "en": "clothes iron",
+        "prompt": "clothes iron pressing fabric"
+      },
+      "meaning_b": {
+        "de": "Eisen (Metall)",
+        "en": "iron (metal)",
+        "prompt": "heavy iron metal ingot"
+      }
+    },
+    {
+      "id": 27,
+      "word": "Letter",
+      "meaning_a": {
+        "de": "Brief",
+        "en": "letter (mail)",
+        "prompt": "sealed envelope letter with stamp"
+      },
+      "meaning_b": {
+        "de": "Buchstabe",
+        "en": "letter (alphabet)",
+        "prompt": "colorful alphabet letter A block"
+      }
+    },
+    {
+      "id": 28,
+      "word": "Light",
+      "meaning_a": {
+        "de": "Lampe",
+        "en": "lamp light",
+        "prompt": "glowing table lamp light"
+      },
+      "meaning_b": {
+        "de": "Leicht (Feder)",
+        "en": "light (weight)",
+        "prompt": "feather floating weightlessly in the air"
+      }
+    },
+    {
+      "id": 29,
+      "word": "Mole",
+      "meaning_a": {
+        "de": "Maulwurf",
+        "en": "mole (animal)",
+        "prompt": "cute mole animal digging in dirt"
+      },
+      "meaning_b": {
+        "de": "Leberfleck",
+        "en": "skin mole",
+        "prompt": "close-up of small brown mole spot on skin"
+      }
+    },
+    {
+      "id": 30,
+      "word": "Mouse",
+      "meaning_a": {
+        "de": "Maus (Tier)",
+        "en": "mouse (animal)",
+        "prompt": "small grey mouse animal eating cheese"
+      },
+      "meaning_b": {
+        "de": "Computermaus",
+        "en": "computer mouse",
+        "prompt": "computer mouse on a desk"
+      }
+    },
+    {
+      "id": 31,
+      "word": "Net",
+      "meaning_a": {
+        "de": "Fischernetz",
+        "en": "fishing net",
+        "prompt": "fishing net full of fish"
+      },
+      "meaning_b": {
+        "de": "Tennisnetz",
+        "en": "tennis net",
+        "prompt": "tennis net stretched across a court"
+      }
+    },
+    {
+      "id": 32,
+      "word": "Nut",
+      "meaning_a": {
+        "de": "Nuss",
+        "en": "walnut",
+        "prompt": "cracked walnut showing the nut inside"
+      },
+      "meaning_b": {
+        "de": "Schraubenmutter",
+        "en": "hex nut",
+        "prompt": "metal hex nut and bolt"
+      }
+    },
+    {
+      "id": 33,
+      "word": "Organ",
+      "meaning_a": {
+        "de": "Orgel",
+        "en": "pipe organ",
+        "prompt": "large church pipe organ"
+      },
+      "meaning_b": {
+        "de": "Organ (Körper)",
+        "en": "body organ",
+        "prompt": "anatomical human heart organ"
+      }
+    },
+    {
+      "id": 34,
+      "word": "Pitcher",
+      "meaning_a": {
+        "de": "Krug",
+        "en": "water pitcher",
+        "prompt": "ceramic water pitcher jug"
+      },
+      "meaning_b": {
+        "de": "Werfer (Baseball)",
+        "en": "baseball pitcher",
+        "prompt": "baseball pitcher throwing a ball"
+      }
+    },
+    {
+      "id": 35,
+      "word": "Plant",
+      "meaning_a": {
+        "de": "Pflanze",
+        "en": "plant (green)",
+        "prompt": "green potted houseplant"
+      },
+      "meaning_b": {
+        "de": "Fabrik",
+        "en": "factory plant",
+        "prompt": "industrial factory plant with smokestacks"
+      }
+    },
+    {
+      "id": 36,
+      "word": "Plug",
+      "meaning_a": {
+        "de": "Stecker",
+        "en": "electric plug",
+        "prompt": "electrical plug being inserted into socket"
+      },
+      "meaning_b": {
+        "de": "Korken",
+        "en": "bottle plug",
+        "prompt": "wine bottle cork plug"
+      }
+    },
+    {
+      "id": 37,
+      "word": "Pupil",
+      "meaning_a": {
+        "de": "Schüler",
+        "en": "school pupil",
+        "prompt": "school pupil at a desk with books"
+      },
+      "meaning_b": {
+        "de": "Pupille",
+        "en": "eye pupil",
+        "prompt": "close-up of an eye showing the pupil"
+      }
+    },
+    {
+      "id": 38,
+      "word": "Ruler",
+      "meaning_a": {
+        "de": "Lineal",
+        "en": "measuring ruler",
+        "prompt": "transparent plastic ruler with measurements"
+      },
+      "meaning_b": {
+        "de": "Herrscher",
+        "en": "king/ruler",
+        "prompt": "king wearing a crown sitting on a throne"
+      }
+    },
+    {
+      "id": 39,
+      "word": "Scale",
+      "meaning_a": {
+        "de": "Waage",
+        "en": "weighing scale",
+        "prompt": "bathroom weighing scale"
+      },
+      "meaning_b": {
+        "de": "Fischschuppe",
+        "en": "fish scale",
+        "prompt": "close-up of shiny fish scales"
+      }
+    },
+    {
+      "id": 40,
+      "word": "Sink",
+      "meaning_a": {
+        "de": "Waschbecken",
+        "en": "kitchen sink",
+        "prompt": "kitchen sink with running water faucet"
+      },
+      "meaning_b": {
+        "de": "Versinken",
+        "en": "sinking ship",
+        "prompt": "ship sinking into the ocean"
+      }
+    },
+    {
+      "id": 41,
+      "word": "Star",
+      "meaning_a": {
+        "de": "Stern",
+        "en": "star (sky)",
+        "prompt": "bright yellow star shining in the night sky"
+      },
+      "meaning_b": {
+        "de": "Seestern",
+        "en": "starfish",
+        "prompt": "orange starfish on the beach"
+      }
+    },
+    {
+      "id": 42,
+      "word": "Stick",
+      "meaning_a": {
+        "de": "Stock",
+        "en": "wooden stick",
+        "prompt": "wooden stick branch on the ground"
+      },
+      "meaning_b": {
+        "de": "Aufkleber",
+        "en": "sticker",
+        "prompt": "colorful sticker being peeled off a sheet"
+      }
+    },
+    {
+      "id": 43,
+      "word": "Tie",
+      "meaning_a": {
+        "de": "Krawatte",
+        "en": "necktie",
+        "prompt": "elegant necktie on a shirt"
+      },
+      "meaning_b": {
+        "de": "Unentschieden",
+        "en": "tie (draw)",
+        "prompt": "scoreboard showing a tie game"
+      }
+    },
+    {
+      "id": 44,
+      "word": "Toast",
+      "meaning_a": {
+        "de": "Toastbrot",
+        "en": "toast (bread)",
+        "prompt": "golden brown toast slices popping from toaster"
+      },
+      "meaning_b": {
+        "de": "Trinkspruch",
+        "en": "toast (cheers)",
+        "prompt": "people raising champagne glasses for a toast"
+      }
+    },
+    {
+      "id": 45,
+      "word": "Watch",
+      "meaning_a": {
+        "de": "Armbanduhr",
+        "en": "wristwatch",
+        "prompt": "wristwatch on a wrist showing time"
+      },
+      "meaning_b": {
+        "de": "Beobachten",
+        "en": "bird watching",
+        "prompt": "person using binoculars watching birds"
+      }
+    },
+    {
+      "id": 46,
+      "word": "Well",
+      "meaning_a": {
+        "de": "Brunnen",
+        "en": "wishing well",
+        "prompt": "old stone wishing well with bucket"
+      },
+      "meaning_b": {
+        "de": "Gesund/Gut",
+        "en": "feeling well",
+        "prompt": "person giving thumbs up feeling well"
+      }
+    },
+    {
+      "id": 47,
+      "word": "Cap",
+      "meaning_a": {
+        "de": "Mütze",
+        "en": "baseball cap",
+        "prompt": "red baseball cap hat"
+      },
+      "meaning_b": {
+        "de": "Flaschendeckel",
+        "en": "bottle cap",
+        "prompt": "metal bottle cap"
+      }
+    },
+    {
+      "id": 48,
+      "word": "Racket",
+      "meaning_a": {
+        "de": "Tennisschläger",
+        "en": "tennis racket",
+        "prompt": "tennis racket with ball"
+      },
+      "meaning_b": {
+        "de": "Lärm/Krach",
+        "en": "racket (noise)",
+        "prompt": "noisy construction site with jackhammer"
+      }
+    },
+    {
+      "id": 49,
+      "word": "Bill",
+      "meaning_a": {
+        "de": "Schnabel",
+        "en": "duck bill",
+        "prompt": "duck with orange bill beak"
+      },
+      "meaning_b": {
+        "de": "Rechnung",
+        "en": "restaurant bill",
+        "prompt": "restaurant bill receipt on a table"
+      }
+    },
+    {
+      "id": 50,
+      "word": "Rock",
+      "meaning_a": {
+        "de": "Fels/Stein",
+        "en": "rock (stone)",
+        "prompt": "large grey rock boulder"
+      },
+      "meaning_b": {
+        "de": "Rockmusik",
+        "en": "rock music",
+        "prompt": "electric guitar for rock music"
+      }
+    },
+    {
+      "id": 51,
+      "word": "Current",
+      "meaning_a": {
+        "de": "Strömung",
+        "en": "water current",
+        "prompt": "river water current flowing fast"
+      },
+      "meaning_b": {
+        "de": "Strom (elektrisch)",
+        "en": "electric current",
+        "prompt": "electric current sparks between wires"
+      }
+    },
+    {
+      "id": 52,
+      "word": "Bolt",
+      "meaning_a": {
+        "de": "Blitz",
+        "en": "lightning bolt",
+        "prompt": "lightning bolt striking during a storm"
+      },
+      "meaning_b": {
+        "de": "Schraube",
+        "en": "bolt (hardware)",
+        "prompt": "metal bolt and nut fastener"
+      }
+    },
+    {
+      "id": 53,
+      "word": "Chest",
+      "meaning_a": {
+        "de": "Truhe",
+        "en": "treasure chest",
+        "prompt": "wooden treasure chest with gold coins"
+      },
+      "meaning_b": {
+        "de": "Brustkorb",
+        "en": "chest (body)",
+        "prompt": "muscular man showing his chest"
+      }
+    },
+    {
+      "id": 54,
+      "word": "Clip",
+      "meaning_a": {
+        "de": "Büroklammer",
+        "en": "paper clip",
+        "prompt": "silver paper clip holding papers"
+      },
+      "meaning_b": {
+        "de": "Haarspange",
+        "en": "hair clip",
+        "prompt": "decorative hair clip in long hair"
+      }
+    },
+    {
+      "id": 55,
+      "word": "Deck",
+      "meaning_a": {
+        "de": "Kartendeck",
+        "en": "card deck",
+        "prompt": "deck of playing cards fanned out"
+      },
+      "meaning_b": {
+        "de": "Schiffsdeck",
+        "en": "ship deck",
+        "prompt": "wooden ship deck with ocean view"
+      }
+    },
+    {
+      "id": 56,
+      "word": "Dove",
+      "meaning_a": {
+        "de": "Taube",
+        "en": "dove (bird)",
+        "prompt": "white dove bird flying with olive branch"
+      },
+      "meaning_b": {
+        "de": "Tauchte (tauchen)",
+        "en": "dove (diving)",
+        "prompt": "person diving into a swimming pool"
+      }
+    },
+    {
+      "id": 57,
+      "word": "Drop",
+      "meaning_a": {
+        "de": "Tropfen",
+        "en": "water drop",
+        "prompt": "single water drop falling into a puddle"
+      },
+      "meaning_b": {
+        "de": "Fallenlassen",
+        "en": "drop (to fall)",
+        "prompt": "person accidentally dropping a plate that shatters"
+      }
+    },
+    {
+      "id": 58,
+      "word": "Drum",
+      "meaning_a": {
+        "de": "Trommel",
+        "en": "drum (music)",
+        "prompt": "red drum with drumsticks"
+      },
+      "meaning_b": {
+        "de": "Fass/Tonne",
+        "en": "oil drum",
+        "prompt": "large metal oil drum barrel"
+      }
+    },
+    {
+      "id": 59,
+      "word": "Foot",
+      "meaning_a": {
+        "de": "Fuß",
+        "en": "foot (body)",
+        "prompt": "bare human foot on sand"
+      },
+      "meaning_b": {
+        "de": "Fuß (Maßeinheit / Lineal)",
+        "en": "foot (measure)",
+        "prompt": "ruler showing one foot measurement twelve inches"
+      }
+    },
+    {
+      "id": 60,
+      "word": "Gum",
+      "meaning_a": {
+        "de": "Kaugummi",
+        "en": "bubble gum",
+        "prompt": "colorful bubble gum with a bubble"
+      },
+      "meaning_b": {
+        "de": "Zahnfleisch",
+        "en": "gum (teeth)",
+        "prompt": "close-up of teeth and pink gums"
+      }
+    },
+    {
+      "id": 61,
+      "word": "Lap",
+      "meaning_a": {
+        "de": "Schoß",
+        "en": "lap (sitting)",
+        "prompt": "cat sitting on a persons lap"
+      },
+      "meaning_b": {
+        "de": "Runde (Rennen)",
+        "en": "race lap",
+        "prompt": "race car completing a lap on a track"
+      }
+    },
+    {
+      "id": 62,
+      "word": "Log",
+      "meaning_a": {
+        "de": "Holzstamm",
+        "en": "fire log",
+        "prompt": "wooden log for a campfire"
+      },
+      "meaning_b": {
+        "de": "Logbuch",
+        "en": "ship log",
+        "prompt": "ship captains logbook open on a desk"
+      }
+    },
+    {
+      "id": 63,
+      "word": "Mine",
+      "meaning_a": {
+        "de": "Bergwerk",
+        "en": "mine (cave)",
+        "prompt": "entrance to a dark mine cave with rails"
+      },
+      "meaning_b": {
+        "de": "Landmine",
+        "en": "land mine",
+        "prompt": "buried land mine warning sign"
+      }
+    },
+    {
+      "id": 64,
+      "word": "Mug",
+      "meaning_a": {
+        "de": "Becher/Tasse",
+        "en": "coffee mug",
+        "prompt": "ceramic coffee mug with steam"
+      },
+      "meaning_b": {
+        "de": "Grimasse",
+        "en": "mug (face)",
+        "prompt": "funny mug shot face with silly expression"
+      }
+    },
+    {
+      "id": 65,
+      "word": "Pipe",
+      "meaning_a": {
+        "de": "Pfeife (Tabak)",
+        "en": "smoking pipe",
+        "prompt": "wooden smoking pipe"
+      },
+      "meaning_b": {
+        "de": "Rohr/Leitung",
+        "en": "plumbing pipe",
+        "prompt": "metal plumbing pipe with valve"
+      }
+    },
+    {
+      "id": 66,
+      "word": "Pitch",
+      "meaning_a": {
+        "de": "Spielfeld",
+        "en": "football pitch",
+        "prompt": "green football pitch field"
+      },
+      "meaning_b": {
+        "de": "Pech/Teer",
+        "en": "pitch (tar)",
+        "prompt": "black sticky pitch tar"
+      }
+    },
+    {
+      "id": 67,
+      "word": "Pound",
+      "meaning_a": {
+        "de": "Pfund (Gewicht)",
+        "en": "pound (weight)",
+        "prompt": "weighing scale showing one pound"
+      },
+      "meaning_b": {
+        "de": "Pfund (Geld)",
+        "en": "pound (money)",
+        "prompt": "British pound coin and banknote"
+      }
+    },
+    {
+      "id": 68,
+      "word": "Rake",
+      "meaning_a": {
+        "de": "Rechen",
+        "en": "garden rake",
+        "prompt": "garden rake collecting autumn leaves"
+      },
+      "meaning_b": {
+        "de": "Lebemann",
+        "en": "rake (person)",
+        "prompt": "well-dressed man with top hat and cane"
+      }
+    },
+    {
+      "id": 69,
+      "word": "Row",
+      "meaning_a": {
+        "de": "Reihe",
+        "en": "row (line)",
+        "prompt": "neat row of colorful chairs"
+      },
+      "meaning_b": {
+        "de": "Rudern",
+        "en": "row (rowing)",
+        "prompt": "person rowing a small boat on a lake"
+      }
+    },
+    {
+      "id": 70,
+      "word": "Saw",
+      "meaning_a": {
+        "de": "Säge",
+        "en": "hand saw",
+        "prompt": "hand saw cutting through wood"
+      },
+      "meaning_b": {
+        "de": "Sah (sehen)",
+        "en": "saw (seeing)",
+        "prompt": "person looking through binoculars"
+      }
+    },
+    {
+      "id": 71,
+      "word": "Sheet",
+      "meaning_a": {
+        "de": "Bettlaken",
+        "en": "bed sheet",
+        "prompt": "white bed sheet on a mattress"
+      },
+      "meaning_b": {
+        "de": "Blatt Papier",
+        "en": "sheet of paper",
+        "prompt": "blank white sheet of paper"
+      }
+    },
+    {
+      "id": 72,
+      "word": "Slide",
+      "meaning_a": {
+        "de": "Rutsche",
+        "en": "playground slide",
+        "prompt": "colorful playground slide for children"
+      },
+      "meaning_b": {
+        "de": "Dia/Folie",
+        "en": "presentation slide",
+        "prompt": "presentation slide projected on a screen"
+      }
+    },
+    {
+      "id": 73,
+      "word": "Sole",
+      "meaning_a": {
+        "de": "Schuhsohle",
+        "en": "shoe sole",
+        "prompt": "shoe sole bottom view with tread pattern"
+      },
+      "meaning_b": {
+        "de": "Seezunge (Fisch)",
+        "en": "sole (fish)",
+        "prompt": "sole flatfish on a plate"
+      }
+    },
+    {
+      "id": 74,
+      "word": "Straw",
+      "meaning_a": {
+        "de": "Strohhalm",
+        "en": "drinking straw",
+        "prompt": "drinking straw in a glass of juice"
+      },
+      "meaning_b": {
+        "de": "Stroh",
+        "en": "straw (hay)",
+        "prompt": "golden straw hay bale on a farm field"
+      }
+    },
+    {
+      "id": 75,
+      "word": "Suit",
+      "meaning_a": {
+        "de": "Anzug",
+        "en": "business suit",
+        "prompt": "formal business suit on a hanger"
+      },
+      "meaning_b": {
+        "de": "Spielfarbe (Karten)",
+        "en": "card suit",
+        "prompt": "four playing card suits hearts diamonds clubs spades"
+      }
+    },
+    {
+      "id": 76,
+      "word": "Tap",
+      "meaning_a": {
+        "de": "Wasserhahn",
+        "en": "water tap",
+        "prompt": "chrome water tap faucet dripping"
+      },
+      "meaning_b": {
+        "de": "Klopfen",
+        "en": "tap (knock)",
+        "prompt": "finger tapping on a table surface"
+      }
+    },
+    {
+      "id": 77,
+      "word": "Tip",
+      "meaning_a": {
+        "de": "Spitze",
+        "en": "pencil tip",
+        "prompt": "sharp pencil tip close-up"
+      },
+      "meaning_b": {
+        "de": "Trinkgeld",
+        "en": "tip (money)",
+        "prompt": "coins and cash left as a restaurant tip"
+      }
+    },
+    {
+      "id": 78,
+      "word": "Yard",
+      "meaning_a": {
+        "de": "Hof/Garten",
+        "en": "backyard",
+        "prompt": "green backyard garden with fence"
+      },
+      "meaning_b": {
+        "de": "Yard (Maßeinheit)",
+        "en": "yard (measure)",
+        "prompt": "football field showing yard lines markings"
+      }
+    },
+    {
+      "id": 79,
+      "word": "Bass",
+      "meaning_a": {
+        "de": "Barsch (Fisch)",
+        "en": "bass (fish)",
+        "prompt": "largemouth bass fish jumping out of water"
+      },
+      "meaning_b": {
+        "de": "Bass (Musik)",
+        "en": "bass (music)",
+        "prompt": "electric bass guitar"
+      }
+    },
+    {
+      "id": 80,
+      "word": "Bridge",
+      "meaning_a": {
+        "de": "Brücke",
+        "en": "bridge (structure)",
+        "prompt": "stone arch bridge over a river"
+      },
+      "meaning_b": {
+        "de": "Kartenspiel Bridge",
+        "en": "bridge (card game)",
+        "prompt": "people playing bridge card game at a table"
+      }
+    },
+    {
+      "id": 81,
+      "word": "Cast",
+      "meaning_a": {
+        "de": "Gipsverband",
+        "en": "arm cast",
+        "prompt": "arm in a white plaster cast"
+      },
+      "meaning_b": {
+        "de": "Angeln werfen",
+        "en": "cast (fishing)",
+        "prompt": "fisherman casting a fishing line into a lake"
+      }
+    },
+    {
+      "id": 82,
+      "word": "Change",
+      "meaning_a": {
+        "de": "Kleingeld",
+        "en": "loose change",
+        "prompt": "pile of loose change coins"
+      },
+      "meaning_b": {
+        "de": "Veränderung",
+        "en": "change (transform)",
+        "prompt": "caterpillar transforming into a butterfly"
+      }
+    },
+    {
+      "id": 83,
+      "word": "Coat",
+      "meaning_a": {
+        "de": "Mantel",
+        "en": "winter coat",
+        "prompt": "warm winter coat hanging on a hook"
+      },
+      "meaning_b": {
+        "de": "Anstrich/Beschichtung",
+        "en": "coat of paint",
+        "prompt": "paint roller applying a coat of blue paint on a wall"
+      }
+    },
+    {
+      "id": 84,
+      "word": "Calf",
+      "meaning_a": {
+        "de": "Kalb",
+        "en": "baby calf",
+        "prompt": "cute baby calf cow on a farm"
+      },
+      "meaning_b": {
+        "de": "Wade (Bein)",
+        "en": "calf muscle",
+        "prompt": "muscular calf muscle of a runner"
+      }
+    },
+    {
+      "id": 85,
+      "word": "Cell",
+      "meaning_a": {
+        "de": "Zelle (Gefängnis)",
+        "en": "prison cell",
+        "prompt": "prison cell with iron bars"
+      },
+      "meaning_b": {
+        "de": "Zelle (Biologie)",
+        "en": "biological cell",
+        "prompt": "biological cell under a microscope"
+      }
+    },
+    {
+      "id": 86,
+      "word": "Check",
+      "meaning_a": {
+        "de": "Scheck",
+        "en": "bank check",
+        "prompt": "bank check with signature"
+      },
+      "meaning_b": {
+        "de": "Häkchen",
+        "en": "checkmark",
+        "prompt": "green checkmark on a checklist"
+      }
+    },
+    {
+      "id": 87,
+      "word": "Dart",
+      "meaning_a": {
+        "de": "Wurfpfeil",
+        "en": "dart (arrow)",
+        "prompt": "dart hitting a dartboard bullseye"
+      },
+      "meaning_b": {
+        "de": "Pfeil (schnelle Bewegung)",
+        "en": "dart (speed)",
+        "prompt": "hummingbird darting between flowers"
+      }
+    },
+    {
+      "id": 88,
+      "word": "File",
+      "meaning_a": {
+        "de": "Akte/Ordner",
+        "en": "file folder",
+        "prompt": "manila file folder with documents"
+      },
+      "meaning_b": {
+        "de": "Feile",
+        "en": "nail file",
+        "prompt": "metal nail file"
+      }
+    },
+    {
+      "id": 89,
+      "word": "Foil",
+      "meaning_a": {
+        "de": "Alufolie",
+        "en": "aluminum foil",
+        "prompt": "roll of shiny aluminum foil"
+      },
+      "meaning_b": {
+        "de": "Florett (Fechten)",
+        "en": "fencing foil",
+        "prompt": "fencing foil sword"
+      }
+    },
+    {
+      "id": 90,
+      "word": "Hood",
+      "meaning_a": {
+        "de": "Kapuze",
+        "en": "hoodie hood",
+        "prompt": "person wearing a hoodie hood over their head"
+      },
+      "meaning_b": {
+        "de": "Motorhaube",
+        "en": "car hood",
+        "prompt": "car hood popped open showing engine"
+      }
+    },
+    {
+      "id": 91,
+      "word": "Iris",
+      "meaning_a": {
+        "de": "Iris (Blume)",
+        "en": "iris flower",
+        "prompt": "purple iris flower in bloom"
+      },
+      "meaning_b": {
+        "de": "Iris (Auge)",
+        "en": "eye iris",
+        "prompt": "close-up of colorful human eye iris"
+      }
+    },
+    {
+      "id": 92,
+      "word": "Kit",
+      "meaning_a": {
+        "de": "Bausatz",
+        "en": "model kit",
+        "prompt": "model airplane kit in a box with parts"
+      },
+      "meaning_b": {
+        "de": "Erste-Hilfe-Set",
+        "en": "first aid kit",
+        "prompt": "red first aid kit box with cross"
+      }
+    },
+    {
+      "id": 93,
+      "word": "Lemon",
+      "meaning_a": {
+        "de": "Zitrone",
+        "en": "lemon (fruit)",
+        "prompt": "fresh yellow lemon fruit cut in half"
+      },
+      "meaning_b": {
+        "de": "Montagsauto",
+        "en": "lemon (bad car)",
+        "prompt": "broken down old car with smoke coming from hood"
+      }
+    },
+    {
+      "id": 94,
+      "word": "Mint",
+      "meaning_a": {
+        "de": "Minze",
+        "en": "mint (herb)",
+        "prompt": "fresh green mint leaves herb"
+      },
+      "meaning_b": {
+        "de": "Münzprägeanstalt",
+        "en": "mint (coins)",
+        "prompt": "shiny freshly minted gold coins"
+      }
+    },
+    {
+      "id": 95,
+      "word": "Mold",
+      "meaning_a": {
+        "de": "Schimmel",
+        "en": "bread mold",
+        "prompt": "green mold growing on old bread"
+      },
+      "meaning_b": {
+        "de": "Gussform",
+        "en": "casting mold",
+        "prompt": "metal casting mold for shaping"
+      }
+    },
+    {
+      "id": 96,
+      "word": "Peg",
+      "meaning_a": {
+        "de": "Wäscheklammer",
+        "en": "clothes peg",
+        "prompt": "wooden clothespin peg on a line"
+      },
+      "meaning_b": {
+        "de": "Holzpflock",
+        "en": "tent peg",
+        "prompt": "tent peg hammered into the ground"
+      }
+    },
+    {
+      "id": 97,
+      "word": "Plot",
+      "meaning_a": {
+        "de": "Grundstück",
+        "en": "plot of land",
+        "prompt": "empty plot of land with fence"
+      },
+      "meaning_b": {
+        "de": "Handlung (Geschichte)",
+        "en": "story plot",
+        "prompt": "open storybook showing plot diagram with rising action"
+      }
+    },
+    {
+      "id": 98,
+      "word": "Port",
+      "meaning_a": {
+        "de": "Hafen",
+        "en": "shipping port",
+        "prompt": "busy shipping port with cargo containers and cranes"
+      },
+      "meaning_b": {
+        "de": "Portwein",
+        "en": "port wine",
+        "prompt": "glass of red port wine with bottle"
+      }
+    },
+    {
+      "id": 99,
+      "word": "Press",
+      "meaning_a": {
+        "de": "Presse (Druckerpresse)",
+        "en": "printing press",
+        "prompt": "old printing press machine with letters"
+      },
+      "meaning_b": {
+        "de": "Drücken",
+        "en": "press (button)",
+        "prompt": "finger pressing a big red button"
+      }
+    },
+    {
+      "id": 100,
+      "word": "Punch",
+      "meaning_a": {
+        "de": "Schlag (Boxen)",
+        "en": "boxing punch",
+        "prompt": "boxing punch hitting a punching bag"
+      },
+      "meaning_b": {
+        "de": "Fruchtbowle",
+        "en": "fruit punch",
+        "prompt": "colorful fruit punch drink in a bowl with ladle"
+      }
+    },
+    {
+      "id": 101,
+      "word": "Range",
+      "meaning_a": {
+        "de": "Gebirge",
+        "en": "mountain range",
+        "prompt": "mountain range with snow-capped peaks"
+      },
+      "meaning_b": {
+        "de": "Schießstand",
+        "en": "shooting range",
+        "prompt": "archery target at a shooting range"
+      }
+    },
+    {
+      "id": 102,
+      "word": "Safe",
+      "meaning_a": {
+        "de": "Tresor",
+        "en": "safe (vault)",
+        "prompt": "heavy metal safe with combination lock"
+      },
+      "meaning_b": {
+        "de": "Sicher",
+        "en": "safe (secure)",
+        "prompt": "child wearing a helmet and knee pads on a bicycle"
+      }
+    },
+    {
+      "id": 103,
+      "word": "Spot",
+      "meaning_a": {
+        "de": "Fleck",
+        "en": "spot (mark)",
+        "prompt": "dalmatian dog with black spots"
+      },
+      "meaning_b": {
+        "de": "Scheinwerfer",
+        "en": "spotlight",
+        "prompt": "bright spotlight beam on a stage"
+      }
+    },
+    {
+      "id": 104,
+      "word": "Stamp",
+      "meaning_a": {
+        "de": "Briefmarke",
+        "en": "postage stamp",
+        "prompt": "colorful postage stamp on an envelope"
+      },
+      "meaning_b": {
+        "de": "Stempel",
+        "en": "rubber stamp",
+        "prompt": "rubber stamp pressing down on paper"
+      }
+    },
+    {
+      "id": 105,
+      "word": "Tank",
+      "meaning_a": {
+        "de": "Panzer",
+        "en": "military tank",
+        "prompt": "military tank vehicle"
+      },
+      "meaning_b": {
+        "de": "Wassertank",
+        "en": "water tank",
+        "prompt": "large water storage tank"
+      }
+    },
+    {
+      "id": 106,
+      "word": "Track",
+      "meaning_a": {
+        "de": "Schiene",
+        "en": "railroad track",
+        "prompt": "railroad track stretching into the distance"
+      },
+      "meaning_b": {
+        "de": "Fußspur",
+        "en": "animal tracks",
+        "prompt": "animal footprint tracks in the snow"
+      }
+    },
+    {
+      "id": 107,
+      "word": "Valve",
+      "meaning_a": {
+        "de": "Ventil",
+        "en": "pipe valve",
+        "prompt": "red industrial pipe valve wheel"
+      },
+      "meaning_b": {
+        "de": "Herzklappe",
+        "en": "heart valve",
+        "prompt": "anatomical heart showing valve"
+      }
+    },
+    {
+      "id": 108,
+      "word": "Bowl",
+      "meaning_a": {
+        "de": "Schüssel",
+        "en": "cereal bowl",
+        "prompt": "ceramic cereal bowl filled with fruit"
+      },
+      "meaning_b": {
+        "de": "Bowlingkugel",
+        "en": "bowling ball",
+        "prompt": "shiny bowling ball rolling down a lane"
+      }
+    },
+    {
+      "id": 109,
+      "word": "Box",
+      "meaning_a": {
+        "de": "Kiste",
+        "en": "cardboard box",
+        "prompt": "open cardboard box package"
+      },
+      "meaning_b": {
+        "de": "Boxen (Sport)",
+        "en": "boxing",
+        "prompt": "boxer wearing boxing gloves in a ring"
+      }
+    },
+    {
+      "id": 110,
+      "word": "Brush",
+      "meaning_a": {
+        "de": "Haarbürste",
+        "en": "hairbrush",
+        "prompt": "wooden hairbrush with bristles"
+      },
+      "meaning_b": {
+        "de": "Pinsel",
+        "en": "paintbrush",
+        "prompt": "artist paintbrush with colorful paint"
+      }
+    },
+    {
+      "id": 111,
+      "word": "Coach",
+      "meaning_a": {
+        "de": "Trainer",
+        "en": "sports coach",
+        "prompt": "sports coach with whistle and clipboard on a field"
+      },
+      "meaning_b": {
+        "de": "Kutsche",
+        "en": "horse coach",
+        "prompt": "elegant horse-drawn coach carriage"
+      }
+    },
+    {
+      "id": 112,
+      "word": "Frame",
+      "meaning_a": {
+        "de": "Bilderrahmen",
+        "en": "picture frame",
+        "prompt": "golden ornate picture frame on a wall"
+      },
+      "meaning_b": {
+        "de": "Brillengestell",
+        "en": "glasses frame",
+        "prompt": "stylish eyeglasses frames"
+      }
+    },
+    {
+      "id": 113,
+      "word": "Glass",
+      "meaning_a": {
+        "de": "Trinkglas",
+        "en": "drinking glass",
+        "prompt": "clear drinking glass filled with water"
+      },
+      "meaning_b": {
+        "de": "Lupe/Vergrößerungsglas",
+        "en": "magnifying glass",
+        "prompt": "magnifying glass with wooden handle"
+      }
+    },
+    {
+      "id": 114,
+      "word": "Kite",
+      "meaning_a": {
+        "de": "Drachen (Spielzeug)",
+        "en": "flying kite",
+        "prompt": "colorful diamond-shaped kite flying in the sky"
+      },
+      "meaning_b": {
+        "de": "Milan (Raubvogel)",
+        "en": "kite (bird)",
+        "prompt": "red kite bird of prey soaring with spread wings"
+      }
+    },
+    {
+      "id": 115,
+      "word": "Line",
+      "meaning_a": {
+        "de": "Linie",
+        "en": "drawn line",
+        "prompt": "straight line drawn with a pencil and ruler"
+      },
+      "meaning_b": {
+        "de": "Warteschlange",
+        "en": "queue line",
+        "prompt": "people standing in a long queue line"
+      }
+    },
+    {
+      "id": 116,
+      "word": "Litter",
+      "meaning_a": {
+        "de": "Müll/Abfall",
+        "en": "street litter",
+        "prompt": "trash and litter scattered on the ground"
+      },
+      "meaning_b": {
+        "de": "Tierwurf (Katzenbabys)",
+        "en": "litter of kittens",
+        "prompt": "adorable litter of kittens cuddled together"
+      }
+    },
+    {
+      "id": 117,
+      "word": "Note",
+      "meaning_a": {
+        "de": "Notiz",
+        "en": "sticky note",
+        "prompt": "yellow sticky note with handwritten text"
+      },
+      "meaning_b": {
+        "de": "Musiknote",
+        "en": "music note",
+        "prompt": "black music note on a sheet of staff paper"
+      }
+    },
+    {
+      "id": 118,
+      "word": "Quarter",
+      "meaning_a": {
+        "de": "Vierteldollar",
+        "en": "quarter coin",
+        "prompt": "shiny American quarter dollar coin"
+      },
+      "meaning_b": {
+        "de": "Stadtviertel",
+        "en": "city quarter",
+        "prompt": "charming old city quarter with narrow streets and cafes"
+      }
+    },
+    {
+      "id": 119,
+      "word": "Roll",
+      "meaning_a": {
+        "de": "Brötchen",
+        "en": "bread roll",
+        "prompt": "fresh baked bread roll on a plate"
+      },
+      "meaning_b": {
+        "de": "Filmrolle",
+        "en": "film roll",
+        "prompt": "old film roll reel for a movie projector"
+      }
+    }
+  ]
+}

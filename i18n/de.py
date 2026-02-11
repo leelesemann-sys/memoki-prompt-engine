@@ -477,7 +477,7 @@ MODE_DATA = {
             "Die Spieler m\u00fcssen erkennen, dass beide Bilder dasselbe Wort darstellen."
         ),
         "how": [
-            ("1. Kein Thema n\u00f6tig", "Teekesselchen kommen aus der kuratierten Wissensbasis <code>teekesselchen_v2.json</code>."),
+            ("1. Kein Thema n\u00f6tig", "Teekesselchen kommen aus der kuratierten, sprachspezifischen Wissensbasis (<code>teekesselchen_de.json</code> / <code>teekesselchen_en.json</code>)."),
             ("2. W\u00f6rter ausw\u00e4hlen", "<code>load_teekesselchen()</code> w\u00e4hlt zuf\u00e4llig N Eintr\u00e4ge mit beiden Bedeutungen."),
             ("3. Prompts bauen", "F\u00fcr jede Bedeutung wird ein separater Bild-Prompt erstellt, der die spezifische Bedeutung klar darstellt."),
             ("4. Bilder erzeugen", "Beide Bedeutungen werden als separate Karten generiert."),

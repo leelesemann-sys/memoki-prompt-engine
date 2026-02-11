@@ -277,17 +277,20 @@ def load_pairs_themes(lang: str = "de") -> list[str]:
 
 
 def load_teekesselchen(count: int, lang: str = "de") -> list[dict]:
-    """Lädt zufällige Teekesselchen aus der JSON-Wissensbasis.
+    """Lädt zufällige Teekesselchen aus der sprachspezifischen JSON-Wissensbasis.
 
     Args:
         count: Anzahl gewünschter Teekesselchen-Paare.
-        lang: Sprache für Display-Labels ("de" oder "en").
+        lang: Sprache für Wort-Auswahl UND Display-Labels ("de" oder "en").
 
     Returns:
         Liste von Dicts mit Struktur:
         [{"word": "Bank", "meaning_a": "wooden park bench...", "meaning_b": "bank building..."}]
     """
-    path = KNOWLEDGE_DIR / "teekesselchen_v2.json"
+    # Sprachspezifische JSON laden (Fallback: Deutsch)
+    path = KNOWLEDGE_DIR / f"teekesselchen_{lang}.json"
+    if not path.exists():
+        path = KNOWLEDGE_DIR / "teekesselchen_de.json"
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
 
@@ -298,8 +301,8 @@ def load_teekesselchen(count: int, lang: str = "de") -> list[dict]:
     return [
         {
             "word": e["word"],
-            "meaning_a": e["meaning_a"]["en"],
-            "meaning_b": e["meaning_b"]["en"],
+            "meaning_a": e["meaning_a"].get("prompt", e["meaning_a"]["en"]),
+            "meaning_b": e["meaning_b"].get("prompt", e["meaning_b"]["en"]),
             "label_a": e["meaning_a"][label_key],
             "label_b": e["meaning_b"][label_key],
         }

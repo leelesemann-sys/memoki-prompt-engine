@@ -203,6 +203,7 @@ st.markdown("""
         margin: 0.3rem 0 0.4rem;
     }
 
+
     .footer {
         text-align: center;
         color: #b2bec3;
