@@ -180,10 +180,8 @@ st.markdown("""
         font-family: 'Nunito', sans-serif;
     }
 
-    /* Aktions-Buttons (Spielen, Karten zeigen, Download) gleich groß */
-    .stDownloadButton > button,
-    [data-testid="stHorizontalBlock"] > div:first-child .stButton > button,
-    [data-testid="stHorizontalBlock"] > div:nth-child(2) .stButton > button {
+    /* Aktions-Buttons: Zeile die den Download-Button enthält */
+    [data-testid="stHorizontalBlock"]:has(.stDownloadButton) button {
         height: 42px !important;
         padding: 0 0.8rem !important;
         font-size: 0.85rem !important;
@@ -498,7 +496,8 @@ with right_col:
                     zf.writestr(f"Paar{card.pair_id:02d}_{safe_label}.png", img_buf.getvalue())
 
         # --- Aktions-Buttons ---
-        btn_col1, btn_col2, btn_col3 = st.columns(3)
+        action_bar = st.container(key="action_bar")
+        btn_col1, btn_col2, btn_col3 = action_bar.columns(3)
         with btn_col1:
             if st.button("🎮 Mischen & Spielen", use_container_width=True):
                 random.shuffle(deck.cards)
