@@ -7,6 +7,7 @@ Streamlit-Frontend für den Memory-Spiel-Generator mit KI-generierten Bildern.
 import io
 import base64
 import random
+import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import streamlit as st
 import streamlit.components.v1 as components
@@ -525,6 +526,23 @@ with right_col:
                     else:
                         st.markdown("*(kein Bild)*")
                     st.caption(f"#{card.pair_id} – {card.label}")
+
+            # --- ZIP-Download ---
+            zip_buf = io.BytesIO()
+            with zipfile.ZipFile(zip_buf, "w", zipfile.ZIP_DEFLATED) as zf:
+                for card in sorted_cards:
+                    if card.image is not None:
+                        img_buf = io.BytesIO()
+                        card.image.save(img_buf, format="PNG")
+                        safe_label = card.label.replace(" ", "_").replace("/", "-")
+                        zf.writestr(f"Paar{card.pair_id:02d}_{safe_label}.png", img_buf.getvalue())
+            st.download_button(
+                "📥 Alle Karten herunterladen (ZIP)",
+                data=zip_buf.getvalue(),
+                file_name="memoki-karten.zip",
+                mime="application/zip",
+                use_container_width=True,
+            )
 
         # === SPIEL-MODUS ===
         else:
