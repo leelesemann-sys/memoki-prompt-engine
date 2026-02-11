@@ -27,3 +27,7 @@ generated_images/
 
 # Downloaded card decks
 download-output/
+
+# Archived files (local only)
+docs/archiv/
+knowledge/archiv/
