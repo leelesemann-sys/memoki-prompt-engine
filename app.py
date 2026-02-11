@@ -336,11 +336,6 @@ st.markdown("""
             <div class="memoki-subtitle">Dein KI-Memory-Spiele-Macher</div>
         </div>
     </div>
-    <div class="memoki-features">
-        <span class="memoki-feat">🃏 Karten generieren</span>
-        <span class="memoki-feat">🎮 Direkt spielen</span>
-        <span class="memoki-feat">🖨️ Druckvorlage</span>
-    </div>
 </div>
 """, unsafe_allow_html=True)
 
