@@ -182,10 +182,12 @@ st.markdown("""
     }
 
     /* Aktions-Buttons: Zeile die den Download-Button enthält */
-    [data-testid="stHorizontalBlock"]:has(.stDownloadButton) button {
-        height: 42px !important;
-        padding: 0 0.8rem !important;
-        font-size: 0.85rem !important;
+    [data-testid="stHorizontalBlock"]:has(.stDownloadButton) button,
+    [data-testid="stHorizontalBlock"]:has(.stDownloadButton) .stDownloadButton button {
+        height: 38px !important;
+        padding: 0 0.6rem !important;
+        font-size: 0.8rem !important;
+        min-height: 38px !important;
     }
 
     .mini-divider {
