@@ -1,7 +1,7 @@
-"""MEMOKI – KI-Memory-Spiele-Macher.
+"""MEMOKI – AI Memory Game Maker.
 
-Streamlit-Frontend für den Memory-Spiel-Generator mit KI-generierten Bildern.
-2-Spalten-Layout: Links Konfiguration, Rechts Chat + Spielfeld.
+Streamlit frontend for the Memory card game generator with AI-generated images.
+2-column layout: Left configuration, Right chat + game board.
 """
 
 import io
@@ -13,6 +13,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from PIL import Image
 
+from i18n import t, get_lang, render_lang_selector
 from agents.memoki import MemokiAgent
 from tools.content import generate_objects, generate_countable_objects, load_teekesselchen, load_math_shape, load_pairs, load_pairs_themes
 from tools.image import build_image_prompt, generate_card_image
@@ -23,7 +24,7 @@ from game.deck import Deck
 
 # --- Page Config ---
 st.set_page_config(
-    page_title="MEMOKI – KI-Memory-Spiele-Macher",
+    page_title="MEMOKI",
     page_icon="🎴",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -296,51 +297,26 @@ def img_to_base64(img: Image.Image) -> str:
 
 
 # ============================
-# MODE-MAPPING
+# MODE-MAPPING (internal keys)
 # ============================
 GAME_MODES = {
-    "Klassisches Memory": {
-        "icon": "🖼️",
-        "css": "mode-classic",
-        "desc": "2x das gleiche Bildmotiv",
-        "key": "classic",
-    },
-    "Paare-Memory": {
-        "icon": "🧩",
-        "css": "mode-paare",
-        "desc": "Zusammengehörige Objekte (TV & Fernbedienung)",
-        "key": "paare",
-    },
-    "Teekesselchen-Memory": {
-        "icon": "🫖",
-        "css": "mode-teekessel",
-        "desc": "Gleiches Wort, anderes Bild (Eis & Eis)",
-        "key": "teekesselchen",
-    },
-    "Mathe Memory I": {
-        "icon": "🔢",
-        "css": "mode-mathe1",
-        "desc": "Zahl ↔ abstrakte Symbole (5 ↔ Quadrate)",
-        "key": "mathe_abstrakt",
-    },
-    "Mathe Memory II": {
-        "icon": "🎯",
-        "css": "mode-mathe2",
-        "desc": "Zahl ↔ reale Objekte (5 ↔ Schuhe)",
-        "key": "mathe_konkret",
-    },
+    "classic": {"icon": "🖼️", "css": "mode-classic"},
+    "paare": {"icon": "🧩", "css": "mode-paare"},
+    "teekesselchen": {"icon": "🫖", "css": "mode-teekessel"},
+    "mathe_abstrakt": {"icon": "🔢", "css": "mode-mathe1"},
+    "mathe_konkret": {"icon": "🎯", "css": "mode-mathe2"},
 }
 
 
 # ============================
 # HEADER-BANNER
 # ============================
-st.markdown("""
+st.markdown(f"""
 <div class="memoki-banner">
     <div class="memoki-brand">
         <div>
             <div class="memoki-title">🎴 MEMOKI</div>
-            <div class="memoki-subtitle">Dein KI-Memory-Spiele-Macher</div>
+            <div class="memoki-subtitle">{t("banner.subtitle")}</div>
         </div>
     </div>
 </div>
@@ -355,32 +331,37 @@ left_col, right_col = st.columns([1, 2], gap="large")
 
 # --- LINKE SPALTE ---
 with left_col:
-    st.markdown('<div class="section-title">🎯 Spielmodus</div>', unsafe_allow_html=True)
+    # Language selector
+    render_lang_selector()
+
+    st.markdown(f'<div class="section-title">{t("section.game_mode")}</div>', unsafe_allow_html=True)
 
     # Mode-Auswahl: bunte Karte + transparenter Button als Overlay
-    mode_names = list(GAME_MODES.keys())
+    mode_keys = list(GAME_MODES.keys())
     if "selected_mode" not in st.session_state:
-        st.session_state.selected_mode = mode_names[0]
+        st.session_state.selected_mode = mode_keys[0]
 
-    def _select_mode(mode):
-        st.session_state.selected_mode = mode
+    def _select_mode(mode_key):
+        st.session_state.selected_mode = mode_key
 
-    for mode_name, mode_info in GAME_MODES.items():
-        is_selected = mode_name == st.session_state.selected_mode
+    for mk, mode_info in GAME_MODES.items():
+        is_selected = mk == st.session_state.selected_mode
         style_attr = "border-width: 3px; box-shadow: 0 4px 14px rgba(0,0,0,0.12);" if is_selected else "opacity: 0.6;"
         check = " ✓" if is_selected else ""
+        mode_name = t(f"mode.{mk}.name")
+        mode_desc = t(f"mode.{mk}.desc")
         st.markdown(f"""
         <div class="mode-card {mode_info['css']}" style="{style_attr}">
             <div class="mode-name">{mode_info['icon']} {mode_name}{check}</div>
-            <div class="mode-desc">{mode_info['desc']}</div>
+            <div class="mode-desc">{mode_desc}</div>
         </div>
         """, unsafe_allow_html=True)
         st.button(
             mode_name,
-            key=f"mode_{mode_name}",
+            key=f"mode_{mk}",
             use_container_width=True,
             on_click=_select_mode,
-            args=(mode_name,),
+            args=(mk,),
         )
 
     selected_mode = st.session_state.selected_mode
@@ -389,23 +370,26 @@ with left_col:
 
     num_pairs = 10
 
-    st.markdown('<div class="footer">MEMOKI – LLM-Tuning & Prompt Engineering 🧠</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="footer">{t("footer.text")}</div>', unsafe_allow_html=True)
 
 
 # ============================
 # SESSION STATE INIT
 # ============================
-mode_key = GAME_MODES[selected_mode]["key"]
+mode_key = selected_mode
+lang = get_lang()
 
-# Agent neu erstellen bei Modus/Paarzahl-Wechsel
+# Agent neu erstellen bei Modus/Paarzahl/Sprach-Wechsel
 if (
     "agent" not in st.session_state
     or st.session_state.get("current_mode") != mode_key
     or st.session_state.get("current_pairs") != num_pairs
+    or st.session_state.get("current_lang") != lang
 ):
-    st.session_state.agent = MemokiAgent(mode=mode_key, pair_count=num_pairs)
+    st.session_state.agent = MemokiAgent(mode=mode_key, pair_count=num_pairs, lang=lang)
     st.session_state.current_mode = mode_key
     st.session_state.current_pairs = num_pairs
+    st.session_state.current_lang = lang
     st.session_state.messages = []
     st.session_state.deck = None
     st.session_state.generating = False
@@ -416,62 +400,27 @@ if (
     st.session_state.moves = 0
     st.session_state.view_mode = "preview"
 
-# Erste Begrüßung (hübsch formatiert, nicht vom Agent)
+# Erste Begrüßung
 if not st.session_state.messages:
+    mode_display_name = t(f"mode.{mode_key}.name")
+    hello = t("greeting.hello") + t("greeting.mode_chosen", mode_name=mode_display_name)
+
     if mode_key == "teekesselchen":
-        greeting = (
-            f"Hallo! Ich bin **MEMOKI** 🎴\n\n"
-            f"Du hast **{selected_mode}** gewählt – super Wahl!\n\n"
-            "Die Wörter wähle ich aus meiner Sammlung von 130 Teekesselchen.\n"
-            "Sag mir noch:\n"
-            "- Welcher **Stil**? (Cartoon, Foto, Aquarell …)\n"
-            "- Für **wen**? (Kinder, Teenager, Erwachsene?)"
-        )
+        hello += t("greeting.teekesselchen")
     elif mode_key == "mathe_abstrakt":
-        greeting = (
-            f"Hallo! Ich bin **MEMOKI** 🎴\n\n"
-            f"Du hast **{selected_mode}** gewählt – super Wahl!\n\n"
-            f"Die Zahlen 1–{num_pairs} werden automatisch generiert.\n"
-            "Sag mir noch:\n"
-            "- Welche **Symbole**? (Kreise ●, Sterne ★, Herzen ♥, Würfel ⚅, Finger ✋, Überraschung 🎲)\n"
-            "- Welcher **Stil**? (Cartoon, Foto, Aquarell …)\n"
-            "- Für **wen**? (Kinder, Teenager, Erwachsene?)"
-        )
+        hello += t("greeting.mathe_abstrakt", num_pairs=num_pairs)
     elif mode_key == "mathe_konkret":
-        greeting = (
-            f"Hallo! Ich bin **MEMOKI** 🎴\n\n"
-            f"Du hast **{selected_mode}** gewählt – super Wahl!\n\n"
-            f"Die Zahlen 1–{num_pairs} werden mit realen Objekten gepaart.\n"
-            "Sag mir:\n"
-            "- Welches **Thema**? (Sport, Essen, Spielzeug …)\n"
-            "  Tipp: Am besten ein Thema mit kleinen, zählbaren Dingen!\n"
-            "- Welcher **Stil**? (Cartoon, Foto, Aquarell …)\n"
-            "- Für **wen**? (Kinder, Teenager, Erwachsene?)"
-        )
+        hello += t("greeting.mathe_konkret", num_pairs=num_pairs)
     elif mode_key == "paare":
-        available_themes = load_pairs_themes()
+        available_themes = load_pairs_themes(lang=lang)
         themes_str = ", ".join(available_themes)
-        greeting = (
-            f"Hallo! Ich bin **MEMOKI** 🎴\n\n"
-            f"Du hast **{selected_mode}** gewählt – super Wahl!\n\n"
-            "Hier findest du zusammengehörige Paare wie Topf & Deckel.\n"
-            "Sag mir:\n"
-            f"- Welches **Thema**? ({themes_str})\n"
-            "- Welcher **Stil**? (Cartoon, Foto, Aquarell …)\n"
-            "- Für **wen**? (Kinder, Teenager, Erwachsene?)"
-        )
+        hello += t("greeting.paare", themes_str=themes_str)
     else:
-        greeting = (
-            f"Hallo! Ich bin **MEMOKI** 🎴\n\n"
-            f"Du hast **{selected_mode}** gewählt – super Wahl!\n\n"
-            "Erzähl mir, was für Karten Du Dir wünschst:\n"
-            "- Welches **Thema**? (Tiere, Essen, Technik …)\n"
-            "- Welcher **Stil**? (Cartoon, Foto, Aquarell …)\n"
-            "- Für **wen**? (Kinder, Teenager, Erwachsene?)"
-        )
+        hello += t("greeting.classic")
+
     st.session_state.messages.append({
         "role": "assistant",
-        "content": greeting,
+        "content": hello,
     })
 
 
@@ -499,7 +448,7 @@ with right_col:
         action_bar = st.container(key="action_bar")
         btn_col1, btn_col2, btn_col3 = action_bar.columns(3)
         with btn_col1:
-            if st.button("🎮 Mischen & Spielen", use_container_width=True):
+            if st.button(t("btn.shuffle_play"), use_container_width=True):
                 random.shuffle(deck.cards)
                 st.session_state.flipped = set()
                 st.session_state.matched = set()
@@ -509,14 +458,14 @@ with right_col:
                 st.session_state.view_mode = "play"
                 st.rerun()
         with btn_col2:
-            if st.button("👁️ Karten zeigen", use_container_width=True):
+            if st.button(t("btn.show_cards"), use_container_width=True):
                 st.session_state.view_mode = "preview"
                 st.rerun()
         with btn_col3:
             st.download_button(
-                "📥 Alle Karten herunterladen (ZIP)",
+                t("btn.download_zip"),
                 data=zip_buf.getvalue(),
-                file_name="memoki-karten.zip",
+                file_name=t("btn.download_filename"),
                 mime="application/zip",
                 use_container_width=True,
             )
@@ -525,8 +474,8 @@ with right_col:
         if st.session_state.view_mode == "preview":
             st.markdown(f"""
             <div class="progress-box">
-                <strong>👁️ Kartenvorschau</strong> &nbsp;|&nbsp;
-                {total_pairs} Paare sortiert nach Zugehörigkeit
+                <strong>{t("preview.title")}</strong> &nbsp;|&nbsp;
+                {t("preview.pairs_sorted", total_pairs=total_pairs)}
             </div>
             """, unsafe_allow_html=True)
 
@@ -546,7 +495,7 @@ with right_col:
                             unsafe_allow_html=True,
                         )
                     else:
-                        st.markdown("*(kein Bild)*")
+                        st.markdown(t("preview.no_image"))
                     st.caption(f"#{card.pair_id} – {card.label}")
 
         # === SPIEL-MODUS ===
@@ -554,15 +503,14 @@ with right_col:
             found = len(st.session_state.matched)
             st.markdown(f"""
             <div class="progress-box">
-                <strong>🎮 Spielfeld</strong> &nbsp;|&nbsp;
-                Paare gefunden: <strong>{found}/{total_pairs}</strong> &nbsp;|&nbsp;
-                Züge: <strong>{st.session_state.moves}</strong>
+                <strong>{t("play.title")}</strong> &nbsp;|&nbsp;
+                {t("play.pairs_found", found=found, total_pairs=total_pairs)} &nbsp;|&nbsp;
+                {t("play.moves", moves=st.session_state.moves)}
             </div>
             """, unsafe_allow_html=True)
 
-            # Callback: Karte anklicken (läuft VOR dem Rendering)
+            # Callback: Karte anklicken
             def _on_card_click(idx):
-                # Vorheriges Nicht-Paar zurückdrehen
                 if st.session_state.pending_flip_back:
                     a, b = st.session_state.pending_flip_back
                     st.session_state.flipped.discard(a)
@@ -570,11 +518,9 @@ with right_col:
                     st.session_state.pending_flip_back = None
 
                 if st.session_state.first_pick is None:
-                    # Erste Karte aufdecken
                     st.session_state.first_pick = idx
                     st.session_state.flipped.add(idx)
                 else:
-                    # Zweite Karte aufdecken + prüfen
                     first = st.session_state.first_pick
                     st.session_state.flipped.add(idx)
                     st.session_state.moves += 1
@@ -615,8 +561,8 @@ with right_col:
 
             # Spiel gewonnen?
             if found == total_pairs:
-                st.success(f"🎉 Gewonnen! Du hast alle {total_pairs} Paare in {st.session_state.moves} Zügen gefunden!")
-                if st.button("🔄 Neues Spiel"):
+                st.success(t("play.won", total_pairs=total_pairs, moves=st.session_state.moves))
+                if st.button(t("btn.new_game")):
                     st.session_state.deck = None
                     st.session_state.messages = []
                     st.session_state.flipped = set()
@@ -625,25 +571,24 @@ with right_col:
                     st.session_state.pending_flip_back = None
                     st.session_state.moves = 0
                     st.session_state.view_mode = "preview"
-                    st.session_state.agent = MemokiAgent(mode=mode_key, pair_count=num_pairs)
+                    st.session_state.agent = MemokiAgent(mode=mode_key, pair_count=num_pairs, lang=lang)
                     st.rerun()
 
         st.markdown("---")
 
     # Chat-Interface
-    st.markdown('<div class="section-title">💬 Sprich mit MEMOKI</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-title">{t("section.chat")}</div>', unsafe_allow_html=True)
 
     for msg in st.session_state.messages:
         avatar = "🎴" if msg["role"] == "assistant" else "🙋"
         with st.chat_message(msg["role"], avatar=avatar):
             st.markdown(msg["content"])
 
-    # Auto-Scroll: nach dem Rendern der Nachrichten ans Ende scrollen
+    # Auto-Scroll
     components.html("""
     <script>
         setTimeout(function() {
             const doc = window.parent.document;
-            // Versuche verschiedene Streamlit-Container
             const targets = [
                 doc.querySelector('[data-testid="stAppViewContainer"]'),
                 doc.querySelector('section.main'),
@@ -654,20 +599,19 @@ with right_col:
                     el.scrollTo({top: el.scrollHeight, behavior: 'smooth'});
                 }
             }
-            // Fallback: ganzes Fenster scrollen
             window.parent.scrollTo({top: doc.body.scrollHeight, behavior: 'smooth'});
         }, 200);
     </script>
     """, height=1)
 
-    if prompt := st.chat_input("Sag MEMOKI, was Du Dir wünschst …"):
+    if prompt := st.chat_input(t("chat.placeholder")):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user", avatar="🙋"):
             st.markdown(prompt)
 
         # Agent-Antwort
         with st.chat_message("assistant", avatar="🎴"):
-            with st.spinner("MEMOKI denkt nach..."):
+            with st.spinner(t("chat.thinking")):
                 response = st.session_state.agent.chat(prompt)
 
             # JSON-Block aus der angezeigten Nachricht entfernen
@@ -699,16 +643,16 @@ with right_col:
                 return idx, label, generate_card_image(prompt), None
             except Exception as e:
                 try:
-                    return idx, label, generate_card_image(prompt, use_fast=True), f"Fallback: {e}"
+                    return idx, label, generate_card_image(prompt, use_fast=True), t("gen.fallback", error=e)
                 except Exception as e2:
-                    return idx, label, None, f"Fehlgeschlagen: {e2}"
+                    return idx, label, None, t("gen.failed", error=e2)
 
-        def _parallel_images(jobs, total_label="Bilder"):
+        def _parallel_images(jobs, total_label=""):
             """Generiert Bilder parallel und zeigt Fortschritt."""
             results = [None] * len(jobs)
             done = 0
             total = len(jobs)
-            progress = st.progress(0, text=f"Generiere {total_label}...")
+            progress = st.progress(0, text=t("gen.progress", label=total_label))
             with ThreadPoolExecutor(max_workers=5) as pool:
                 futures = {pool.submit(_gen_one_img, j): j[0] for j in jobs}
                 for future in as_completed(futures):
@@ -719,24 +663,22 @@ with right_col:
                         st.warning(f"⚠️ {label}: {warn}")
                     else:
                         st.write(f"✅ {label}")
-                    progress.progress(done / total, text=f"Bild {done}/{total}")
+                    progress.progress(done / total, text=t("gen.image_progress", done=done, total=total))
             return results
 
         # === TEEKESSELCHEN ===
         if mode_key == "teekesselchen":
-            with st.status(f"🫖 Generiere {num_pairs} Teekesselchen-Paare...", expanded=True) as status:
-                # Schritt 1: Teekesselchen aus JSON laden
-                st.write(f"📝 Wähle {num_pairs} Teekesselchen aus 130 Wörtern...")
+            with st.status(t("gen.tk.status", num_pairs=num_pairs), expanded=True) as status:
+                st.write(t("gen.tk.selecting", num_pairs=num_pairs))
                 try:
-                    tk_list = load_teekesselchen(num_pairs)
+                    tk_list = load_teekesselchen(num_pairs, lang=lang)
                     words = [tk["word"] for tk in tk_list]
-                    st.write(f"✅ Wörter: {', '.join(words)}")
+                    st.write(t("gen.tk.words_ok", words=", ".join(words)))
                 except Exception as e:
-                    st.error(f"Fehler beim Laden: {e}")
+                    st.error(t("gen.error_loading", error=e))
                     st.session_state.generating = False
                     st.stop()
 
-                # Schritt 2: Bild-Prompts bauen (2 pro Wort)
                 jobs = []
                 for i, tk in enumerate(tk_list):
                     prompt_a = build_image_prompt(tk["meaning_a"], style, audience)
@@ -744,175 +686,159 @@ with right_col:
                     jobs.append((i * 2, f"{tk['word']} ({tk['label_a']})", prompt_a))
                     jobs.append((i * 2 + 1, f"{tk['word']} ({tk['label_b']})", prompt_b))
 
-                st.write(f"🖼️ Generiere {len(jobs)} Bilder parallel (2 pro Wort)...")
-                all_images = _parallel_images(jobs, f"{len(jobs)} Bilder")
+                st.write(t("gen.tk.images", count=len(jobs)))
+                all_images = _parallel_images(jobs, f"{len(jobs)}")
 
-                # Bilder aufteilen: gerade=A, ungerade=B
                 images_a = [all_images[i * 2] for i in range(num_pairs)]
                 images_b = [all_images[i * 2 + 1] for i in range(num_pairs)]
 
-                # Schritt 3: Deck bauen
-                st.write("🃏 Baue Spielfeld...")
+                st.write(t("gen.building_deck"))
                 deck = Deck.build_teekesselchen(tk_list, images_a, images_b)
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
                 st.session_state.view_mode = "preview"
-                status.update(label="✅ Fertig! Dein Teekesselchen-Memory ist bereit!", state="complete")
+                status.update(label=t("gen.tk.done"), state="complete")
 
             st.session_state.messages.append({
                 "role": "assistant",
-                "content": f"🎉 Dein **Teekesselchen**-Memory mit {num_pairs} Wortpaaren ist fertig! Finde die zwei Bedeutungen!"
+                "content": t("gen.tk.complete_msg", num_pairs=num_pairs),
             })
             st.rerun()
 
         # === MATHE ABSTRAKT ===
         elif mode_key == "mathe_abstrakt":
             shape_id = action.get("shape", "surprise")
-            with st.status(f"🔢 Generiere Mathe-Memory mit {num_pairs} Zahlen...", expanded=True) as status:
-                # Schritt 1: Shape laden
-                st.write(f"🔷 Lade Shape-Stil '{shape_id}'...")
+            with st.status(t("gen.ma.status", num_pairs=num_pairs), expanded=True) as status:
+                st.write(t("gen.ma.loading_shape", shape_id=shape_id))
                 try:
                     shape = load_math_shape(shape_id)
-                    st.write(f"✅ Shape: {shape['name_de']} {shape.get('symbol', '')}")
+                    shape_name = shape.get(f"name_{lang}", shape["name_de"])
+                    st.write(t("gen.ma.shape_ok", name=shape_name, symbol=shape.get("symbol", "")))
                 except Exception as e:
-                    st.error(f"Fehler beim Shape-Laden: {e}")
+                    st.error(t("gen.error_shape", error=e))
                     st.session_state.generating = False
                     st.stop()
 
-                # Schritt 2: Zahlen + Prompts vorbereiten
                 numbers = list(range(1, num_pairs + 1))
                 jobs = []
                 for i, num in enumerate(numbers):
                     num_prompt = build_number_prompt(num, style, audience, theme=shape["name_en"])
                     shape_prompt = build_shapes_prompt(num, shape, style, audience)
-                    jobs.append((i * 2, f"Zahl {num}", num_prompt))
-                    jobs.append((i * 2 + 1, f"{num}x {shape['name_de']}", shape_prompt))
+                    jobs.append((i * 2, t("card.number", num=num), num_prompt))
+                    jobs.append((i * 2 + 1, t("card.number_x", num=num, name=shape_name), shape_prompt))
 
-                # Schritt 3: Bilder parallel generieren (2 pro Zahl)
-                st.write(f"🖼️ Generiere {len(jobs)} Bilder parallel (Zahl + Shape)...")
-                all_images = _parallel_images(jobs, f"{len(jobs)} Bilder")
+                st.write(t("gen.ma.images", count=len(jobs)))
+                all_images = _parallel_images(jobs, f"{len(jobs)}")
 
-                # Bilder aufteilen: gerade=Zahlen, ungerade=Shapes
                 number_images = [all_images[i * 2] for i in range(num_pairs)]
                 shape_images = [all_images[i * 2 + 1] for i in range(num_pairs)]
 
-                # Schritt 4: Deck bauen
-                st.write("🃏 Baue Spielfeld...")
-                deck = Deck.build_mathe_abstrakt(numbers, shape["name_de"], number_images, shape_images)
+                st.write(t("gen.building_deck"))
+                deck = Deck.build_mathe_abstrakt(numbers, shape_name, number_images, shape_images, lang=lang)
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
                 st.session_state.view_mode = "preview"
-                status.update(label="✅ Fertig! Dein Mathe-Memory ist bereit!", state="complete")
+                status.update(label=t("gen.ma.done"), state="complete")
 
             st.session_state.messages.append({
                 "role": "assistant",
-                "content": f"🎉 Dein **Mathe-Memory** mit Zahlen 1–{num_pairs} und **{shape['name_de']}** ist fertig! Finde die passenden Paare!"
+                "content": t("gen.ma.complete_msg", num_pairs=num_pairs, shape_name=shape_name),
             })
             st.rerun()
 
         # === MATHE KONKRET ===
         elif mode_key == "mathe_konkret":
             theme = action.get("theme", "toys")
-            with st.status(f"🎯 Generiere Mathe-Memory II mit {num_pairs} Zahlen...", expanded=True) as status:
-                # Schritt 1: Zählbare Objekte generieren
-                st.write(f"📝 Generiere {num_pairs} zählbare Objekte zum Thema '{theme}'...")
+            with st.status(t("gen.mk.status", num_pairs=num_pairs), expanded=True) as status:
+                st.write(t("gen.mk.generating_objects", num_pairs=num_pairs, theme=theme))
                 try:
                     objects = generate_countable_objects(
                         theme=theme,
                         count=num_pairs,
                         audience=audience,
                     )
-                    st.write(f"✅ Objekte: {', '.join(objects)}")
+                    st.write(t("gen.mk.objects_ok", objects=", ".join(objects)))
                 except Exception as e:
-                    st.error(f"Fehler bei Objekt-Generierung: {e}")
+                    st.error(t("gen.error_objects", error=e))
                     st.session_state.generating = False
                     st.stop()
 
-                # Schritt 2: Zahlen + Prompts vorbereiten
                 numbers = list(range(1, num_pairs + 1))
                 jobs = []
                 for i, (num, obj) in enumerate(zip(numbers, objects)):
                     num_prompt = build_number_prompt(num, style, audience, theme=theme)
                     obj_prompt = build_real_objects_prompt(num, obj, style, audience, theme=theme)
-                    jobs.append((i * 2, f"Zahl {num}", num_prompt))
+                    jobs.append((i * 2, t("card.number", num=num), num_prompt))
                     jobs.append((i * 2 + 1, f"{num}x {obj}", obj_prompt))
 
-                # Schritt 3: Bilder parallel generieren (2 pro Zahl)
-                st.write(f"🖼️ Generiere {len(jobs)} Bilder parallel (Zahl + Objekt)...")
-                all_images = _parallel_images(jobs, f"{len(jobs)} Bilder")
+                st.write(t("gen.mk.images", count=len(jobs)))
+                all_images = _parallel_images(jobs, f"{len(jobs)}")
 
-                # Bilder aufteilen: gerade=Zahlen, ungerade=Objekte
                 number_images = [all_images[i * 2] for i in range(num_pairs)]
                 object_images = [all_images[i * 2 + 1] for i in range(num_pairs)]
 
-                # Schritt 4: Deck bauen
-                st.write("🃏 Baue Spielfeld...")
-                deck = Deck.build_mathe_konkret(numbers, objects, number_images, object_images)
+                st.write(t("gen.building_deck"))
+                deck = Deck.build_mathe_konkret(numbers, objects, number_images, object_images, lang=lang)
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
                 st.session_state.view_mode = "preview"
-                status.update(label="✅ Fertig! Dein Mathe-Memory II ist bereit!", state="complete")
+                status.update(label=t("gen.mk.done"), state="complete")
 
             st.session_state.messages.append({
                 "role": "assistant",
-                "content": f"🎉 Dein **Mathe-Memory II** zum Thema **{theme}** mit Zahlen 1–{num_pairs} ist fertig! Finde Zahl und passende Objekte!"
+                "content": t("gen.mk.complete_msg", theme=theme, num_pairs=num_pairs),
             })
             st.rerun()
 
         # === PAARE-MEMORY ===
         elif mode_key == "paare":
             theme = action.get("theme", "Küche")
-            with st.status(f"🧩 Generiere {num_pairs} Wortpaare zum Thema '{theme}'...", expanded=True) as status:
-                # Schritt 1: Paare aus JSON laden
-                st.write(f"📝 Wähle {num_pairs} Paare zum Thema '{theme}'...")
+            with st.status(t("gen.pa.status", num_pairs=num_pairs, theme=theme), expanded=True) as status:
+                st.write(t("gen.pa.selecting", num_pairs=num_pairs, theme=theme))
                 try:
-                    pairs = load_pairs(theme, num_pairs)
-                    pair_labels = [f"{p['a_de']} & {p['b_de']}" for p in pairs]
-                    st.write(f"✅ Paare: {', '.join(pair_labels)}")
+                    pairs = load_pairs(theme, num_pairs, lang=lang)
+                    pair_labels = [f"{p['a_label']} & {p['b_label']}" for p in pairs]
+                    st.write(t("gen.pa.pairs_ok", pairs=", ".join(pair_labels)))
                 except Exception as e:
-                    st.error(f"Fehler beim Laden: {e}")
+                    st.error(t("gen.error_loading", error=e))
                     st.session_state.generating = False
                     st.stop()
 
-                # Schritt 2: Bild-Prompts bauen (2 pro Paar: Objekt A + Objekt B)
                 jobs = []
                 for i, pair in enumerate(pairs):
                     prompt_a = build_pair_object_prompt(pair["a_en"], style, audience)
                     prompt_b = build_pair_object_prompt(pair["b_en"], style, audience)
-                    jobs.append((i * 2, pair["a_de"], prompt_a))
-                    jobs.append((i * 2 + 1, pair["b_de"], prompt_b))
+                    jobs.append((i * 2, pair["a_label"], prompt_a))
+                    jobs.append((i * 2 + 1, pair["b_label"], prompt_b))
 
-                st.write(f"🖼️ Generiere {len(jobs)} Bilder parallel (2 pro Paar)...")
-                all_images = _parallel_images(jobs, f"{len(jobs)} Bilder")
+                st.write(t("gen.pa.images", count=len(jobs)))
+                all_images = _parallel_images(jobs, f"{len(jobs)}")
 
-                # Bilder aufteilen: gerade=A, ungerade=B
                 images_a = [all_images[i * 2] for i in range(len(pairs))]
                 images_b = [all_images[i * 2 + 1] for i in range(len(pairs))]
 
-                # Schritt 3: Deck bauen
-                st.write("🃏 Baue Spielfeld...")
+                st.write(t("gen.building_deck"))
                 deck = Deck.build_paare(pairs, images_a, images_b)
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
                 st.session_state.view_mode = "preview"
-                status.update(label="✅ Fertig! Dein Paare-Memory ist bereit!", state="complete")
+                status.update(label=t("gen.pa.done"), state="complete")
 
             st.session_state.messages.append({
                 "role": "assistant",
-                "content": f"🎉 Dein **Paare-Memory** zum Thema **{theme}** mit {len(pairs)} Paaren ist fertig! Finde die zusammengehörigen Objekte!"
+                "content": t("gen.pa.complete_msg", theme=theme, count=len(pairs)),
             })
             st.rerun()
 
-        # === CLASSIC (und vorerst alle anderen Modi) ===
+        # === CLASSIC ===
         else:
             theme = action.get("theme", "animals")
-            with st.status(f"🎨 Generiere {num_pairs} Kartenbilder...", expanded=True) as status:
-                # Schritt 1: Objekte generieren
-                st.write(f"📝 Generiere {num_pairs} Objekte zum Thema '{theme}'...")
+            with st.status(t("gen.cl.status", num_pairs=num_pairs), expanded=True) as status:
+                st.write(t("gen.cl.generating_objects", num_pairs=num_pairs, theme=theme))
                 try:
                     objects = generate_objects(
                         theme=theme,
@@ -920,31 +846,29 @@ with right_col:
                         audience=audience,
                         style=style,
                     )
-                    st.write(f"✅ Objekte: {', '.join(objects)}")
+                    st.write(t("gen.cl.objects_ok", objects=", ".join(objects)))
                 except Exception as e:
-                    st.error(f"Fehler bei Objekt-Generierung: {e}")
+                    st.error(t("gen.error_objects", error=e))
                     st.session_state.generating = False
                     st.stop()
 
-                # Schritt 2: Bilder parallel generieren
-                st.write(f"🖼️ Generiere {num_pairs} Bilder parallel...")
+                st.write(t("gen.cl.images", num_pairs=num_pairs))
                 jobs = [
                     (i, obj, build_image_prompt(obj, style, audience))
                     for i, obj in enumerate(objects)
                 ]
                 images = _parallel_images(jobs)
 
-                # Schritt 3: Deck bauen
-                st.write("🃏 Baue Spielfeld...")
+                st.write(t("gen.building_deck"))
                 deck = Deck.build_classic(objects, images)
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
                 st.session_state.view_mode = "preview"
-                status.update(label="✅ Fertig! Dein Memory ist bereit!", state="complete")
+                status.update(label=t("gen.cl.done"), state="complete")
 
             st.session_state.messages.append({
                 "role": "assistant",
-                "content": f"🎉 Dein **{theme}**-Memory mit {num_pairs} Paaren ist fertig! Viel Spaß beim Spielen!"
+                "content": t("gen.cl.complete_msg", theme=theme, num_pairs=num_pairs),
             })
             st.rerun()

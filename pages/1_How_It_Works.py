@@ -3,9 +3,11 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+from i18n import t, get_mode_data, render_lang_selector
+
 # ── Page Config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="MEMOKI – How it Works",
+    page_title=t("hiw.page_title"),
     page_icon="🧠",
     layout="wide",
 )
@@ -242,263 +244,36 @@ components.html("""
 # ── Navigation ───────────────────────────────────────────────────────────────
 
 NAV_ITEMS = [
-    "🏗️ Architektur-Übersicht",
-    "🎴 Klassisches Memory",
-    "👫 Paare-Memory",
-    "🫖 Teekesselchen",
-    "🔢 Mathe I (Abstrakt)",
-    "🧮 Mathe II (Konkret)",
-    "🎨 Stil & Zielgruppen",
+    t("hiw.nav.architecture"),
+    t("hiw.nav.classic"),
+    t("hiw.nav.paare"),
+    t("hiw.nav.teekesselchen"),
+    t("hiw.nav.mathe_abstrakt"),
+    t("hiw.nav.mathe_konkret"),
+    t("hiw.nav.style"),
 ]
 
 with st.sidebar:
-    st.markdown("### 🧠 MEMOKI Docs")
+    st.markdown(t("hiw.sidebar_title"))
+    st.markdown("---")
+    render_lang_selector()
     st.markdown("---")
     selected = st.radio("Navigation", NAV_ITEMS, label_visibility="collapsed")
 
 
-# ── Mode Data ────────────────────────────────────────────────────────────────
+# ── Mode Data (sprachabhängig) ──────────────────────────────────────────────
 
-MODE_DATA = {
-    "classic": {
-        "icon": "🎴",
-        "title": "Klassisches Memory",
-        "what": (
-            "Im klassischen Modus generiert MEMOKI Bildpaare zu einem frei "
-            "wählbaren Thema. Der User nennt ein Thema (z.B. *Tiere*, *Fahrzeuge*, "
-            "*Weltraum*), und das System erzeugt passende Motive als identische Kartenpaare.\n\n"
-            "Jedes Paar besteht aus zwei identischen Karten mit demselben Motiv. "
-            "Die Spieler decken Karten auf und suchen die passenden Paare."
-        ),
-        "how": [
-            ("1. Thema wählen", "Der MEMOKI-Agent fragt nach Thema, Stil und Zielgruppe."),
-            ("2. Objekte generieren", "Gemini 2.5 Flash generiert eine Liste passender Objekte per LLM-Call."),
-            ("3. Prompts bauen", "<code>build_image_prompt()</code> erstellt für jedes Objekt einen optimierten Bild-Prompt."),
-            ("4. Bilder erzeugen", "Gemini 3 Pro generiert die Kartenbilder parallel (ThreadPoolExecutor)."),
-            ("5. Deck erstellen", "Jedes Bild wird verdoppelt, gemischt und als spielbares Deck ausgegeben."),
-        ],
-        "prompt_engineering": [
-            "<b>Objekt-Generierung</b> &mdash; Der Content-Prompt fordert visuell unterscheidbare, "
-            "konkrete Objekte. Abstrakte Konzepte und Synonyme werden explizit ausgeschlossen.",
-            "<b>Stil-Anpassung</b> &mdash; Das Hybrid-System löst bekannte Stil-Keys (z.B. <code>cartoon</code>) "
-            "in detaillierte Prompt-Fragmente auf, lässt aber auch Freitext durch (z.B. <code>van Gogh</code>).",
-            "<b>Zielgruppen-Tuning</b> &mdash; Je nach Audience werden Attribute wie <code>cute, friendly</code> "
-            "(Kinder) oder <code>sophisticated, elegant</code> (Erwachsene) ergänzt.",
-            "<b>Weißer Hintergrund</b> &mdash; Alle Prompts enden mit <code>pure white background, no text, "
-            "square format</code> für konsistente Kartenlayouts.",
-        ],
-        "challenges": [
-            ("Objekt-Qualität", "Der LLM generiert manchmal zu ähnliche oder zu abstrakte Objekte. "
-             "Gelöst durch detaillierte Beispiele und Negativbeispiele im Prompt."),
-            ("Stil-Konsistenz", "Verschiedene Objekte im selben Stil halten &mdash; der Stil-Prompt "
-             "muss stark genug sein, um den Look über alle Karten hinweg einheitlich zu halten."),
-        ],
-        "learnings": [
-            "<b>Few-Shot-Beispiele wirken</b> &mdash; Gute und schlechte Beispiele im Content-Prompt "
-            "verbessern die Objekt-Qualität drastisch.",
-            "<b>Parallelisierung lohnt sich</b> &mdash; 10 Bilder parallel statt sequenziell spart "
-            "erheblich Zeit bei der Generierung.",
-        ],
-    },
-
-    "paare": {
-        "icon": "👫",
-        "title": "Paare-Memory",
-        "what": (
-            "Im Paare-Modus bestehen die Kartenpaare aus zwei *zusammengehörigen* "
-            "aber *unterschiedlichen* Motiven. Zum Beispiel: Hund & Knochen, "
-            "Schlüssel & Schloss, Nadel & Faden.\n\n"
-            "Die Spieler müssen erkennen, welche zwei verschiedenen Bilder "
-            "logisch zusammengehören &mdash; eine anspruchsvollere Variante als identische Paare."
-        ),
-        "how": [
-            ("1. Thema wählen", "Der Agent fragt nach Thema, Stil und Zielgruppe."),
-            ("2. Paare laden", "Zusammengehörige Objekt-Paare werden aus der <code>pairs_v2.json</code> Wissensbasis geladen."),
-            ("3. Prompts bauen", "Für jedes Objekt wird ein eigener Bild-Prompt erstellt (Objekt A und Objekt B getrennt)."),
-            ("4. Bilder erzeugen", "Beide Bilder eines Paares werden parallel generiert."),
-            ("5. Deck erstellen", "Die Karten werden gemischt, jedes Paar hat eine gemeinsame <code>pair_id</code>."),
-        ],
-        "prompt_engineering": [
-            "<b>Paar-Kohärenz</b> &mdash; Beide Objekte eines Paares müssen im selben Stil generiert werden, "
-            "damit sie visuell als zusammengehörig erkennbar sind.",
-            "<b>Eindeutigkeit</b> &mdash; Jedes Objekt muss eindeutig dargestellt werden &mdash; "
-            "ein Schlüssel darf nicht wie ein Schloss aussehen und umgekehrt.",
-            "<b>Wissensbasis-Kuratierung</b> &mdash; Die Paare in <code>pairs_v2.json</code> sind manuell kuratiert, "
-            "um sicherzustellen, dass die Zuordnung für die Zielgruppe klar ist.",
-            "<b>Anti-Morphing</b> &mdash; Der Bild-Prompt verbietet explizit Anthropomorphismus: "
-            "<code>do NOT reshape it into an animal, do NOT add faces, eyes, or animal features</code>. "
-            "Ohne diese Regel verwandelt Gemini Alltagsobjekte gerne in niedliche Charaktere.",
-        ],
-        "challenges": [
-            ("Paar-Erkennung", "Die logische Verbindung muss auch visuell erkennbar sein. "
-             "Zu abstrakte Paare (z.B. Ursache & Wirkung) funktionieren als Bild nicht."),
-            ("Schwierigkeitsbalance", "Paare müssen herausfordernd genug sein, aber nicht zu obskur &mdash; "
-             "besonders für Kinder eine Gratwanderung."),
-        ],
-        "learnings": [
-            "<b>Kuratierte Wissensbasis > LLM-Generierung</b> &mdash; Für Paare ist eine "
-            "handgepflegte JSON-Datei zuverlässiger als LLM-generierte Zuordnungen.",
-            "<b>Kulturelle Sensibilität</b> &mdash; Manche Paare sind kulturabhängig "
-            "(z.B. Brezel & Bier funktioniert in DE, aber nicht überall).",
-        ],
-    },
-
-    "teekesselchen": {
-        "icon": "🫖",
-        "title": "Teekesselchen",
-        "what": (
-            "Teekesselchen sind Wörter mit mehreren Bedeutungen (Homonyme). "
-            "Zum Beispiel: *Bank* (Sitzbank vs. Geldinstitut), *Birne* (Obst vs. Glühbirne), "
-            "*Schloss* (Gebäude vs. Türschloss).\n\n"
-            "Karte A zeigt die eine Bedeutung als Bild, Karte B die andere Bedeutung. "
-            "Die Spieler müssen erkennen, dass beide Bilder dasselbe Wort darstellen."
-        ),
-        "how": [
-            ("1. Kein Thema nötig", "Teekesselchen kommen aus der kuratierten Wissensbasis <code>teekesselchen_v2.json</code>."),
-            ("2. Wörter auswählen", "<code>load_teekesselchen()</code> wählt zufällig N Einträge mit beiden Bedeutungen."),
-            ("3. Prompts bauen", "Für jede Bedeutung wird ein separater Bild-Prompt erstellt, der die spezifische Bedeutung klar darstellt."),
-            ("4. Bilder erzeugen", "Beide Bedeutungen werden als separate Karten generiert."),
-            ("5. Rätsel-Deck", "Die Karten werden gemischt &mdash; das Rätsel: Welche zwei Bilder gehören zum selben Wort?"),
-        ],
-        "prompt_engineering": [
-            "<b>Bedeutungs-Disambiguierung</b> &mdash; Der Prompt muss unmissverständlich klarmachen, "
-            "WELCHE Bedeutung gemeint ist. <code>\"A wooden park bench in a park\"</code> statt nur <code>\"Bank\"</code>.",
-            "<b>Englische Bild-Prompts</b> &mdash; Die Bildgenerierung arbeitet auf Englisch, "
-            "die Bedeutungen werden in der Wissensbasis bereits als englische Prompts gespeichert.",
-            "<b>Keine Texthinweise</b> &mdash; Die Bilder dürfen keinen Text enthalten, der das Wort verrät. "
-            "Nur die visuelle Darstellung zählt.",
-        ],
-        "challenges": [
-            ("Homonym-Qualität", "Nicht jedes Homonym eignet sich &mdash; beide Bedeutungen müssen "
-             "gut als Bild darstellbar sein. <code>Ton</code> (Klang vs. Erde) ist z.B. schwierig."),
-            ("Schwierigkeitsgrad", "Die beiden Bilder dürfen sich nicht zu ähnlich sehen "
-             "(sonst zu leicht) und nicht zu unterschiedlich (sonst geraten)."),
-            ("Wissensbasis-Pflege", "Jeder Eintrag braucht zwei sorgfältig formulierte englische "
-             "Bild-Beschreibungen &mdash; aufwendig, aber notwendig für Qualität."),
-        ],
-        "learnings": [
-            "<b>JSON-Struktur entscheidend</b> &mdash; Jedes Teekesselchen hat <code>meaning_a</code> und "
-            "<code>meaning_b</code> mit je einer deutschen Bezeichnung und einem englischen Bild-Prompt.",
-            "<b>Kuratierung ist King</b> &mdash; LLMs können Teekesselchen vorschlagen, aber die "
-            "finale Auswahl und Prompt-Formulierung braucht menschliches Urteil.",
-        ],
-    },
-
-    "mathe_abstrakt": {
-        "icon": "🔢",
-        "title": "Mathe I (Abstrakt)",
-        "what": (
-            "Mathe Memory I trainiert Zahlenverständnis durch abstrakte Darstellungen. "
-            "Karte A zeigt eine Zahl (z.B. **5**), Karte B zeigt die entsprechende Menge "
-            "als abstrakte Formen (z.B. 5 Kreise, 5 Sterne, 5 Herzen).\n\n"
-            "Der User wählt einen **Shape-Stil** (Kreise, Sterne, Herzen, Würfelaugen, "
-            "Finger oder Überraschung). Die Zahlen 1&ndash;10 oder 1&ndash;20 werden automatisch generiert."
-        ),
-        "how": [
-            ("1. Shape wählen", "Der Agent bietet 6 Shape-Optionen an: Kreise, Sterne, Herzen, Würfelaugen, Finger, Überraschung."),
-            ("2. Shape laden", "<code>load_math_shape()</code> lädt die Shape-Definition aus <code>math_shapes.json</code>."),
-            ("3. Zahl-Prompts", "<code>build_number_prompt()</code> erzeugt Prompts für die Zahlenkarten (große, klare Ziffer)."),
-            ("4. Shape-Prompts", "<code>build_shapes_prompt()</code> erzeugt Prompts für die Shape-Karten (N Objekte, klar zählbar)."),
-            ("5. Parallel generieren", "Alle Karten werden parallel via ThreadPoolExecutor generiert."),
-        ],
-        "prompt_engineering": [
-            "<b>Zählbarkeit</b> &mdash; Der Shape-Prompt betont <code>clearly countable, well-spaced</code> &mdash; "
-            "die Formen müssen einzeln abzählbar sein, nicht ineinander verschmelzen.",
-            "<b>Finger-Sonderlogik</b> &mdash; Zahlen 1&ndash;5 zeigen eine Hand, 6&ndash;10 zeigen zwei Hände. "
-            "Der Prompt beschreibt explizit <code>left hand 5 fingers + right hand N fingers</code>.",
-            "<b>Zahlen-Klarheit</b> &mdash; Zahlenkarten betonen <code>clean standard shape, instantly recognizable</code> "
-            "und verbieten explizit Dekorationen, die die Lesbarkeit beeinträchtigen.",
-            "<b>Konsistente Shapes</b> &mdash; Die <code>image_prompt_en</code> aus der JSON-Datei definiert das "
-            "exakte Aussehen jeder Form für konsistente Ergebnisse.",
-            "<b>Layout-Hints</b> &mdash; <code>_layout_hint(n)</code> gibt für jede Zahl eine explizite "
-            "Grid-Anordnung vor (z.B. <code>3 top row, 2 bottom row</code> für 5), damit die KI "
-            "die korrekte Anzahl nicht zufällig verteilt, sondern strukturiert anordnet.",
-            "<b>Würfelaugen-Prompts</b> &mdash; <code>_dice_prompt(n)</code> beschreibt exakte Pip-Positionen "
-            "pro Würfelseite. Ab 7 werden mehrere Würfel nebeneinander dargestellt (z.B. 6+1 für 7).",
-            "<b>Strichlisten-Prompts</b> &mdash; <code>_tally_prompt(n)</code> nutzt das klassische System: "
-            "4 senkrechte Striche + 1 diagonaler = 5. Gruppen werden getrennt dargestellt.",
-            "<b>Domino-Prompts</b> &mdash; <code>_domino_prompt(n)</code> teilt die Zahl optimal auf zwei "
-            "Hälften auf (max 6 pro Hälfte). Ab 13 werden zwei Dominosteine verwendet.",
-        ],
-        "challenges": [
-            ("Zahlen-Styling vs. Lesbarkeit", "Wenn ein Thema gewählt wird, dürfen Farben sich anpassen, "
-             "aber die Ziffernform muss sauber bleiben. Gelöst durch explizites <code>Do NOT reshape the number</code>."),
-            ("Finger-Darstellung", "LLMs haben Schwierigkeiten mit korrekter Finger-Anzahl. "
-             "Gelöst durch sehr explizite Hand-Beschreibungen im Prompt."),
-            ("Hohe Zahlen zählen", "Bei 15+ Objekten wird das Zählen im Bild schwierig. "
-             "Reihen/Grid-Anordnung und großzügiger Abstand helfen."),
-        ],
-        "learnings": [
-            "<b>Shape-Datenbank statt Freitext</b> &mdash; Vordefinierte Shapes mit getesteten "
-            "Prompt-Fragmenten liefern konsistentere Ergebnisse als freie Beschreibungen.",
-            "<b>Negative Prompts wirken</b> &mdash; <code>no borders, no frames, no black edges</code> "
-            "verhindert unerwünschte visuelle Artefakte bei den Zahlenkarten.",
-        ],
-    },
-
-    "mathe_konkret": {
-        "icon": "🧮",
-        "title": "Mathe II (Konkret)",
-        "what": (
-            "Mathe Memory II verwendet **reale Objekte** statt abstrakter Formen. "
-            "Karte A zeigt eine Zahl, Karte B zeigt die entsprechende Menge "
-            "realer Gegenstände (z.B. 3 Tennisbälle, 7 Cupcakes).\n\n"
-            "Der User wählt ein **Thema** (z.B. Sport, Essen, Spielzeug), und das "
-            "System generiert per LLM passende, zählbare Objekte. Jede Zahl wird "
-            "mit einem *anderen* Objekt gepaart."
-        ),
-        "how": [
-            ("1. Thema wählen", "Der Agent fragt nach einem Thema und erklärt, dass es gut zählbare Objekte hergeben muss."),
-            ("2. Objekte generieren", "<code>generate_countable_objects()</code> nutzt Gemini Flash, um N zählbare Objekte zum Thema zu finden."),
-            ("3. Zahl-Prompts", "<code>build_number_prompt()</code> erstellt Zahlenkarten mit optionalem Thema-Einfluss auf Farben."),
-            ("4. Objekt-Prompts", "<code>build_real_objects_prompt()</code> erstellt Karten mit exakt N identischen Objekten."),
-            ("5. Generieren & Paaren", "Zahl 1 &harr; Objekt A, Zahl 2 &harr; Objekt B, etc. Parallel generiert."),
-        ],
-        "prompt_engineering": [
-            "<b>Zählbare Objekte erzwingen</b> &mdash; Der Content-Prompt hat strenge Regeln: "
-            "Objekte müssen diskret, klein und einzeln zählbar sein. Elefanten oder Schwimmbäder sind verboten.",
-            "<b>Die Sache selbst, nicht Zubehör</b> &mdash; Wichtigste Regel im Prompt: Bei Thema <code>Schuhe</code> "
-            "Schuhtypen generieren (Sneaker, Stiefel), NICHT Schuh-Zubehör (Schnürsenkel, Schuhschnalle).",
-            "<b>Anti-Cropping</b> &mdash; Explizite Anweisung: <code>all objects fully visible and not cropped or "
-            "cut off at the edges</code> mit <code>generous margin</code> verhindert abgeschnittene Objekte.",
-            "<b>Identische Objekte</b> &mdash; Der Prompt betont <code>identical</code> und <code>same type</code> &mdash; "
-            "5 Tennisbälle sollen 5 gleiche Tennisbälle sein, nicht 3 Tennisbälle und 2 Fußbälle.",
-            "<b>Thema-Kontext für Mehrdeutigkeiten</b> &mdash; <code>(in the context of {theme})</code> hilft dem "
-            "Bildgenerator bei mehrdeutigen Wörtern (z.B. <code>mouse</code> bei Thema Technik vs. Tiere).",
-            "<b>Layout-Hints</b> &mdash; Auch bei realen Objekten nutzt <code>build_real_objects_prompt()</code> "
-            "die <code>_layout_hint(n)</code>-Funktion für strukturierte Grid-Anordnungen, damit die "
-            "exakte Anzahl klar zählbar bleibt.",
-        ],
-        "challenges": [
-            ("Objekt-Auswahl-Qualität", "LLMs generierten Zubehör statt der Sache selbst "
-             "(Schuhschnallen statt Schuhe). Gelöst durch explizite Regel und Positiv-/Negativ-Beispiele."),
-            ("Objekt-Cropping", "Bei 7+ Objekten wurden Teile am Bildrand abgeschnitten. "
-             "Gelöst durch <code>generous margin</code> und explizite Anti-Cropping-Anweisung."),
-            ("Zahlenkarten-Deformation", "Zahlen wurden thematisch verformt (6 sah aus wie ein Schuh). "
-             "Gelöst durch explizites <code>Do NOT reshape the number to look like objects from the theme</code>."),
-            ("Schwarze Ränder", "Manche Zahlenkarten hatten unerwünschte schwarze Rahmen. "
-             "Gelöst durch <code>no borders, no frames, no black edges</code> im Prompt."),
-        ],
-        "learnings": [
-            "<b>Iteratives Prompt-Engineering</b> &mdash; Die Prompts wurden durch mehrere Test-Runden "
-            "schrittweise verbessert. Jeder Testlauf offenbarte neue Edge Cases.",
-            "<b>Negative Anweisungen sind mächtig</b> &mdash; Explizite Verbote (<code>Do NOT reshape</code>, "
-            "<code>no borders</code>) wirken oft besser als positive Anweisungen allein.",
-            "<b>Beispiel-basiertes Prompting</b> &mdash; Gute und schlechte Beispiele im Content-Prompt "
-            "verbessern die LLM-Objekt-Auswahl massiv (Schuhe, Getränke).",
-        ],
-    },
-}
+MODE_DATA = get_mode_data()
 
 
 # ── Render Functions ─────────────────────────────────────────────────────────
 
 def render_architecture():
     """Rendert die Architektur-Übersicht."""
-    st.markdown("""
+    st.markdown(f"""
     <div class="how-header">
-        <h1>🏗️ Architektur-Übersicht</h1>
-        <p>Wie MEMOKI unter der Haube funktioniert</p>
+        <h1>{t("hiw.arch.header")}</h1>
+        <p>{t("hiw.arch.subheader")}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -512,42 +287,37 @@ def render_architecture():
     """, unsafe_allow_html=True)
 
     # KPI Cards
-    st.markdown('<div class="section-head">📊 Auf einen Blick</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-head">{t("hiw.arch.kpi_title")}</div>', unsafe_allow_html=True)
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.markdown("""<div class="kpi-card">
+        st.markdown(f"""<div class="kpi-card">
             <div class="kpi-value">5</div>
-            <div class="kpi-label">Spielmodi</div>
+            <div class="kpi-label">{t("hiw.arch.kpi.modes")}</div>
         </div>""", unsafe_allow_html=True)
     with c2:
-        st.markdown("""<div class="kpi-card">
+        st.markdown(f"""<div class="kpi-card">
             <div class="kpi-value">10+</div>
-            <div class="kpi-label">Bildstile</div>
+            <div class="kpi-label">{t("hiw.arch.kpi.styles")}</div>
         </div>""", unsafe_allow_html=True)
     with c3:
-        st.markdown("""<div class="kpi-card">
+        st.markdown(f"""<div class="kpi-card">
             <div class="kpi-value">2</div>
-            <div class="kpi-label">Gemini-Modelle</div>
+            <div class="kpi-label">{t("hiw.arch.kpi.models")}</div>
         </div>""", unsafe_allow_html=True)
     with c4:
-        st.markdown("""<div class="kpi-card">
+        st.markdown(f"""<div class="kpi-card">
             <div class="kpi-value">3</div>
-            <div class="kpi-label">Wissensbasen</div>
+            <div class="kpi-label">{t("hiw.arch.kpi.knowledge")}</div>
         </div>""", unsafe_allow_html=True)
 
     # Pipeline
-    st.markdown('<div class="section-head">🔄 Die MEMOKI-Pipeline</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-head">{t("hiw.arch.pipeline_title")}</div>', unsafe_allow_html=True)
     steps = [
-        ("🗣️ Chat-Agent", "Der MEMOKI-Agent (Gemini 2.5 Flash) führt den User durch "
-         "die Konfiguration: Modus, Thema, Stil, Zielgruppe."),
-        ("📋 Content-Generierung", "Je nach Modus werden Objekte per LLM generiert oder "
-         "aus kuratierten Wissensbasen geladen (Teekesselchen, Paare, Shapes)."),
-        ("✍️ Prompt-Building", "Spezialisierte Prompt-Builder erzeugen optimierte Bild-Prompts "
-         "mit Stil, Zielgruppe und modus-spezifischen Anpassungen."),
-        ("🎨 Bild-Generierung", "Gemini 3 Pro (Qualität) oder Gemini 2.5 Flash (Schnell) "
-         "generiert die Kartenbilder parallel via ThreadPoolExecutor."),
-        ("🃏 Deck-Assembly", "Die Bilder werden zu Card-Objekten, das Deck wird gemischt, "
-         "und die interaktive Spieloberfläche wird gerendert."),
+        (t("hiw.arch.pipeline.chat_agent"), t("hiw.arch.pipeline.chat_agent_desc")),
+        (t("hiw.arch.pipeline.content"), t("hiw.arch.pipeline.content_desc")),
+        (t("hiw.arch.pipeline.prompt_building"), t("hiw.arch.pipeline.prompt_building_desc")),
+        (t("hiw.arch.pipeline.image_gen"), t("hiw.arch.pipeline.image_gen_desc")),
+        (t("hiw.arch.pipeline.deck_assembly"), t("hiw.arch.pipeline.deck_assembly_desc")),
     ]
     for label, desc in steps:
         st.markdown(f"""<div class="pipeline-step">
@@ -555,54 +325,27 @@ def render_architecture():
         </div>""", unsafe_allow_html=True)
 
     # Architecture Boxes
-    st.markdown('<div class="section-head">📁 Projekt-Struktur</div>', unsafe_allow_html=True)
-    st.markdown("""<div class="arch-grid">
-        <div class="arch-box">
-            <h4>🎭 Frontend</h4>
-            <code>app.py</code> &mdash; Streamlit-UI mit Custom CSS, Chat-Interface,
-            Mode-Selector, Kartenraster und Spiellogik. Nunito-Font, Gradient-Background,
-            interaktive Mode-Cards.
-        </div>
-        <div class="arch-box">
-            <h4>🤖 Agent</h4>
-            <code>agents/memoki.py</code> &mdash; Chat-Orchestrierung mit Gemini.
-            System-Prompt mit Modus-spezifischen Regeln, JSON-Action-Block-Erkennung,
-            Gesprächshistorie.
-        </div>
-        <div class="arch-box">
-            <h4>🖼️ Generatoren</h4>
-            <code>tools/image.py</code> &mdash; Bildgenerierung via Gemini mit
-            Stil-Mapping und Zielgruppen-Anpassung.<br>
-            <code>tools/content.py</code> &mdash; Content-Generierung per LLM.
-        </div>
-        <div class="arch-box">
-            <h4>✍️ Prompts</h4>
-            <code>prompts/</code> &mdash; Spezialisierte Prompt-Builder pro Modus:
-            Classic, Paare, Teekesselchen, Mathe I, Mathe II. Jeder mit eigenen
-            Optimierungen und Sonderfällen.
-        </div>
-        <div class="arch-box">
-            <h4>🎮 Game Engine</h4>
-            <code>game/</code> &mdash; Card (Dataclass), Deck (Mischen, Verwalten),
-            GameSession (Spielzustand, Flip-Logik, Match-Erkennung).
-        </div>
-        <div class="arch-box">
-            <h4>📚 Wissensbasen</h4>
-            <code>knowledge/</code> &mdash; Kuratierte JSON-Dateien:
-            Teekesselchen (Homonyme mit 2 Bedeutungen), Paare (logisch zusammengehörige
-            Objekte), Math-Shapes (abstrakte Formen).
-        </div>
-    </div>""", unsafe_allow_html=True)
+    st.markdown(f'<div class="section-head">{t("hiw.arch.structure_title")}</div>', unsafe_allow_html=True)
+    boxes = [
+        (t("hiw.arch.box.frontend"), t("hiw.arch.box.frontend_desc")),
+        (t("hiw.arch.box.agent"), t("hiw.arch.box.agent_desc")),
+        (t("hiw.arch.box.generators"), t("hiw.arch.box.generators_desc")),
+        (t("hiw.arch.box.prompts"), t("hiw.arch.box.prompts_desc")),
+        (t("hiw.arch.box.game_engine"), t("hiw.arch.box.game_engine_desc")),
+        (t("hiw.arch.box.knowledge"), t("hiw.arch.box.knowledge_desc")),
+    ]
+    box_html = '<div class="arch-grid">'
+    for title, desc in boxes:
+        box_html += f"""<div class="arch-box">
+            <h4>{title}</h4>
+            {desc}
+        </div>"""
+    box_html += '</div>'
+    st.markdown(box_html, unsafe_allow_html=True)
 
     # Model Overview
-    st.markdown('<div class="section-head">🧠 KI-Modelle im Einsatz</div>', unsafe_allow_html=True)
-    st.markdown("""
-| Modell | Aufgabe | Warum dieses Modell? |
-|--------|---------|---------------------|
-| Gemini 2.5 Flash | Chat-Agent, Objekt-Generierung | Schnell, günstig, gutes Sprachverständnis |
-| Gemini 3 Pro | Bildgenerierung (Standard) | Beste Bildqualität, kreative Stile |
-| Gemini 2.5 Flash Image | Bildgenerierung (Schnell) | Schneller und günstiger für einfachere Motive |
-    """)
+    st.markdown(f'<div class="section-head">{t("hiw.arch.models_title")}</div>', unsafe_allow_html=True)
+    st.markdown(t("hiw.arch.models_table"))
 
 
 def render_mode_page(key: str):
@@ -613,7 +356,7 @@ def render_mode_page(key: str):
     st.markdown(f"""
     <div class="how-header">
         <h1>{mode["icon"]} {mode["title"]}</h1>
-        <p>Spielmodus-Dokumentation &mdash; Wie es funktioniert und was wir gelernt haben</p>
+        <p>{t("hiw.mode.subheader")}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -621,63 +364,55 @@ def render_mode_page(key: str):
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown('<div class="section-head">🎯 Was es macht</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-head">{t("hiw.mode.what_title")}</div>', unsafe_allow_html=True)
         st.markdown(mode["what"], unsafe_allow_html=True)
 
     with col2:
-        st.markdown('<div class="section-head">⚙️ Wie es funktioniert</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="section-head">{t("hiw.mode.how_title")}</div>', unsafe_allow_html=True)
         for label, desc in mode["how"]:
             st.markdown(f"""<div class="pipeline-step">
                 <b>{label}</b><br>{desc}
             </div>""", unsafe_allow_html=True)
 
     # Prompt Engineering
-    st.markdown('<div class="section-head">✍️ Prompt Engineering</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-head">{t("hiw.mode.pe_title")}</div>', unsafe_allow_html=True)
     for item in mode["prompt_engineering"]:
         st.markdown(f'<div class="info-item">{item}</div>', unsafe_allow_html=True)
 
     # Challenges
-    st.markdown('<div class="section-head">🔧 Herausforderungen & Lösungen</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-head">{t("hiw.mode.challenges_title")}</div>', unsafe_allow_html=True)
     for title, desc in mode["challenges"]:
         st.markdown(f'<div class="challenge-item"><b>{title}</b> &mdash; {desc}</div>',
                     unsafe_allow_html=True)
 
     # Learnings
-    st.markdown('<div class="section-head">💡 Learnings</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-head">{t("hiw.mode.learnings_title")}</div>', unsafe_allow_html=True)
     for item in mode["learnings"]:
         st.markdown(f'<div class="learning-item">{item}</div>', unsafe_allow_html=True)
 
 
 def render_style_system():
     """Rendert die Stil & Zielgruppen Dokumentation."""
-    st.markdown("""
+    st.markdown(f"""
     <div class="how-header">
-        <h1>🎨 Stil & Zielgruppen</h1>
-        <p>Das hybride Stil-System und die Zielgruppen-Anpassung</p>
+        <h1>{t("hiw.style.header")}</h1>
+        <p>{t("hiw.style.subheader")}</p>
     </div>
     """, unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown('<div class="section-head">🖌️ Das Hybrid-Stil-System</div>', unsafe_allow_html=True)
-        st.markdown(
-            "MEMOKI verwendet ein **hybrides** Stil-System: 10 vordefinierte Stile "
-            "mit optimierten Prompt-Fragmenten **plus** die Möglichkeit, beliebige "
-            "Freitext-Stile einzugeben.",
-            unsafe_allow_html=True,
-        )
+        st.markdown(f'<div class="section-head">{t("hiw.style.hybrid_title")}</div>', unsafe_allow_html=True)
+        st.markdown(t("hiw.style.hybrid_desc"), unsafe_allow_html=True)
 
-        st.markdown("""
+        st.markdown(f"""
         <div class="info-item">
-            <b>Wie es funktioniert:</b> Die Funktion <code>resolve_style(style)</code> prüft,
-            ob der Stil in der <code>STYLE_MAP</code> existiert. Wenn ja, wird das optimierte
-            Prompt-Fragment verwendet. Wenn nein, wird der Freitext direkt als Stil-Beschreibung
-            in den Prompt eingefügt.
+            {t("hiw.style.how_it_works")}
         </div>
         """, unsafe_allow_html=True)
 
-        st.markdown("**Vordefinierte Stile:**")
+        st.markdown(t("hiw.style.predefined_title"))
         styles = {
             "cartoon": "Bold outlines, vibrant colors, Disney-Pixar inspired",
             "photorealistic": "High detail, professional photography, soft studio lighting",
@@ -696,17 +431,13 @@ def render_style_system():
             </div>""", unsafe_allow_html=True)
 
     with col2:
-        st.markdown('<div class="section-head">🎯 Zielgruppen-Anpassung</div>', unsafe_allow_html=True)
-        st.markdown(
-            "Jeder Bild-Prompt wird automatisch mit zielgruppenspezifischen "
-            "Attributen angereichert:",
-            unsafe_allow_html=True,
-        )
+        st.markdown(f'<div class="section-head">{t("hiw.style.audience_title")}</div>', unsafe_allow_html=True)
+        st.markdown(t("hiw.style.audience_desc"), unsafe_allow_html=True)
 
         audiences = {
-            "children": ("👶", "Kinder", "cute, friendly, rounded shapes, bright cheerful colors"),
-            "teenagers": ("🧑", "Teenager", "cool, modern, dynamic, trendy aesthetic"),
-            "adults": ("👔", "Erwachsene", "sophisticated, elegant, refined details"),
+            "children": ("👶", t("hiw.style.audience.children"), "cute, friendly, rounded shapes, bright cheerful colors"),
+            "teenagers": ("🧑", t("hiw.style.audience.teenagers"), "cool, modern, dynamic, trendy aesthetic"),
+            "adults": ("👔", t("hiw.style.audience.adults"), "sophisticated, elegant, refined details"),
         }
         for key_name, (icon, label, desc) in audiences.items():
             st.markdown(f"""<div class="style-card">
@@ -714,12 +445,8 @@ def render_style_system():
                 &rarr; <i>{desc}</i>
             </div>""", unsafe_allow_html=True)
 
-        st.markdown('<div class="section-head">🆓 Freitext-Stile</div>', unsafe_allow_html=True)
-        st.markdown(
-            "Neben den vordefinierten Stilen können User beliebige Stile eingeben. "
-            "Der MEMOKI-Agent formuliert diese als englische Stil-Beschreibung:",
-            unsafe_allow_html=True,
-        )
+        st.markdown(f'<div class="section-head">{t("hiw.style.freetext_title")}</div>', unsafe_allow_html=True)
+        st.markdown(t("hiw.style.freetext_desc"), unsafe_allow_html=True)
 
         free_styles = [
             ("van Gogh", "van Gogh post-impressionist style, thick swirling brushstrokes, bold vivid colors"),
@@ -728,12 +455,13 @@ def render_style_system():
         ]
         for user_input, prompt_output in free_styles:
             st.markdown(f"""<div class="info-item">
-                User sagt: <b>"{user_input}"</b><br>
-                &rarr; Prompt wird: <code>{prompt_output}</code>
+                {t("hiw.style.user_says", input=user_input)}<br>
+                &rarr; {t("hiw.style.prompt_becomes", output=prompt_output)}
             </div>""", unsafe_allow_html=True)
 
-        st.markdown('<div class="section-head">💡 Learnings</div>', unsafe_allow_html=True)
-        learnings = [
+        st.markdown(f'<div class="section-head">{t("hiw.style.learnings_title")}</div>', unsafe_allow_html=True)
+        # Style learnings are in MODE_DATA-like structure but kept simple here
+        learnings_de = [
             "<b>Hybrides System ist optimal</b> &mdash; Vordefinierte Stile garantieren Qualität, "
             "Freitext ermöglicht Kreativität.",
             "<b>Stil-Konsistenz über Karten</b> &mdash; Der Stil-Prompt muss stark genug sein, "
@@ -741,6 +469,16 @@ def render_style_system():
             "<b>Zielgruppe beeinflusst alles</b> &mdash; Nicht nur Farben ändern sich, "
             "sondern auch Formen (runder für Kinder) und Details (feiner für Erwachsene).",
         ]
+        learnings_en = [
+            "<b>Hybrid system is optimal</b> &mdash; Predefined styles guarantee quality, "
+            "free text enables creativity.",
+            "<b>Style consistency across cards</b> &mdash; The style prompt must be strong enough "
+            "to maintain a consistent look across 10-20 different subjects.",
+            "<b>Audience affects everything</b> &mdash; Not just colors change, "
+            "but also shapes (rounder for kids) and details (finer for adults).",
+        ]
+        from i18n import get_lang
+        learnings = learnings_en if get_lang() == "en" else learnings_de
         for item in learnings:
             st.markdown(f'<div class="learning-item">{item}</div>', unsafe_allow_html=True)
 
@@ -765,8 +503,8 @@ else:
         render_mode_page(mode_key)
 
 # ── Footer ───────────────────────────────────────────────────────────────────
-st.markdown("""
+st.markdown(f"""
 <div class="how-footer">
-    MEMOKI &mdash; KI-Memory-Spiele-Macher | Built with Streamlit & Google Gemini
+    {t("hiw.footer")}
 </div>
 """, unsafe_allow_html=True)

@@ -3,6 +3,7 @@
 import random
 
 from game.card import Card
+from i18n import t
 
 
 class Deck:
@@ -52,7 +53,7 @@ class Deck:
         aber verschiedene Objekte (z.B. Topf ↔ Deckel).
 
         Args:
-            pairs: Liste von Dicts mit a_de, b_de, a_en, b_en.
+            pairs: Liste von Dicts mit a_label, b_label, a_en, b_en.
             images_a: Bilder für Objekt A (eins pro Paar).
             images_b: Bilder für Objekt B (eins pro Paar).
 
@@ -61,8 +62,8 @@ class Deck:
         """
         deck = cls()
         for i, (pair, img_a, img_b) in enumerate(zip(pairs, images_a, images_b)):
-            card_a = Card(pair_id=i, label=pair["a_de"], image=img_a)
-            card_b = Card(pair_id=i, label=pair["b_de"], image=img_b)
+            card_a = Card(pair_id=i, label=pair["a_label"], image=img_a)
+            card_b = Card(pair_id=i, label=pair["b_label"], image=img_b)
             deck.add_pair(card_a, card_b)
         deck.shuffle()
         return deck
@@ -95,14 +96,16 @@ class Deck:
     def build_mathe_abstrakt(
         cls, numbers: list[int], shape_name: str,
         number_images: list, shape_images: list,
+        lang: str = "de",
     ) -> "Deck":
         """Baut ein Mathe-Abstrakt-Deck: Zahl ↔ Shapes.
 
         Args:
             numbers: Liste der Zahlen (z.B. [1, 2, ..., 10]).
-            shape_name: Deutscher Shape-Name (z.B. "Kreise").
+            shape_name: Shape-Name in der aktuellen Sprache.
             number_images: Bilder der Zahlenkarten.
             shape_images: Bilder der Shape-Karten.
+            lang: Sprache für Card-Labels.
 
         Returns:
             Fertiges, gemischtes Deck.
@@ -111,8 +114,8 @@ class Deck:
         for i, (num, num_img, shape_img) in enumerate(
             zip(numbers, number_images, shape_images)
         ):
-            card_a = Card(pair_id=i, label=f"Zahl {num}", image=num_img)
-            card_b = Card(pair_id=i, label=f"{num}x {shape_name}", image=shape_img)
+            card_a = Card(pair_id=i, label=t("card.number", num=num), image=num_img)
+            card_b = Card(pair_id=i, label=t("card.number_x", num=num, name=shape_name), image=shape_img)
             deck.add_pair(card_a, card_b)
         deck.shuffle()
         return deck
@@ -121,6 +124,7 @@ class Deck:
     def build_mathe_konkret(
         cls, numbers: list[int], objects: list[str],
         number_images: list, object_images: list,
+        lang: str = "de",
     ) -> "Deck":
         """Baut ein Mathe-Konkret-Deck: Zahl ↔ reale Objekte.
 
@@ -131,6 +135,7 @@ class Deck:
             objects: Liste der Objekt-Namen (eins pro Zahl).
             number_images: Bilder der Zahlenkarten.
             object_images: Bilder der Objekt-Karten.
+            lang: Sprache für Card-Labels.
 
         Returns:
             Fertiges, gemischtes Deck.
@@ -139,7 +144,7 @@ class Deck:
         for i, (num, obj, num_img, obj_img) in enumerate(
             zip(numbers, objects, number_images, object_images)
         ):
-            card_a = Card(pair_id=i, label=f"Zahl {num}", image=num_img)
+            card_a = Card(pair_id=i, label=t("card.number", num=num), image=num_img)
             card_b = Card(pair_id=i, label=f"{num}x {obj}", image=obj_img)
             deck.add_pair(card_a, card_b)
         deck.shuffle()

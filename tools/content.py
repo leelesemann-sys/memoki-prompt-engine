@@ -218,16 +218,17 @@ def load_math_shape(shape_id: str) -> dict:
     raise ValueError(f"Shape '{shape_id}' nicht gefunden")
 
 
-def load_pairs(theme: str, count: int) -> list[dict]:
+def load_pairs(theme: str, count: int, lang: str = "de") -> list[dict]:
     """Lädt zusammengehörige Objektpaare aus der Wissensbasis.
 
     Args:
         theme: Thema-Key (z.B. "küche", "sport", "tiere").
         count: Anzahl gewünschter Paare.
+        lang: Sprache für Display-Labels ("de" oder "en").
 
     Returns:
         Liste von Dicts:
-        [{"a_en": "cooking pot", "b_en": "pot lid", "a_de": "Topf", "b_de": "Deckel"}]
+        [{"a_en": "cooking pot", "b_en": "pot lid", "a_label": "Topf", "b_label": "Deckel"}]
     """
     path = KNOWLEDGE_DIR / "pairs_v2.json"
     with open(path, encoding="utf-8") as f:
@@ -246,7 +247,7 @@ def load_pairs(theme: str, count: int) -> list[dict]:
             break
 
     if theme_data is None:
-        available = [v["name_de"] for v in themes.values()]
+        available = [v[f"name_{lang}"] for v in themes.values()]
         raise ValueError(
             f"Thema '{theme}' nicht gefunden. Verfügbar: {', '.join(available)}"
         )
@@ -254,30 +255,33 @@ def load_pairs(theme: str, count: int) -> list[dict]:
     pairs = theme_data["pairs"]
     selected = random.sample(pairs, min(count, len(pairs)))
 
+    label_key = lang if lang in ("de", "en") else "de"
     return [
         {
             "a_en": p["a"]["en"],
             "b_en": p["b"]["en"],
-            "a_de": p["a"]["de"],
-            "b_de": p["b"]["de"],
+            "a_label": p["a"][label_key],
+            "b_label": p["b"][label_key],
         }
         for p in selected
     ]
 
 
-def load_pairs_themes() -> list[str]:
+def load_pairs_themes(lang: str = "de") -> list[str]:
     """Gibt alle verfügbaren Paare-Themen zurück."""
     path = KNOWLEDGE_DIR / "pairs_v2.json"
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
-    return [v["name_de"] for v in data["themes"].values()]
+    name_key = f"name_{lang}" if lang in ("de", "en") else "name_de"
+    return [v[name_key] for v in data["themes"].values()]
 
 
-def load_teekesselchen(count: int) -> list[dict]:
+def load_teekesselchen(count: int, lang: str = "de") -> list[dict]:
     """Lädt zufällige Teekesselchen aus der JSON-Wissensbasis.
 
     Args:
         count: Anzahl gewünschter Teekesselchen-Paare.
+        lang: Sprache für Display-Labels ("de" oder "en").
 
     Returns:
         Liste von Dicts mit Struktur:
@@ -290,13 +294,14 @@ def load_teekesselchen(count: int) -> list[dict]:
     entries = data["entries"]
     selected = random.sample(entries, min(count, len(entries)))
 
+    label_key = lang if lang in ("de", "en") else "de"
     return [
         {
             "word": e["word"],
             "meaning_a": e["meaning_a"]["en"],
             "meaning_b": e["meaning_b"]["en"],
-            "label_a": e["meaning_a"]["de"],
-            "label_b": e["meaning_b"]["de"],
+            "label_a": e["meaning_a"][label_key],
+            "label_b": e["meaning_b"][label_key],
         }
         for e in selected
     ]
