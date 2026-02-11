@@ -180,6 +180,15 @@ st.markdown("""
         font-family: 'Nunito', sans-serif;
     }
 
+    /* Aktions-Buttons (Spielen, Karten zeigen, Download) gleich groß */
+    .stDownloadButton > button,
+    [data-testid="stHorizontalBlock"] > div:first-child .stButton > button,
+    [data-testid="stHorizontalBlock"] > div:nth-child(2) .stButton > button {
+        height: 42px !important;
+        padding: 0 0.8rem !important;
+        font-size: 0.85rem !important;
+    }
+
     .mini-divider {
         text-align: center;
         font-size: 0.8rem;
@@ -661,9 +670,15 @@ with right_col:
         with st.chat_message("assistant", avatar="🎴"):
             with st.spinner("MEMOKI denkt nach..."):
                 response = st.session_state.agent.chat(prompt)
-            st.markdown(response)
 
-        st.session_state.messages.append({"role": "assistant", "content": response})
+            # JSON-Block aus der angezeigten Nachricht entfernen
+            display_response = response
+            if "```json" in response:
+                import re
+                display_response = re.sub(r'```json\s*\{.*?\}\s*```', '', response, flags=re.DOTALL).strip()
+            st.markdown(display_response)
+
+        st.session_state.messages.append({"role": "assistant", "content": display_response})
 
         # Prüfe ob Agent einen Action-Block ausgegeben hat
         action = MemokiAgent.parse_action(response)
