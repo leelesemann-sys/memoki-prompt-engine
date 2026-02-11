@@ -248,6 +248,7 @@ Hinweis: "shape" nur bei mathe_abstrakt n\u00f6tig, bei anderen Modi weglassen.
     "hiw.nav.mathe_abstrakt": "\U0001f522 Mathe I (Abstrakt)",
     "hiw.nav.mathe_konkret": "\U0001f9ee Mathe II (Konkret)",
     "hiw.nav.style": "\U0001f3a8 Stil & Zielgruppen",
+    "hiw.nav.i18n": "\U0001f310 Sprachen (i18n)",
 
     # Architecture page
     "hiw.arch.header": "\U0001f3d7\ufe0f Architektur-\u00dcbersicht",
@@ -609,6 +610,79 @@ MODE_DATA = {
             "<code>no borders</code>) wirken oft besser als positive Anweisungen allein.",
             "<b>Beispiel-basiertes Prompting</b> &mdash; Gute und schlechte Beispiele im Content-Prompt "
             "verbessern die LLM-Objekt-Auswahl massiv (Schuhe, Getr\u00e4nke).",
+        ],
+    },
+
+    "i18n": {
+        "icon": "\U0001f310",
+        "title": "Sprachen (i18n)",
+        "what": (
+            "MEMOKI unterst\u00fctzt mehrere Sprachen \u2013 aktuell **Deutsch** und **Englisch**. "
+            "Das Sprachsystem (Internationalisierung, kurz *i18n*) ist so aufgebaut, dass "
+            "neue Sprachen mit minimalem Aufwand erg\u00e4nzt werden k\u00f6nnen.\n\n"
+            "Alle UI-Texte, Begrüßungen, Status-Meldungen und sogar die "
+            "Spielmodus-Dokumentation liegen in separaten Sprachdateien. "
+            "Die Wissensbasis (Teekesselchen) ist ebenfalls sprachspezifisch: "
+            "Deutsche Homonyme (Bank, Birne, Schloss) und englische Homonyme "
+            "(Bat, Crane, Trunk) sind in getrennten JSON-Dateien gespeichert."
+        ),
+        "how": [
+            ("1. Sprachdateien", "Jede Sprache hat eine eigene Python-Datei: "
+             "<code>i18n/de.py</code> und <code>i18n/en.py</code> mit einem "
+             "<code>STRINGS</code>-Dict und einer <code>MODE_DATA</code>-Struktur."),
+            ("2. t()-Funktion", "<code>t(key, **kwargs)</code> liefert den String "
+             "in der aktuellen Sprache. Platzhalter werden via <code>.format()</code> ersetzt. "
+             "Fehlende Keys geben den Key selbst zur\u00fcck (Debugging)."),
+            ("3. Sprachwechsel", "Ein kompakter <code>st.pills</code>-Selector (Deutsch | English) "
+             "in der Sidebar speichert die Wahl in <code>st.session_state.lang</code>."),
+            ("4. Sprachspezifische Wissensbasis", "<code>load_teekesselchen(count, lang)</code> l\u00e4dt "
+             "automatisch <code>teekesselchen_{lang}.json</code> \u2013 "
+             "mit Fallback auf die deutsche Datei."),
+            ("5. Bild-Prompts bleiben Englisch", "Unabh\u00e4ngig von der UI-Sprache sind alle "
+             "Bild-Prompts in der JSON auf Englisch (<code>prompt</code>-Feld), "
+             "da die Bildgenerierung auf Englisch arbeitet."),
+        ],
+        "prompt_engineering": [
+            "<b>Flache Key-Struktur</b> &mdash; Alle Strings nutzen flache, "
+            "dot-notierte Keys wie <code>greeting.hello</code>, <code>gen.tk.status</code>. "
+            "Das vermeidet verschachtelte Dicts und macht Suche/Ersetzung einfach.",
+            "<b>Platzhalter-Konvention</b> &mdash; Dynamische Werte werden via "
+            "<code>{num_pairs}</code>, <code>{mode_name}</code> etc. eingesetzt. "
+            "Die <code>t()</code>-Funktion ignoriert fehlende Platzhalter still.",
+            "<b>Prompt vs. Label Trennung</b> &mdash; In der Teekesselchen-JSON hat "
+            "jeder Eintrag drei Felder: <code>de</code> (deutsches Label), "
+            "<code>en</code> (englisches Label) und <code>prompt</code> "
+            "(detaillierter Bild-Prompt auf Englisch).",
+            "<b>Agent-Prompts sprachunabh\u00e4ngig</b> &mdash; Die System-Prompts "
+            "f\u00fcr den LLM-Agenten sind auf Englisch, da der Agent intern "
+            "immer auf Englisch arbeitet. Nur die UI-Texte werden \u00fcbersetzt.",
+        ],
+        "challenges": [
+            ("Homonyme sind sprachspezifisch",
+             "\"Schloss\" (Burg/T\u00fcrschloss) hat kein englisches \u00c4quivalent, "
+             "\"Bat\" (Fledermaus/Schl\u00e4ger) kein deutsches. "
+             "L\u00f6sung: Getrennte JSON-Dateien pro Sprache statt einer universellen."),
+            ("Streamlit-Version auf Cloud",
+             "<code>st.pills</code> (kompakter Sprachselector) erfordert Streamlit &ge;1.39.0. "
+             "Die Streamlit Cloud installierte \u00e4ltere Versionen. "
+             "L\u00f6sung: <code>requirements.txt</code> auf <code>&ge;1.39.0</code> gepinnt."),
+            ("Anzahl-Konsistenz",
+             "Greeting-Texte und Status-Meldungen nennen die Anzahl der Homonyme "
+             "(z.B. \"119 Homonyms\"). Bei jeder Erg\u00e4nzung m\u00fcssen "
+             "diese Zahlen in beiden Sprachen aktualisiert werden."),
+        ],
+        "learnings": [
+            "<b>Separate Wissensbasis > \u00dcbersetzung</b> &mdash; Homonyme lassen sich nicht "
+            "\u00fcbersetzen \u2013 sie m\u00fcssen pro Sprache kuratiert werden. "
+            "Die getrennte JSON-Struktur (<code>teekesselchen_de.json</code> / "
+            "<code>teekesselchen_en.json</code>) war die richtige Entscheidung.",
+            "<b>Flache Strings skalieren besser</b> &mdash; Ein flaches Dict mit "
+            "dot-notierten Keys ist einfacher zu pflegen als verschachtelte "
+            "Sprachb\u00e4ume. Neue Keys k\u00f6nnen schnell erg\u00e4nzt werden.",
+            "<b>Neue Sprache in 3 Schritten</b> &mdash; (1) Sprachdatei kopieren "
+            "und \u00fcbersetzen, (2) in <code>i18n/__init__.py</code> registrieren, "
+            "(3) ggf. sprachspezifische Wissensbasis anlegen. "
+            "Das System ist f\u00fcr Erweiterung vorbereitet.",
         ],
     },
 }

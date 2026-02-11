@@ -248,6 +248,7 @@ Note: "shape" only needed for mathe_abstrakt, omit for other modes.
     "hiw.nav.mathe_abstrakt": "\U0001f522 Math I (Abstract)",
     "hiw.nav.mathe_konkret": "\U0001f9ee Math II (Concrete)",
     "hiw.nav.style": "\U0001f3a8 Style & Audience",
+    "hiw.nav.i18n": "\U0001f310 Languages (i18n)",
 
     # Architecture page
     "hiw.arch.header": "\U0001f3d7\ufe0f Architecture Overview",
@@ -608,6 +609,79 @@ MODE_DATA = {
             "<code>no borders</code>) often work better than positive instructions alone.",
             "<b>Example-based prompting</b> &mdash; Good and bad examples in the content prompt "
             "massively improve LLM object selection (shoes, beverages).",
+        ],
+    },
+
+    "i18n": {
+        "icon": "\U0001f310",
+        "title": "Languages (i18n)",
+        "what": (
+            "MEMOKI supports multiple languages \u2013 currently **German** and **English**. "
+            "The language system (internationalization, short *i18n*) is designed so that "
+            "new languages can be added with minimal effort.\n\n"
+            "All UI texts, greetings, status messages, and even the "
+            "game mode documentation live in separate language files. "
+            "The knowledge base (Teapot Memory) is also language-specific: "
+            "German homonyms (Bank, Birne, Schloss) and English homonyms "
+            "(Bat, Crane, Trunk) are stored in separate JSON files."
+        ),
+        "how": [
+            ("1. Language files", "Each language has its own Python file: "
+             "<code>i18n/de.py</code> and <code>i18n/en.py</code> with a "
+             "<code>STRINGS</code> dict and a <code>MODE_DATA</code> structure."),
+            ("2. t() function", "<code>t(key, **kwargs)</code> returns the string "
+             "in the current language. Placeholders are replaced via <code>.format()</code>. "
+             "Missing keys return the key itself (for debugging)."),
+            ("3. Language switch", "A compact <code>st.pills</code> selector (Deutsch | English) "
+             "in the sidebar stores the choice in <code>st.session_state.lang</code>."),
+            ("4. Language-specific knowledge base", "<code>load_teekesselchen(count, lang)</code> "
+             "automatically loads <code>teekesselchen_{lang}.json</code> \u2013 "
+             "with fallback to the German file."),
+            ("5. Image prompts stay English", "Regardless of the UI language, all "
+             "image prompts in the JSON are English (<code>prompt</code> field), "
+             "since image generation works best in English."),
+        ],
+        "prompt_engineering": [
+            "<b>Flat key structure</b> &mdash; All strings use flat, "
+            "dot-notated keys like <code>greeting.hello</code>, <code>gen.tk.status</code>. "
+            "This avoids nested dicts and makes search/replace easy.",
+            "<b>Placeholder convention</b> &mdash; Dynamic values are inserted via "
+            "<code>{num_pairs}</code>, <code>{mode_name}</code> etc. "
+            "The <code>t()</code> function silently ignores missing placeholders.",
+            "<b>Prompt vs. label separation</b> &mdash; In the Teapot Memory JSON, "
+            "each entry has three fields: <code>de</code> (German label), "
+            "<code>en</code> (English label), and <code>prompt</code> "
+            "(detailed image prompt in English).",
+            "<b>Agent prompts are language-independent</b> &mdash; The system prompts "
+            "for the LLM agent are in English, as the agent always works "
+            "internally in English. Only the UI texts are translated.",
+        ],
+        "challenges": [
+            ("Homonyms are language-specific",
+             "\"Schloss\" (castle/door lock) has no English equivalent, "
+             "\"Bat\" (animal/baseball bat) has no German one. "
+             "Solution: Separate JSON files per language instead of one universal file."),
+            ("Streamlit version on Cloud",
+             "<code>st.pills</code> (compact language selector) requires Streamlit &ge;1.39.0. "
+             "Streamlit Cloud installed older versions. "
+             "Solution: Pinned <code>requirements.txt</code> to <code>&ge;1.39.0</code>."),
+            ("Count consistency",
+             "Greeting texts and status messages mention the number of homonyms "
+             "(e.g. \"119 homonyms\"). Every time entries are added, "
+             "these numbers must be updated in both languages."),
+        ],
+        "learnings": [
+            "<b>Separate knowledge base > translation</b> &mdash; Homonyms cannot be "
+            "translated \u2013 they must be curated per language. "
+            "The separate JSON structure (<code>teekesselchen_de.json</code> / "
+            "<code>teekesselchen_en.json</code>) was the right decision.",
+            "<b>Flat strings scale better</b> &mdash; A flat dict with "
+            "dot-notated keys is easier to maintain than nested "
+            "language trees. New keys can be added quickly.",
+            "<b>New language in 3 steps</b> &mdash; (1) Copy and translate a language file, "
+            "(2) register it in <code>i18n/__init__.py</code>, "
+            "(3) optionally create a language-specific knowledge base. "
+            "The system is designed for extensibility.",
         ],
     },
 }

@@ -251,6 +251,7 @@ NAV_ITEMS = [
     t("hiw.nav.mathe_abstrakt"),
     t("hiw.nav.mathe_konkret"),
     t("hiw.nav.style"),
+    t("hiw.nav.i18n"),
 ]
 
 with st.sidebar:
@@ -491,6 +492,7 @@ NAV_TO_KEY = {
     NAV_ITEMS[3]: "teekesselchen",
     NAV_ITEMS[4]: "mathe_abstrakt",
     NAV_ITEMS[5]: "mathe_konkret",
+    NAV_ITEMS[7]: "i18n",
 }
 
 if selected == NAV_ITEMS[0]:
