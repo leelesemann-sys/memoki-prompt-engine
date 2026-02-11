@@ -276,7 +276,7 @@ components.html("""
     const navLinks = sidebar.querySelectorAll('a[href]');
     for (const link of navLinks) {
         const span = link.querySelector('span');
-        if (span && /^app2?$/i.test(span.textContent.trim())) {
+        if (span && /^app(_test)?$/i.test(span.textContent.trim())) {
             span.textContent = 'MEMOKI-App';
         }
     }

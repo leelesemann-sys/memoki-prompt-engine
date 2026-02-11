@@ -227,11 +227,11 @@ components.html("""
         }
     }
 
-    // 2) Ersten Nav-Link umbenennen (app2 / app → MEMOKI-App)
+    // 2) Ersten Nav-Link umbenennen (app / app_test → MEMOKI-App)
     const navLinks = sidebar.querySelectorAll('a[href]');
     for (const link of navLinks) {
         const span = link.querySelector('span');
-        if (span && /^app2?$/i.test(span.textContent.trim())) {
+        if (span && /^app(_test)?$/i.test(span.textContent.trim())) {
             span.textContent = 'MEMOKI-App';
         }
     }
@@ -313,7 +313,7 @@ MODE_DATA = {
         ),
         "how": [
             ("1. Thema wählen", "Der Agent fragt nach Thema, Stil und Zielgruppe."),
-            ("2. Paare laden", "Zusammengehörige Objekt-Paare werden aus der <code>pairs.json</code> Wissensbasis geladen."),
+            ("2. Paare laden", "Zusammengehörige Objekt-Paare werden aus der <code>pairs_v2.json</code> Wissensbasis geladen."),
             ("3. Prompts bauen", "Für jedes Objekt wird ein eigener Bild-Prompt erstellt (Objekt A und Objekt B getrennt)."),
             ("4. Bilder erzeugen", "Beide Bilder eines Paares werden parallel generiert."),
             ("5. Deck erstellen", "Die Karten werden gemischt, jedes Paar hat eine gemeinsame <code>pair_id</code>."),
@@ -323,8 +323,11 @@ MODE_DATA = {
             "damit sie visuell als zusammengehörig erkennbar sind.",
             "<b>Eindeutigkeit</b> &mdash; Jedes Objekt muss eindeutig dargestellt werden &mdash; "
             "ein Schlüssel darf nicht wie ein Schloss aussehen und umgekehrt.",
-            "<b>Wissensbasis-Kuratierung</b> &mdash; Die Paare in <code>pairs.json</code> sind manuell kuratiert, "
+            "<b>Wissensbasis-Kuratierung</b> &mdash; Die Paare in <code>pairs_v2.json</code> sind manuell kuratiert, "
             "um sicherzustellen, dass die Zuordnung für die Zielgruppe klar ist.",
+            "<b>Anti-Morphing</b> &mdash; Der Bild-Prompt verbietet explizit Anthropomorphismus: "
+            "<code>do NOT reshape it into an animal, do NOT add faces, eyes, or animal features</code>. "
+            "Ohne diese Regel verwandelt Gemini Alltagsobjekte gerne in niedliche Charaktere.",
         ],
         "challenges": [
             ("Paar-Erkennung", "Die logische Verbindung muss auch visuell erkennbar sein. "
@@ -407,6 +410,15 @@ MODE_DATA = {
             "und verbieten explizit Dekorationen, die die Lesbarkeit beeinträchtigen.",
             "<b>Konsistente Shapes</b> &mdash; Die <code>image_prompt_en</code> aus der JSON-Datei definiert das "
             "exakte Aussehen jeder Form für konsistente Ergebnisse.",
+            "<b>Layout-Hints</b> &mdash; <code>_layout_hint(n)</code> gibt für jede Zahl eine explizite "
+            "Grid-Anordnung vor (z.B. <code>3 top row, 2 bottom row</code> für 5), damit die KI "
+            "die korrekte Anzahl nicht zufällig verteilt, sondern strukturiert anordnet.",
+            "<b>Würfelaugen-Prompts</b> &mdash; <code>_dice_prompt(n)</code> beschreibt exakte Pip-Positionen "
+            "pro Würfelseite. Ab 7 werden mehrere Würfel nebeneinander dargestellt (z.B. 6+1 für 7).",
+            "<b>Strichlisten-Prompts</b> &mdash; <code>_tally_prompt(n)</code> nutzt das klassische System: "
+            "4 senkrechte Striche + 1 diagonaler = 5. Gruppen werden getrennt dargestellt.",
+            "<b>Domino-Prompts</b> &mdash; <code>_domino_prompt(n)</code> teilt die Zahl optimal auf zwei "
+            "Hälften auf (max 6 pro Hälfte). Ab 13 werden zwei Dominosteine verwendet.",
         ],
         "challenges": [
             ("Zahlen-Styling vs. Lesbarkeit", "Wenn ein Thema gewählt wird, dürfen Farben sich anpassen, "
@@ -453,6 +465,9 @@ MODE_DATA = {
             "5 Tennisbälle sollen 5 gleiche Tennisbälle sein, nicht 3 Tennisbälle und 2 Fußbälle.",
             "<b>Thema-Kontext für Mehrdeutigkeiten</b> &mdash; <code>(in the context of {theme})</code> hilft dem "
             "Bildgenerator bei mehrdeutigen Wörtern (z.B. <code>mouse</code> bei Thema Technik vs. Tiere).",
+            "<b>Layout-Hints</b> &mdash; Auch bei realen Objekten nutzt <code>build_real_objects_prompt()</code> "
+            "die <code>_layout_hint(n)</code>-Funktion für strukturierte Grid-Anordnungen, damit die "
+            "exakte Anzahl klar zählbar bleibt.",
         ],
         "challenges": [
             ("Objekt-Auswahl-Qualität", "LLMs generierten Zubehör statt der Sache selbst "
@@ -492,7 +507,7 @@ def render_architecture():
     <span class="tech-badge streamlit">Streamlit</span>
     <span class="tech-badge gemini">Gemini 2.5 Flash</span>
     <span class="tech-badge gemini">Gemini 3 Pro</span>
-    <span class="tech-badge python">Python 3.12</span>
+    <span class="tech-badge python">Python 3.11+</span>
     <span class="tech-badge prompt">Prompt Engineering</span>
     """, unsafe_allow_html=True)
 
@@ -516,7 +531,7 @@ def render_architecture():
         </div>""", unsafe_allow_html=True)
     with c4:
         st.markdown("""<div class="kpi-card">
-            <div class="kpi-value">2</div>
+            <div class="kpi-value">3</div>
             <div class="kpi-label">Wissensbasen</div>
         </div>""", unsafe_allow_html=True)
 

@@ -2,7 +2,7 @@
 
 Kopie von app.py zum schnellen Testen. Karten werden sofort
 aufgedeckt und nach pair_id sortiert angezeigt (Paare nebeneinander).
-Starten mit: streamlit run app2.py
+Starten mit: streamlit run app_test.py
 """
 
 import io
@@ -268,7 +268,7 @@ components.html("""
     const navLinks = sidebar.querySelectorAll('a[href]');
     for (const link of navLinks) {
         const span = link.querySelector('span');
-        if (span && /^app2?$/i.test(span.textContent.trim())) {
+        if (span && /^app(_test)?$/i.test(span.textContent.trim())) {
             span.textContent = 'MEMOKI-App';
         }
     }
