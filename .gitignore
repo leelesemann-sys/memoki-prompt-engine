@@ -24,3 +24,6 @@ Thumbs.db
 
 # Generated images
 generated_images/
+
+# Downloaded card decks
+download-output/

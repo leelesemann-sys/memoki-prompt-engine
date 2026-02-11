@@ -1,0 +1,16 @@
+graph TD
+    User([User]) --> UI[Streamlit Frontend<br>app.py]
+    UI --> Agent[MemokiAgent<br>agents/memoki.py]
+    Agent --> Gemini_Chat[Gemini 2.5 Flash<br>Chat Model]
+    Gemini_Chat --> Agent
+    Agent -->|JSON Action| Pipeline[Generation Pipeline]
+    Pipeline --> Content[Content Generator<br>tools/content.py]
+    Pipeline --> Prompts[Prompt Builders<br>prompts/*.py]
+    Content -->|Objects / Knowledge| Prompts
+    Prompts --> ImageGen[Image Generator<br>tools/image.py]
+    ImageGen --> Gemini_Img[Gemini 3 Pro<br>Image Model]
+    Gemini_Img --> ImageGen
+    ImageGen -->|Fallback| Gemini_Fast[Gemini 2.5 Flash<br>Image Fallback]
+    ImageGen --> DeckBuilder[Deck Builder<br>game/deck.py]
+    DeckBuilder --> UI
+    KB[(Knowledge Bases<br>knowledge/*.json)] --> Content
