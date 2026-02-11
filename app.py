@@ -6,6 +6,7 @@ Streamlit-Frontend für den Memory-Spiel-Generator mit KI-generierten Bildern.
 
 import io
 import base64
+import random
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import streamlit as st
 import streamlit.components.v1 as components
@@ -410,6 +411,7 @@ if (
     st.session_state.first_pick = None
     st.session_state.pending_flip_back = None
     st.session_state.moves = 0
+    st.session_state.view_mode = "preview"
 
 # Erste Begrüßung (hübsch formatiert, nicht vom Agent)
 if not st.session_state.messages:
@@ -477,84 +479,131 @@ with right_col:
     # Wenn Deck vorhanden → Spielfeld anzeigen
     if st.session_state.deck is not None:
         deck = st.session_state.deck
-
-        # Spielstand
         total_pairs = len(deck.cards) // 2
-        found = len(st.session_state.matched)
-        st.markdown(f"""
-        <div class="progress-box">
-            <strong>🎮 Spielfeld</strong> &nbsp;|&nbsp;
-            Paare gefunden: <strong>{found}/{total_pairs}</strong> &nbsp;|&nbsp;
-            Züge: <strong>{st.session_state.moves}</strong>
-        </div>
-        """, unsafe_allow_html=True)
 
-        # Callback: Karte anklicken (läuft VOR dem Rendering)
-        def _on_card_click(idx):
-            # Vorheriges Nicht-Paar zurückdrehen
-            if st.session_state.pending_flip_back:
-                a, b = st.session_state.pending_flip_back
-                st.session_state.flipped.discard(a)
-                st.session_state.flipped.discard(b)
-                st.session_state.pending_flip_back = None
-
-            if st.session_state.first_pick is None:
-                # Erste Karte aufdecken
-                st.session_state.first_pick = idx
-                st.session_state.flipped.add(idx)
-            else:
-                # Zweite Karte aufdecken + prüfen
-                first = st.session_state.first_pick
-                st.session_state.flipped.add(idx)
-                st.session_state.moves += 1
-
-                deck = st.session_state.deck
-                if deck.cards[first].pair_id == deck.cards[idx].pair_id:
-                    st.session_state.matched.add(deck.cards[idx].pair_id)
-                else:
-                    st.session_state.pending_flip_back = (first, idx)
-
-                st.session_state.first_pick = None
-
-        # Karten als Grid
-        cols_per_row = 5 if total_pairs <= 10 else 8
-        cols = st.columns(cols_per_row)
-
-        for idx, card in enumerate(deck.cards):
-            col = cols[idx % cols_per_row]
-            with col:
-                is_matched = card.pair_id in st.session_state.matched
-                is_flipped = idx in st.session_state.flipped or is_matched
-
-                if is_flipped and card.image is not None:
-                    b64 = img_to_base64(card.image)
-                    border = "3px solid #2ed573" if is_matched else "2px solid #ddd"
-                    st.markdown(
-                        f'<div class="memory-card" style="border: {border};">'
-                        f'<img src="data:image/png;base64,{b64}" />'
-                        f'</div>',
-                        unsafe_allow_html=True,
-                    )
-                else:
-                    st.button(
-                        "🎴", key=f"card_{idx}",
-                        use_container_width=True,
-                        on_click=_on_card_click, args=(idx,),
-                    )
-
-        # Spiel gewonnen?
-        if found == total_pairs:
-            st.success(f"🎉 Gewonnen! Du hast alle {total_pairs} Paare in {st.session_state.moves} Zügen gefunden!")
-            if st.button("🔄 Neues Spiel"):
-                st.session_state.deck = None
-                st.session_state.messages = []
+        # --- Modus-Buttons ---
+        btn_col1, btn_col2 = st.columns(2)
+        with btn_col1:
+            if st.button("👁️ Karten zeigen", use_container_width=True):
+                st.session_state.view_mode = "preview"
+                st.rerun()
+        with btn_col2:
+            if st.button("🎮 Mischen & Spielen", use_container_width=True):
+                random.shuffle(deck.cards)
                 st.session_state.flipped = set()
                 st.session_state.matched = set()
                 st.session_state.first_pick = None
                 st.session_state.pending_flip_back = None
                 st.session_state.moves = 0
-                st.session_state.agent = MemokiAgent(mode=mode_key, pair_count=num_pairs)
+                st.session_state.view_mode = "play"
                 st.rerun()
+
+        # === PREVIEW-MODUS ===
+        if st.session_state.view_mode == "preview":
+            st.markdown(f"""
+            <div class="progress-box">
+                <strong>👁️ Kartenvorschau</strong> &nbsp;|&nbsp;
+                {total_pairs} Paare sortiert nach Zugehörigkeit
+            </div>
+            """, unsafe_allow_html=True)
+
+            sorted_cards = sorted(deck.cards, key=lambda c: (c.pair_id, c.label))
+            cols_per_row = 5 if total_pairs <= 10 else 8
+            cols = st.columns(cols_per_row)
+
+            for idx, card in enumerate(sorted_cards):
+                col = cols[idx % cols_per_row]
+                with col:
+                    if card.image is not None:
+                        b64 = img_to_base64(card.image)
+                        st.markdown(
+                            f'<div class="memory-card" style="border: 2px solid #ddd;">'
+                            f'<img src="data:image/png;base64,{b64}" />'
+                            f'</div>',
+                            unsafe_allow_html=True,
+                        )
+                    else:
+                        st.markdown("*(kein Bild)*")
+                    st.caption(f"#{card.pair_id} – {card.label}")
+
+        # === SPIEL-MODUS ===
+        else:
+            found = len(st.session_state.matched)
+            st.markdown(f"""
+            <div class="progress-box">
+                <strong>🎮 Spielfeld</strong> &nbsp;|&nbsp;
+                Paare gefunden: <strong>{found}/{total_pairs}</strong> &nbsp;|&nbsp;
+                Züge: <strong>{st.session_state.moves}</strong>
+            </div>
+            """, unsafe_allow_html=True)
+
+            # Callback: Karte anklicken (läuft VOR dem Rendering)
+            def _on_card_click(idx):
+                # Vorheriges Nicht-Paar zurückdrehen
+                if st.session_state.pending_flip_back:
+                    a, b = st.session_state.pending_flip_back
+                    st.session_state.flipped.discard(a)
+                    st.session_state.flipped.discard(b)
+                    st.session_state.pending_flip_back = None
+
+                if st.session_state.first_pick is None:
+                    # Erste Karte aufdecken
+                    st.session_state.first_pick = idx
+                    st.session_state.flipped.add(idx)
+                else:
+                    # Zweite Karte aufdecken + prüfen
+                    first = st.session_state.first_pick
+                    st.session_state.flipped.add(idx)
+                    st.session_state.moves += 1
+
+                    deck = st.session_state.deck
+                    if deck.cards[first].pair_id == deck.cards[idx].pair_id:
+                        st.session_state.matched.add(deck.cards[idx].pair_id)
+                    else:
+                        st.session_state.pending_flip_back = (first, idx)
+
+                    st.session_state.first_pick = None
+
+            # Karten als Grid
+            cols_per_row = 5 if total_pairs <= 10 else 8
+            cols = st.columns(cols_per_row)
+
+            for idx, card in enumerate(deck.cards):
+                col = cols[idx % cols_per_row]
+                with col:
+                    is_matched = card.pair_id in st.session_state.matched
+                    is_flipped = idx in st.session_state.flipped or is_matched
+
+                    if is_flipped and card.image is not None:
+                        b64 = img_to_base64(card.image)
+                        border = "3px solid #2ed573" if is_matched else "2px solid #ddd"
+                        st.markdown(
+                            f'<div class="memory-card" style="border: {border};">'
+                            f'<img src="data:image/png;base64,{b64}" />'
+                            f'</div>',
+                            unsafe_allow_html=True,
+                        )
+                    else:
+                        st.button(
+                            "🎴", key=f"card_{idx}",
+                            use_container_width=True,
+                            on_click=_on_card_click, args=(idx,),
+                        )
+
+            # Spiel gewonnen?
+            if found == total_pairs:
+                st.success(f"🎉 Gewonnen! Du hast alle {total_pairs} Paare in {st.session_state.moves} Zügen gefunden!")
+                if st.button("🔄 Neues Spiel"):
+                    st.session_state.deck = None
+                    st.session_state.messages = []
+                    st.session_state.flipped = set()
+                    st.session_state.matched = set()
+                    st.session_state.first_pick = None
+                    st.session_state.pending_flip_back = None
+                    st.session_state.moves = 0
+                    st.session_state.view_mode = "preview"
+                    st.session_state.agent = MemokiAgent(mode=mode_key, pair_count=num_pairs)
+                    st.rerun()
 
         st.markdown("---")
 
@@ -679,6 +728,7 @@ with right_col:
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
+                st.session_state.view_mode = "preview"
                 status.update(label="✅ Fertig! Dein Teekesselchen-Memory ist bereit!", state="complete")
 
             st.session_state.messages.append({
@@ -724,6 +774,7 @@ with right_col:
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
+                st.session_state.view_mode = "preview"
                 status.update(label="✅ Fertig! Dein Mathe-Memory ist bereit!", state="complete")
 
             st.session_state.messages.append({
@@ -773,6 +824,7 @@ with right_col:
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
+                st.session_state.view_mode = "preview"
                 status.update(label="✅ Fertig! Dein Mathe-Memory II ist bereit!", state="complete")
 
             st.session_state.messages.append({
@@ -817,6 +869,7 @@ with right_col:
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
+                st.session_state.view_mode = "preview"
                 status.update(label="✅ Fertig! Dein Paare-Memory ist bereit!", state="complete")
 
             st.session_state.messages.append({
@@ -858,6 +911,7 @@ with right_col:
 
                 st.session_state.deck = deck
                 st.session_state.generating = False
+                st.session_state.view_mode = "preview"
                 status.update(label="✅ Fertig! Dein Memory ist bereit!", state="complete")
 
             st.session_state.messages.append({
