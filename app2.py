@@ -1,7 +1,8 @@
-"""MEMOKI – KI-Memory-Spiele-Macher.
+"""MEMOKI – TEST-MODUS (alle Karten aufgedeckt).
 
-Streamlit-Frontend für den Memory-Spiel-Generator mit KI-generierten Bildern.
-2-Spalten-Layout: Links Konfiguration, Rechts Chat + Spielfeld.
+Kopie von app.py zum schnellen Testen. Karten werden sofort
+aufgedeckt und nach pair_id sortiert angezeigt (Paare nebeneinander).
+Starten mit: streamlit run app2.py
 """
 
 import io
@@ -21,7 +22,7 @@ from game.deck import Deck
 
 # --- Page Config ---
 st.set_page_config(
-    page_title="MEMOKI – KI-Memory-Spiele-Macher",
+    page_title="MEMOKI – TEST-MODUS",
     page_icon="🎴",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -383,7 +384,7 @@ with left_col:
 
     st.markdown('<div class="mini-divider">🟡 🔵 🟢 🟣 🔴</div>', unsafe_allow_html=True)
 
-    num_pairs = 10
+    num_pairs = 8  # TEST: weniger Paare für schnelleres Testen
 
     st.markdown('<div class="footer">MEMOKI – LLM-Tuning & Prompt Engineering 🧠</div>', unsafe_allow_html=True)
 
@@ -478,83 +479,47 @@ with right_col:
     if st.session_state.deck is not None:
         deck = st.session_state.deck
 
-        # Spielstand
+        # TEST-MODUS: Alle Karten aufgedeckt (kein Spiellogik)
         total_pairs = len(deck.cards) // 2
-        found = len(st.session_state.matched)
         st.markdown(f"""
         <div class="progress-box">
-            <strong>🎮 Spielfeld</strong> &nbsp;|&nbsp;
-            Paare gefunden: <strong>{found}/{total_pairs}</strong> &nbsp;|&nbsp;
-            Züge: <strong>{st.session_state.moves}</strong>
+            <strong>🔍 TEST-MODUS</strong> &nbsp;|&nbsp;
+            Alle {total_pairs} Paare aufgedeckt &nbsp;|&nbsp;
+            Karten werden nach pair_id gruppiert
         </div>
         """, unsafe_allow_html=True)
 
-        # Callback: Karte anklicken (läuft VOR dem Rendering)
-        def _on_card_click(idx):
-            # Vorheriges Nicht-Paar zurückdrehen
-            if st.session_state.pending_flip_back:
-                a, b = st.session_state.pending_flip_back
-                st.session_state.flipped.discard(a)
-                st.session_state.flipped.discard(b)
-                st.session_state.pending_flip_back = None
+        # Karten nach pair_id sortieren, damit Paare nebeneinander stehen
+        sorted_cards = sorted(deck.cards, key=lambda c: (c.pair_id, c.label))
 
-            if st.session_state.first_pick is None:
-                # Erste Karte aufdecken
-                st.session_state.first_pick = idx
-                st.session_state.flipped.add(idx)
-            else:
-                # Zweite Karte aufdecken + prüfen
-                first = st.session_state.first_pick
-                st.session_state.flipped.add(idx)
-                st.session_state.moves += 1
-
-                deck = st.session_state.deck
-                if deck.cards[first].pair_id == deck.cards[idx].pair_id:
-                    st.session_state.matched.add(deck.cards[idx].pair_id)
-                else:
-                    st.session_state.pending_flip_back = (first, idx)
-
-                st.session_state.first_pick = None
-
-        # Karten als Grid
         cols_per_row = 5 if total_pairs <= 10 else 8
         cols = st.columns(cols_per_row)
 
-        for idx, card in enumerate(deck.cards):
+        for idx, card in enumerate(sorted_cards):
             col = cols[idx % cols_per_row]
             with col:
-                is_matched = card.pair_id in st.session_state.matched
-                is_flipped = idx in st.session_state.flipped or is_matched
-
-                if is_flipped and card.image is not None:
+                if card.image is not None:
                     b64 = img_to_base64(card.image)
-                    border = "3px solid #2ed573" if is_matched else "2px solid #ddd"
                     st.markdown(
-                        f'<div class="memory-card" style="border: {border};">'
+                        f'<div class="memory-card" style="border: 2px solid #ddd;">'
                         f'<img src="data:image/png;base64,{b64}" />'
                         f'</div>',
                         unsafe_allow_html=True,
                     )
                 else:
-                    st.button(
-                        "🎴", key=f"card_{idx}",
-                        use_container_width=True,
-                        on_click=_on_card_click, args=(idx,),
-                    )
+                    st.markdown("*(kein Bild)*")
+                st.caption(f"#{card.pair_id} – {card.label}")
 
-        # Spiel gewonnen?
-        if found == total_pairs:
-            st.success(f"🎉 Gewonnen! Du hast alle {total_pairs} Paare in {st.session_state.moves} Zügen gefunden!")
-            if st.button("🔄 Neues Spiel"):
-                st.session_state.deck = None
-                st.session_state.messages = []
-                st.session_state.flipped = set()
-                st.session_state.matched = set()
-                st.session_state.first_pick = None
-                st.session_state.pending_flip_back = None
-                st.session_state.moves = 0
-                st.session_state.agent = MemokiAgent(mode=mode_key, pair_count=num_pairs)
-                st.rerun()
+        if st.button("🔄 Neues Spiel"):
+            st.session_state.deck = None
+            st.session_state.messages = []
+            st.session_state.flipped = set()
+            st.session_state.matched = set()
+            st.session_state.first_pick = None
+            st.session_state.pending_flip_back = None
+            st.session_state.moves = 0
+            st.session_state.agent = MemokiAgent(mode=mode_key, pair_count=num_pairs)
+            st.rerun()
 
         st.markdown("---")
 
@@ -565,28 +530,6 @@ with right_col:
         avatar = "🎴" if msg["role"] == "assistant" else "🙋"
         with st.chat_message(msg["role"], avatar=avatar):
             st.markdown(msg["content"])
-
-    # Auto-Scroll: nach dem Rendern der Nachrichten ans Ende scrollen
-    components.html("""
-    <script>
-        setTimeout(function() {
-            const doc = window.parent.document;
-            // Versuche verschiedene Streamlit-Container
-            const targets = [
-                doc.querySelector('[data-testid="stAppViewContainer"]'),
-                doc.querySelector('section.main'),
-                doc.querySelector('.main'),
-            ];
-            for (const el of targets) {
-                if (el) {
-                    el.scrollTo({top: el.scrollHeight, behavior: 'smooth'});
-                }
-            }
-            // Fallback: ganzes Fenster scrollen
-            window.parent.scrollTo({top: doc.body.scrollHeight, behavior: 'smooth'});
-        }, 200);
-    </script>
-    """, height=1)
 
     if prompt := st.chat_input("Sag MEMOKI, was Du Dir wünschst …"):
         st.session_state.messages.append({"role": "user", "content": prompt})

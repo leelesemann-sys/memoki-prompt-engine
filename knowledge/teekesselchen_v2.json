@@ -1,0 +1,1577 @@
+{
+  "metadata": {
+    "description": "Kuratierte Teekesselchen/Homonyme für MEMOKI Memory Game",
+    "source": "deutschmeisterei.de, mijan.de, unker.com, teekesselchen-woerter-liste.pdf, manuell kuratiert",
+    "version": "3.0",
+    "last_updated": "2026-02-07",
+    "criteria": [
+      "Beide Bedeutungen visuell klar darstellbar",
+      "Keine abstrakten Konzepte",
+      "Keine veralteten/regionalen Begriffe",
+      "Kinderfreundlich",
+      "Korrekte englische Übersetzungen für Bildgenerierung"
+    ]
+  },
+  "entries": [
+    {
+      "id": 1,
+      "word": "Bank",
+      "meaning_a": {
+        "de": "Sitzbank",
+        "en": "wooden park bench"
+      },
+      "meaning_b": {
+        "de": "Geldinstitut",
+        "en": "bank building exterior"
+      }
+    },
+    {
+      "id": 2,
+      "word": "Schloss",
+      "meaning_a": {
+        "de": "Türschloss",
+        "en": "door lock with keyhole"
+      },
+      "meaning_b": {
+        "de": "Palast",
+        "en": "fairy tale castle"
+      }
+    },
+    {
+      "id": 3,
+      "word": "Birne",
+      "meaning_a": {
+        "de": "Obst",
+        "en": "pear fruit"
+      },
+      "meaning_b": {
+        "de": "Glühbirne",
+        "en": "glowing light bulb"
+      }
+    },
+    {
+      "id": 4,
+      "word": "Brille",
+      "meaning_a": {
+        "de": "Sehhilfe",
+        "en": "eyeglasses"
+      },
+      "meaning_b": {
+        "de": "Toilettensitz",
+        "en": "toilet seat"
+      }
+    },
+    {
+      "id": 5,
+      "word": "Schiff",
+      "meaning_a": {
+        "de": "Wasserfahrzeug",
+        "en": "cruise ship"
+      },
+      "meaning_b": {
+        "de": "Kirchenschiff",
+        "en": "church nave interior"
+      }
+    },
+    {
+      "id": 6,
+      "word": "Nagel",
+      "meaning_a": {
+        "de": "Metallnagel",
+        "en": "metal nail"
+      },
+      "meaning_b": {
+        "de": "Fingernagel",
+        "en": "fingernail close-up"
+      }
+    },
+    {
+      "id": 7,
+      "word": "Fliege",
+      "meaning_a": {
+        "de": "Insekt",
+        "en": "housefly insect"
+      },
+      "meaning_b": {
+        "de": "Kleidung",
+        "en": "bow tie"
+      }
+    },
+    {
+      "id": 8,
+      "word": "Schimmel",
+      "meaning_a": {
+        "de": "Pferd",
+        "en": "white horse"
+      },
+      "meaning_b": {
+        "de": "Pilzbefall",
+        "en": "moldy bread"
+      }
+    },
+    {
+      "id": 9,
+      "word": "Flügel",
+      "meaning_a": {
+        "de": "Vogelflügel",
+        "en": "bird wing spread"
+      },
+      "meaning_b": {
+        "de": "Instrument",
+        "en": "grand piano"
+      }
+    },
+    {
+      "id": 11,
+      "word": "Krone",
+      "meaning_a": {
+        "de": "Königskrone",
+        "en": "royal crown"
+      },
+      "meaning_b": {
+        "de": "Zahnkrone",
+        "en": "dental crown on tooth"
+      }
+    },
+    {
+      "id": 12,
+      "word": "Ton",
+      "meaning_a": {
+        "de": "Klang",
+        "en": "musical note with sound waves"
+      },
+      "meaning_b": {
+        "de": "Lehm",
+        "en": "pottery clay"
+      }
+    },
+    {
+      "id": 13,
+      "word": "Ball",
+      "meaning_a": {
+        "de": "Spielball",
+        "en": "sports ball"
+      },
+      "meaning_b": {
+        "de": "Tanzveranstaltung",
+        "en": "elegant ballroom dance"
+      }
+    },
+    {
+      "id": 14,
+      "word": "Blatt",
+      "meaning_a": {
+        "de": "Baumblatt",
+        "en": "green leaf on tree"
+      },
+      "meaning_b": {
+        "de": "Papierblatt",
+        "en": "sheet of paper"
+      }
+    },
+    {
+      "id": 15,
+      "word": "Decke",
+      "meaning_a": {
+        "de": "Bettdecke",
+        "en": "cozy blanket on bed"
+      },
+      "meaning_b": {
+        "de": "Zimmerdecke",
+        "en": "room ceiling"
+      }
+    },
+    {
+      "id": 16,
+      "word": "Hahn",
+      "meaning_a": {
+        "de": "Tier",
+        "en": "rooster"
+      },
+      "meaning_b": {
+        "de": "Wasserhahn",
+        "en": "water faucet"
+      }
+    },
+    {
+      "id": 17,
+      "word": "Leiter",
+      "meaning_a": {
+        "de": "Klettergerät",
+        "en": "ladder"
+      },
+      "meaning_b": {
+        "de": "Chef",
+        "en": "business manager in suit"
+      }
+    },
+    {
+      "id": 18,
+      "word": "Mutter",
+      "meaning_a": {
+        "de": "Elternteil",
+        "en": "mother with child"
+      },
+      "meaning_b": {
+        "de": "Schraubenmutter",
+        "en": "metal hex nut"
+      }
+    },
+    {
+      "id": 19,
+      "word": "Pfeife",
+      "meaning_a": {
+        "de": "Tabakpfeife",
+        "en": "smoking pipe"
+      },
+      "meaning_b": {
+        "de": "Trillerpfeife",
+        "en": "referee whistle"
+      }
+    },
+    {
+      "id": 20,
+      "word": "Linse",
+      "meaning_a": {
+        "de": "Optik",
+        "en": "camera lens"
+      },
+      "meaning_b": {
+        "de": "Hülsenfrucht",
+        "en": "lentils in bowl"
+      }
+    },
+    {
+      "id": 21,
+      "word": "Bogen",
+      "meaning_a": {
+        "de": "Schießbogen",
+        "en": "archery bow"
+      },
+      "meaning_b": {
+        "de": "Architekturbogen",
+        "en": "stone arch"
+      }
+    },
+    {
+      "id": 22,
+      "word": "Zug",
+      "meaning_a": {
+        "de": "Eisenbahn",
+        "en": "train"
+      },
+      "meaning_b": {
+        "de": "Spielzug",
+        "en": "hand moving chess piece"
+      }
+    },
+    {
+      "id": 23,
+      "word": "Schnecke",
+      "meaning_a": {
+        "de": "Tier",
+        "en": "snail"
+      },
+      "meaning_b": {
+        "de": "Gebäck",
+        "en": "cinnamon roll pastry"
+      }
+    },
+    {
+      "id": 24,
+      "word": "Feder",
+      "meaning_a": {
+        "de": "Vogelfeder",
+        "en": "bird feather"
+      },
+      "meaning_b": {
+        "de": "Metallfeder",
+        "en": "coil spring"
+      }
+    },
+    {
+      "id": 25,
+      "word": "Star",
+      "meaning_a": {
+        "de": "Vogel",
+        "en": "starling bird"
+      },
+      "meaning_b": {
+        "de": "Berühmtheit",
+        "en": "celebrity movie star"
+      }
+    },
+    {
+      "id": 26,
+      "word": "Kamm",
+      "meaning_a": {
+        "de": "Haarkamm",
+        "en": "hair comb"
+      },
+      "meaning_b": {
+        "de": "Bergkamm",
+        "en": "mountain ridge"
+      }
+    },
+    {
+      "id": 27,
+      "word": "Tau",
+      "meaning_a": {
+        "de": "Morgentau",
+        "en": "morning dew on grass"
+      },
+      "meaning_b": {
+        "de": "Schiffstau",
+        "en": "thick ship rope"
+      }
+    },
+    {
+      "id": 28,
+      "word": "Golf",
+      "meaning_a": {
+        "de": "Sport",
+        "en": "golf player on course"
+      },
+      "meaning_b": {
+        "de": "Auto",
+        "en": "VW Golf car"
+      }
+    },
+    {
+      "id": 29,
+      "word": "Kater",
+      "meaning_a": {
+        "de": "Tier",
+        "en": "tomcat"
+      },
+      "meaning_b": {
+        "de": "Nachwirkung",
+        "en": "person with hangover headache"
+      }
+    },
+    {
+      "id": 30,
+      "word": "Eis",
+      "meaning_a": {
+        "de": "Speiseeis",
+        "en": "ice cream cone"
+      },
+      "meaning_b": {
+        "de": "gefrorenes Wasser",
+        "en": "frozen ice"
+      }
+    },
+    {
+      "id": 31,
+      "word": "Raupe",
+      "meaning_a": {
+        "de": "Insekt",
+        "en": "caterpillar"
+      },
+      "meaning_b": {
+        "de": "Kettenfahrzeug",
+        "en": "caterpillar track on excavator"
+      }
+    },
+    {
+      "id": 32,
+      "word": "Hering",
+      "meaning_a": {
+        "de": "Fisch",
+        "en": "herring fish"
+      },
+      "meaning_b": {
+        "de": "Zelthering",
+        "en": "tent peg"
+      }
+    },
+    {
+      "id": 33,
+      "word": "Maus",
+      "meaning_a": {
+        "de": "Tier",
+        "en": "mouse animal"
+      },
+      "meaning_b": {
+        "de": "Computermaus",
+        "en": "computer mouse"
+      }
+    },
+    {
+      "id": 34,
+      "word": "Brücke",
+      "meaning_a": {
+        "de": "Bauwerk",
+        "en": "bridge over river"
+      },
+      "meaning_b": {
+        "de": "Zahnbrücke",
+        "en": "dental bridge"
+      }
+    },
+    {
+      "id": 35,
+      "word": "Kiefer",
+      "meaning_a": {
+        "de": "Baum",
+        "en": "pine tree"
+      },
+      "meaning_b": {
+        "de": "Gesichtsknochen",
+        "en": "human jawbone"
+      }
+    },
+    {
+      "id": 36,
+      "word": "Flur",
+      "meaning_a": {
+        "de": "Gang",
+        "en": "hallway corridor"
+      },
+      "meaning_b": {
+        "de": "Feld",
+        "en": "open field meadow"
+      }
+    },
+    {
+      "id": 37,
+      "word": "Strauß",
+      "meaning_a": {
+        "de": "Vogel",
+        "en": "ostrich"
+      },
+      "meaning_b": {
+        "de": "Blumenstrauß",
+        "en": "flower bouquet"
+      }
+    },
+    {
+      "id": 38,
+      "word": "Schalter",
+      "meaning_a": {
+        "de": "Lichtschalter",
+        "en": "light switch"
+      },
+      "meaning_b": {
+        "de": "Serviceschalter",
+        "en": "service counter"
+      }
+    },
+    {
+      "id": 39,
+      "word": "Pferd",
+      "meaning_a": {
+        "de": "Tier",
+        "en": "horse"
+      },
+      "meaning_b": {
+        "de": "Turngerät",
+        "en": "pommel horse gymnastics"
+      }
+    },
+    {
+      "id": 40,
+      "word": "Löffel",
+      "meaning_a": {
+        "de": "Besteck",
+        "en": "spoon"
+      },
+      "meaning_b": {
+        "de": "Hasenohren",
+        "en": "rabbit ears"
+      }
+    },
+    {
+      "id": 41,
+      "word": "Rad",
+      "meaning_a": {
+        "de": "Fahrradrad",
+        "en": "bicycle wheel"
+      },
+      "meaning_b": {
+        "de": "Pfauenrad",
+        "en": "peacock tail display"
+      }
+    },
+    {
+      "id": 42,
+      "word": "Boxer",
+      "meaning_a": {
+        "de": "Sportler",
+        "en": "boxing athlete"
+      },
+      "meaning_b": {
+        "de": "Hund",
+        "en": "boxer dog"
+      }
+    },
+    {
+      "id": 43,
+      "word": "Ring",
+      "meaning_a": {
+        "de": "Fingerring",
+        "en": "wedding ring"
+      },
+      "meaning_b": {
+        "de": "Boxring",
+        "en": "boxing ring"
+      }
+    },
+    {
+      "id": 44,
+      "word": "Gericht",
+      "meaning_a": {
+        "de": "Gerichtshof",
+        "en": "courtroom"
+      },
+      "meaning_b": {
+        "de": "Speise",
+        "en": "food dish"
+      }
+    },
+    {
+      "id": 45,
+      "word": "Stock",
+      "meaning_a": {
+        "de": "Gehstock",
+        "en": "walking cane"
+      },
+      "meaning_b": {
+        "de": "Stockwerk",
+        "en": "building floor level"
+      }
+    },
+    {
+      "id": 46,
+      "word": "Wanze",
+      "meaning_a": {
+        "de": "Insekt",
+        "en": "bed bug insect"
+      },
+      "meaning_b": {
+        "de": "Abhörgerät",
+        "en": "listening bug spy device"
+      }
+    },
+    {
+      "id": 47,
+      "word": "Scheibe",
+      "meaning_a": {
+        "de": "Fensterscheibe",
+        "en": "glass window pane"
+      },
+      "meaning_b": {
+        "de": "Brotscheibe",
+        "en": "slice of bread"
+      }
+    },
+    {
+      "id": 48,
+      "word": "Schale",
+      "meaning_a": {
+        "de": "Obstschale",
+        "en": "fruit peel"
+      },
+      "meaning_b": {
+        "de": "Schüssel",
+        "en": "decorative bowl"
+      }
+    },
+    {
+      "id": 49,
+      "word": "Bauer",
+      "meaning_a": {
+        "de": "Landwirt",
+        "en": "farmer with pitchfork"
+      },
+      "meaning_b": {
+        "de": "Schachfigur",
+        "en": "chess pawn"
+      }
+    },
+    {
+      "id": 50,
+      "word": "Ampel",
+      "meaning_a": {
+        "de": "Verkehrsampel",
+        "en": "traffic light"
+      },
+      "meaning_b": {
+        "de": "Blumenampel",
+        "en": "hanging plant basket"
+      }
+    },
+    {
+      "id": 51,
+      "word": "Träger",
+      "meaning_a": {
+        "de": "Hosenträger",
+        "en": "suspenders"
+      },
+      "meaning_b": {
+        "de": "Bauträger",
+        "en": "structural steel girder"
+      }
+    },
+    {
+      "id": 52,
+      "word": "Kapelle",
+      "meaning_a": {
+        "de": "kleine Kirche",
+        "en": "small chapel"
+      },
+      "meaning_b": {
+        "de": "Musikgruppe",
+        "en": "music band"
+      }
+    },
+    {
+      "id": 53,
+      "word": "Welle",
+      "meaning_a": {
+        "de": "Meereswelle",
+        "en": "ocean wave"
+      },
+      "meaning_b": {
+        "de": "Antriebswelle",
+        "en": "drive shaft"
+      }
+    },
+    {
+      "id": 54,
+      "word": "Lager",
+      "meaning_a": {
+        "de": "Warenlager",
+        "en": "warehouse"
+      },
+      "meaning_b": {
+        "de": "Kugellager",
+        "en": "ball bearing"
+      }
+    },
+    {
+      "id": 55,
+      "word": "Pflaster",
+      "meaning_a": {
+        "de": "Wundpflaster",
+        "en": "bandaid"
+      },
+      "meaning_b": {
+        "de": "Straßenpflaster",
+        "en": "cobblestone pavement"
+      }
+    },
+    {
+      "id": 56,
+      "word": "Mantel",
+      "meaning_a": {
+        "de": "Wintermantel",
+        "en": "winter coat"
+      },
+      "meaning_b": {
+        "de": "Reifenmantel",
+        "en": "tire casing"
+      }
+    },
+    {
+      "id": 57,
+      "word": "Schuppen",
+      "meaning_a": {
+        "de": "Fischschuppen",
+        "en": "fish scales"
+      },
+      "meaning_b": {
+        "de": "Gartenschuppen",
+        "en": "garden shed"
+      }
+    },
+    {
+      "id": 58,
+      "word": "Kreuz",
+      "meaning_a": {
+        "de": "christliches Kreuz",
+        "en": "christian cross"
+      },
+      "meaning_b": {
+        "de": "Rücken",
+        "en": "lower back anatomy"
+      }
+    },
+    {
+      "id": 59,
+      "word": "Drache",
+      "meaning_a": {
+        "de": "Fabelwesen",
+        "en": "mythical dragon"
+      },
+      "meaning_b": {
+        "de": "Spielzeug",
+        "en": "flying kite"
+      }
+    },
+    {
+      "id": 60,
+      "word": "Falle",
+      "meaning_a": {
+        "de": "Tierfalle",
+        "en": "mouse trap"
+      },
+      "meaning_b": {
+        "de": "Türfalle",
+        "en": "door latch"
+      }
+    },
+    {
+      "id": 61,
+      "word": "Schlag",
+      "meaning_a": {
+        "de": "Faustschlag",
+        "en": "punch fist"
+      },
+      "meaning_b": {
+        "de": "Schlagsahne",
+        "en": "whipped cream"
+      }
+    },
+    {
+      "id": 62,
+      "word": "Tor",
+      "meaning_a": {
+        "de": "Fußballtor",
+        "en": "soccer goal"
+      },
+      "meaning_b": {
+        "de": "Eingangstor",
+        "en": "gate entrance"
+      }
+    },
+    {
+      "id": 63,
+      "word": "Tulpe",
+      "meaning_a": {
+        "de": "Blume",
+        "en": "tulip flower"
+      },
+      "meaning_b": {
+        "de": "Bierglas",
+        "en": "pilsner beer glass"
+      }
+    },
+    {
+      "id": 65,
+      "word": "Bremse",
+      "meaning_a": {
+        "de": "Autobremse",
+        "en": "car brake pedal"
+      },
+      "meaning_b": {
+        "de": "Insekt",
+        "en": "horsefly insect"
+      }
+    },
+    {
+      "id": 66,
+      "word": "Spinne",
+      "meaning_a": {
+        "de": "Tier",
+        "en": "spider"
+      },
+      "meaning_b": {
+        "de": "Wäschespinne",
+        "en": "rotary clothesline"
+      }
+    },
+    {
+      "id": 67,
+      "word": "Steuer",
+      "meaning_a": {
+        "de": "Lenkrad",
+        "en": "car steering wheel"
+      },
+      "meaning_b": {
+        "de": "Abgabe",
+        "en": "tax form documents"
+      }
+    },
+    {
+      "id": 68,
+      "word": "Pony",
+      "meaning_a": {
+        "de": "kleines Pferd",
+        "en": "pony horse"
+      },
+      "meaning_b": {
+        "de": "Haarschnitt",
+        "en": "hair bangs fringe"
+      }
+    },
+    {
+      "id": 69,
+      "word": "Käfer",
+      "meaning_a": {
+        "de": "Insekt",
+        "en": "beetle insect"
+      },
+      "meaning_b": {
+        "de": "VW Auto",
+        "en": "VW Beetle car"
+      }
+    },
+    {
+      "id": 70,
+      "word": "Horn",
+      "meaning_a": {
+        "de": "Tierhorn",
+        "en": "animal horn on cow"
+      },
+      "meaning_b": {
+        "de": "Musikinstrument",
+        "en": "french horn instrument"
+      }
+    },
+    {
+      "id": 71,
+      "word": "Bart",
+      "meaning_a": {
+        "de": "Gesichtsbehaarung",
+        "en": "beard on face"
+      },
+      "meaning_b": {
+        "de": "Schlüsselbart",
+        "en": "key bit teeth"
+      }
+    },
+    {
+      "id": 72,
+      "word": "Schlüssel",
+      "meaning_a": {
+        "de": "Türschlüssel",
+        "en": "door key"
+      },
+      "meaning_b": {
+        "de": "Notenschlüssel",
+        "en": "musical clef treble"
+      }
+    },
+    {
+      "id": 73,
+      "word": "Kran",
+      "meaning_a": {
+        "de": "Baukran",
+        "en": "construction crane"
+      },
+      "meaning_b": {
+        "de": "Wasserkran",
+        "en": "water tap faucet"
+      }
+    },
+    {
+      "id": 74,
+      "word": "Becken",
+      "meaning_a": {
+        "de": "Waschbecken",
+        "en": "bathroom sink"
+      },
+      "meaning_b": {
+        "de": "Schlagzeugbecken",
+        "en": "drum cymbal"
+      }
+    },
+    {
+      "id": 75,
+      "word": "Schild",
+      "meaning_a": {
+        "de": "Verkehrsschild",
+        "en": "traffic sign"
+      },
+      "meaning_b": {
+        "de": "Ritterschild",
+        "en": "knight shield"
+      }
+    },
+    {
+      "id": 76,
+      "word": "Kolben",
+      "meaning_a": {
+        "de": "Motorkolben",
+        "en": "engine piston"
+      },
+      "meaning_b": {
+        "de": "Glaskolben",
+        "en": "laboratory flask"
+      }
+    },
+    {
+      "id": 77,
+      "word": "Schnee",
+      "meaning_a": {
+        "de": "Niederschlag",
+        "en": "snow falling"
+      },
+      "meaning_b": {
+        "de": "Eischnee",
+        "en": "whipped egg whites meringue"
+      }
+    },
+    {
+      "id": 78,
+      "word": "Note",
+      "meaning_a": {
+        "de": "Musiknote",
+        "en": "musical note"
+      },
+      "meaning_b": {
+        "de": "Schulnote",
+        "en": "school grade report card"
+      }
+    },
+    {
+      "id": 79,
+      "word": "Pass",
+      "meaning_a": {
+        "de": "Reisepass",
+        "en": "passport"
+      },
+      "meaning_b": {
+        "de": "Gebirgspass",
+        "en": "mountain pass road"
+      }
+    },
+    {
+      "id": 80,
+      "word": "Sender",
+      "meaning_a": {
+        "de": "TV-Sender",
+        "en": "broadcasting tower"
+      },
+      "meaning_b": {
+        "de": "Briefsender",
+        "en": "letter sender person"
+      }
+    },
+    {
+      "id": 81,
+      "word": "Angel",
+      "meaning_a": {
+        "de": "Angelrute",
+        "en": "fishing rod with reel at a lake shore"
+      },
+      "meaning_b": {
+        "de": "Türangel",
+        "en": "metal door hinge on a wooden door"
+      }
+    },
+    {
+      "id": 82,
+      "word": "Anhänger",
+      "meaning_a": {
+        "de": "Fahrzeuganhänger",
+        "en": "car trailer being towed on a road"
+      },
+      "meaning_b": {
+        "de": "Schmuckanhänger",
+        "en": "pendant necklace with gemstone"
+      }
+    },
+    {
+      "id": 83,
+      "word": "Auflauf",
+      "meaning_a": {
+        "de": "Speise",
+        "en": "golden baked casserole dish in an oven tray"
+      },
+      "meaning_b": {
+        "de": "Menschenauflauf",
+        "en": "crowd of people gathered on a street"
+      }
+    },
+    {
+      "id": 84,
+      "word": "Band",
+      "meaning_a": {
+        "de": "Schleifenband",
+        "en": "colorful satin ribbon tied in a bow"
+      },
+      "meaning_b": {
+        "de": "Musikband",
+        "en": "rock band playing instruments on stage"
+      }
+    },
+    {
+      "id": 85,
+      "word": "Barren",
+      "meaning_a": {
+        "de": "Goldbarren",
+        "en": "shiny gold bars stacked"
+      },
+      "meaning_b": {
+        "de": "Turnbarren",
+        "en": "parallel bars gymnastics equipment"
+      }
+    },
+    {
+      "id": 86,
+      "word": "Bett",
+      "meaning_a": {
+        "de": "Schlafbett",
+        "en": "cozy bed with pillows and blanket in a bedroom"
+      },
+      "meaning_b": {
+        "de": "Flussbett",
+        "en": "dry riverbed with rocks and pebbles"
+      }
+    },
+    {
+      "id": 87,
+      "word": "Bienenstich",
+      "meaning_a": {
+        "de": "Insektenstich",
+        "en": "bee stinging a finger close-up"
+      },
+      "meaning_b": {
+        "de": "Kuchen",
+        "en": "Bienenstich cake with custard filling and caramelized almond topping"
+      }
+    },
+    {
+      "id": 88,
+      "word": "Blinker",
+      "meaning_a": {
+        "de": "Autoblinker",
+        "en": "car turn signal indicator light flashing orange"
+      },
+      "meaning_b": {
+        "de": "Angelköder",
+        "en": "shiny metal fishing lure spinner bait"
+      }
+    },
+    {
+      "id": 89,
+      "word": "Bock",
+      "meaning_a": {
+        "de": "Ziegenbock",
+        "en": "male goat with horns standing on a rock"
+      },
+      "meaning_b": {
+        "de": "Turnbock",
+        "en": "gymnastic vaulting buck in a gymnasium"
+      }
+    },
+    {
+      "id": 90,
+      "word": "Brause",
+      "meaning_a": {
+        "de": "Duschbrause",
+        "en": "shower head spraying water"
+      },
+      "meaning_b": {
+        "de": "Brauselimonade",
+        "en": "fizzy lemonade drink with bubbles in a glass"
+      }
+    },
+    {
+      "id": 91,
+      "word": "Chip",
+      "meaning_a": {
+        "de": "Computerchip",
+        "en": "green microchip circuit board close-up"
+      },
+      "meaning_b": {
+        "de": "Kartoffelchip",
+        "en": "crispy potato chips in a bowl"
+      }
+    },
+    {
+      "id": 92,
+      "word": "Dame",
+      "meaning_a": {
+        "de": "elegante Frau",
+        "en": "elegant lady in a long dress"
+      },
+      "meaning_b": {
+        "de": "Brettspiel",
+        "en": "checkers board game with red and black pieces"
+      }
+    },
+    {
+      "id": 93,
+      "word": "Ente",
+      "meaning_a": {
+        "de": "Vogel",
+        "en": "duck swimming on a pond"
+      },
+      "meaning_b": {
+        "de": "Auto",
+        "en": "classic Citroen 2CV car on a street"
+      }
+    },
+    {
+      "id": 94,
+      "word": "Eselsohr",
+      "meaning_a": {
+        "de": "Tierohr",
+        "en": "close-up of a donkey's long fuzzy ear"
+      },
+      "meaning_b": {
+        "de": "Buchknick",
+        "en": "dog-eared page corner folded in a book"
+      }
+    },
+    {
+      "id": 95,
+      "word": "Fingerhut",
+      "meaning_a": {
+        "de": "Nähzubehör",
+        "en": "metal thimble on a finger"
+      },
+      "meaning_b": {
+        "de": "Pflanze",
+        "en": "purple foxglove flower in a garden"
+      }
+    },
+    {
+      "id": 96,
+      "word": "Geschirr",
+      "meaning_a": {
+        "de": "Essgeschirr",
+        "en": "stack of plates cups and bowls on a kitchen shelf"
+      },
+      "meaning_b": {
+        "de": "Pferdegeschirr",
+        "en": "horse harness and bridle on a draft horse"
+      }
+    },
+    {
+      "id": 97,
+      "word": "Jaguar",
+      "meaning_a": {
+        "de": "Raubkatze",
+        "en": "spotted jaguar big cat in the jungle"
+      },
+      "meaning_b": {
+        "de": "Auto",
+        "en": "sleek Jaguar luxury car"
+      }
+    },
+    {
+      "id": 98,
+      "word": "Karte",
+      "meaning_a": {
+        "de": "Landkarte",
+        "en": "colorful folded road map spread out on a table"
+      },
+      "meaning_b": {
+        "de": "Spielkarte",
+        "en": "hand of playing cards fanned out"
+      }
+    },
+    {
+      "id": 99,
+      "word": "Kerze",
+      "meaning_a": {
+        "de": "Wachskerze",
+        "en": "burning candle with warm flame and dripping wax"
+      },
+      "meaning_b": {
+        "de": "Zündkerze",
+        "en": "automotive spark plug close-up"
+      }
+    },
+    {
+      "id": 100,
+      "word": "Kiwi",
+      "meaning_a": {
+        "de": "Frucht",
+        "en": "sliced kiwi fruit showing green flesh and black seeds"
+      },
+      "meaning_b": {
+        "de": "Vogel",
+        "en": "brown kiwi bird from New Zealand"
+      }
+    },
+    {
+      "id": 101,
+      "word": "Löwenzahn",
+      "meaning_a": {
+        "de": "Pflanze",
+        "en": "bright yellow dandelion flower in a green meadow"
+      },
+      "meaning_b": {
+        "de": "Löwengebiss",
+        "en": "lion showing its teeth with open mouth roaring"
+      }
+    },
+    {
+      "id": 102,
+      "word": "Mars",
+      "meaning_a": {
+        "de": "Planet",
+        "en": "red planet Mars in outer space"
+      },
+      "meaning_b": {
+        "de": "Schokoriegel",
+        "en": "Mars chocolate candy bar with caramel and nougat"
+      }
+    },
+    {
+      "id": 103,
+      "word": "Melone",
+      "meaning_a": {
+        "de": "Wassermelone",
+        "en": "watermelon cut open showing red flesh and black seeds"
+      },
+      "meaning_b": {
+        "de": "Hut",
+        "en": "black bowler hat worn by a gentleman"
+      }
+    },
+    {
+      "id": 104,
+      "word": "Messe",
+      "meaning_a": {
+        "de": "Fachmesse",
+        "en": "trade fair exhibition hall with booths and visitors"
+      },
+      "meaning_b": {
+        "de": "Gottesdienst",
+        "en": "church mass ceremony with priest at altar"
+      }
+    },
+    {
+      "id": 105,
+      "word": "Mine",
+      "meaning_a": {
+        "de": "Kugelschreibermine",
+        "en": "ballpoint pen refill cartridge close-up"
+      },
+      "meaning_b": {
+        "de": "Bergwerk",
+        "en": "underground mine tunnel with railway tracks"
+      }
+    },
+    {
+      "id": 106,
+      "word": "Mühle",
+      "meaning_a": {
+        "de": "Windmühle",
+        "en": "traditional windmill with spinning blades in a field"
+      },
+      "meaning_b": {
+        "de": "Brettspiel",
+        "en": "Nine Mens Morris board game with black and white pieces"
+      }
+    },
+    {
+      "id": 107,
+      "word": "Nadel",
+      "meaning_a": {
+        "de": "Nähnadel",
+        "en": "sewing needle with thread"
+      },
+      "meaning_b": {
+        "de": "Tannennadel",
+        "en": "close-up of green pine needles on a fir tree branch"
+      }
+    },
+    {
+      "id": 108,
+      "word": "Otter",
+      "meaning_a": {
+        "de": "Fischotter",
+        "en": "cute otter floating on its back in water"
+      },
+      "meaning_b": {
+        "de": "Kreuzotter",
+        "en": "European adder snake coiled on a rock"
+      }
+    },
+    {
+      "id": 109,
+      "word": "Radler",
+      "meaning_a": {
+        "de": "Fahrradfahrer",
+        "en": "cyclist riding a bicycle with helmet"
+      },
+      "meaning_b": {
+        "de": "Biergetränk",
+        "en": "glass of Radler shandy beer mixed with lemonade"
+      }
+    },
+    {
+      "id": 110,
+      "word": "Rock",
+      "meaning_a": {
+        "de": "Kleidung",
+        "en": "woman wearing a pleated skirt"
+      },
+      "meaning_b": {
+        "de": "Musik",
+        "en": "electric guitar with amplifier on a rock music stage"
+      }
+    },
+    {
+      "id": 111,
+      "word": "Scholle",
+      "meaning_a": {
+        "de": "Plattfisch",
+        "en": "flatfish plaice lying on ocean floor"
+      },
+      "meaning_b": {
+        "de": "Eisscholle",
+        "en": "floating ice floe in arctic water"
+      }
+    },
+    {
+      "id": 112,
+      "word": "Sichel",
+      "meaning_a": {
+        "de": "Erntewerkzeug",
+        "en": "hand sickle for harvesting grain with curved blade"
+      },
+      "meaning_b": {
+        "de": "Mondsichel",
+        "en": "crescent moon glowing in a dark night sky"
+      }
+    },
+    {
+      "id": 113,
+      "word": "Spion",
+      "meaning_a": {
+        "de": "Geheimagent",
+        "en": "spy agent in trench coat and sunglasses"
+      },
+      "meaning_b": {
+        "de": "Türspion",
+        "en": "door peephole viewer lens in a front door"
+      }
+    },
+    {
+      "id": 114,
+      "word": "Spitze",
+      "meaning_a": {
+        "de": "Spitzenstoff",
+        "en": "delicate white lace fabric with intricate pattern"
+      },
+      "meaning_b": {
+        "de": "Bergspitze",
+        "en": "sharp snow-covered mountain peak against blue sky"
+      }
+    },
+    {
+      "id": 115,
+      "word": "Stempel",
+      "meaning_a": {
+        "de": "Poststempel",
+        "en": "rubber stamp pressing red ink onto paper"
+      },
+      "meaning_b": {
+        "de": "Blütenstempel",
+        "en": "close-up of a flower pistil with pollen"
+      }
+    },
+    {
+      "id": 116,
+      "word": "Stollen",
+      "meaning_a": {
+        "de": "Bergstollen",
+        "en": "dark mine tunnel entrance in a mountainside"
+      },
+      "meaning_b": {
+        "de": "Christstollen",
+        "en": "Christmas Stollen cake dusted with powdered sugar sliced"
+      }
+    },
+    {
+      "id": 117,
+      "word": "Strom",
+      "meaning_a": {
+        "de": "Fluss",
+        "en": "wide flowing river with strong current"
+      },
+      "meaning_b": {
+        "de": "Elektrizität",
+        "en": "electrical power lines with lightning bolt"
+      }
+    },
+    {
+      "id": 118,
+      "word": "Strudel",
+      "meaning_a": {
+        "de": "Wasserstrudel",
+        "en": "swirling water whirlpool vortex in a river"
+      },
+      "meaning_b": {
+        "de": "Apfelstrudel",
+        "en": "apple strudel pastry sliced showing apple filling"
+      }
+    },
+    {
+      "id": 119,
+      "word": "Tafel",
+      "meaning_a": {
+        "de": "Schultafel",
+        "en": "green chalkboard with chalk writing in a classroom"
+      },
+      "meaning_b": {
+        "de": "Schokoladentafel",
+        "en": "chocolate bar tablet with squares partially unwrapped"
+      }
+    },
+    {
+      "id": 120,
+      "word": "Weide",
+      "meaning_a": {
+        "de": "Baum",
+        "en": "weeping willow tree with drooping branches near water"
+      },
+      "meaning_b": {
+        "de": "Koppel",
+        "en": "green pasture with grazing cows and a wooden fence"
+      }
+    },
+    {
+      "id": 121,
+      "word": "Zahn",
+      "meaning_a": {
+        "de": "Menschenzahn",
+        "en": "white human molar tooth"
+      },
+      "meaning_b": {
+        "de": "Zahnradzahn",
+        "en": "metal cogwheel gear teeth close-up"
+      }
+    },
+    {
+      "id": 122,
+      "word": "Zehe",
+      "meaning_a": {
+        "de": "Fußzehe",
+        "en": "human toes on a bare foot"
+      },
+      "meaning_b": {
+        "de": "Knoblauchzehe",
+        "en": "garlic clove next to a whole garlic bulb"
+      }
+    },
+    {
+      "id": 123,
+      "word": "Zelle",
+      "meaning_a": {
+        "de": "Gefängniszelle",
+        "en": "prison cell with bars and a small bed"
+      },
+      "meaning_b": {
+        "de": "Körperzelle",
+        "en": "biological cell under microscope with visible nucleus"
+      }
+    },
+    {
+      "id": 124,
+      "word": "Zylinder",
+      "meaning_a": {
+        "de": "Hut",
+        "en": "black top hat worn by a gentleman"
+      },
+      "meaning_b": {
+        "de": "Motorzylinder",
+        "en": "engine cylinder and piston cross-section"
+      }
+    },
+    {
+      "id": 125,
+      "word": "Schweinsohr",
+      "meaning_a": {
+        "de": "Tierohr",
+        "en": "close-up of a pink pig ear on a cute pig"
+      },
+      "meaning_b": {
+        "de": "Gebäck",
+        "en": "crispy palmier pastry with caramelized sugar"
+      }
+    },
+    {
+      "id": 126,
+      "word": "Erde",
+      "meaning_a": {
+        "de": "Erdboden",
+        "en": "hands holding rich brown soil with a small plant seedling"
+      },
+      "meaning_b": {
+        "de": "Planet",
+        "en": "planet Earth seen from space with blue oceans and clouds"
+      }
+    },
+    {
+      "id": 127,
+      "word": "Iris",
+      "meaning_a": {
+        "de": "Auge",
+        "en": "close-up of a human eye showing colorful iris"
+      },
+      "meaning_b": {
+        "de": "Blume",
+        "en": "purple iris flower blooming in a garden"
+      }
+    },
+    {
+      "id": 128,
+      "word": "Sieben",
+      "meaning_a": {
+        "de": "Küchensieb",
+        "en": "metal kitchen sieve strainer"
+      },
+      "meaning_b": {
+        "de": "Zahl",
+        "en": "large bold number seven"
+      }
+    },
+    {
+      "id": 129,
+      "word": "Umzug",
+      "meaning_a": {
+        "de": "Karnevalsumzug",
+        "en": "colorful carnival parade with floats and costumes"
+      },
+      "meaning_b": {
+        "de": "Wohnungswechsel",
+        "en": "moving truck with cardboard boxes being loaded"
+      }
+    },
+    {
+      "id": 130,
+      "word": "Uhu",
+      "meaning_a": {
+        "de": "Kleber",
+        "en": "UHU glue stick tube"
+      },
+      "meaning_b": {
+        "de": "Vogel",
+        "en": "eagle owl with large orange eyes perched on branch"
+      }
+    },
+    {
+      "id": 131,
+      "word": "Wiener",
+      "meaning_a": {
+        "de": "Würstchen",
+        "en": "wiener sausages on a plate with mustard"
+      },
+      "meaning_b": {
+        "de": "Bewohner Wiens",
+        "en": "person in front of Vienna Stephansdom cathedral"
+      }
+    },
+    {
+      "id": 132,
+      "word": "Zopf",
+      "meaning_a": {
+        "de": "Hefezopf",
+        "en": "braided bread loaf golden baked"
+      },
+      "meaning_b": {
+        "de": "Haarzopf",
+        "en": "braided hair ponytail on a girl"
+      }
+    }
+  ]
+}

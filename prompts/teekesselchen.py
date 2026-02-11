@@ -4,19 +4,24 @@ Modus: Homonyme – zwei Bilder zeigen verschiedene Bedeutungen
 desselben Wortes (z.B. "Eis" zum Essen + "Eis" im Winter).
 """
 
+from tools.image import build_image_prompt
+
 
 class TeekesselchenPromptBuilder:
     """Baut Prompts für den Teekesselchen-Memory-Modus."""
 
-    def build_prompt(self, word: str, meaning: str, style: str = "cartoon") -> str:
+    def __init__(self, style: str = "cartoon", audience: str = "children"):
+        self.style = style
+        self.audience = audience
+
+    def build_prompt(self, meaning_en: str) -> str:
         """Erstellt einen Bildgenerierungs-Prompt für eine Wort-Bedeutung.
 
         Args:
-            word: Das Homonym (z.B. "Eis").
-            meaning: Die spezifische Bedeutung (z.B. "Speiseeis").
-            style: Bildstil.
+            meaning_en: Englische Beschreibung der Bedeutung
+                        (z.B. "wooden park bench in a park").
 
         Returns:
             Prompt-String für den Bildgenerator.
         """
-        raise NotImplementedError
+        return build_image_prompt(meaning_en, self.style, self.audience)

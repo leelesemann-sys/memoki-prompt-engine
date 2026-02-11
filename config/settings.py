@@ -8,15 +8,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Azure OpenAI (DALL-E 3)
-AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY", "")
-AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT", "")
-AZURE_OPENAI_DALLE_DEPLOYMENT = os.getenv("AZURE_OPENAI_DALLE_DEPLOYMENT", "dall-e-3")
-
-# Google AI Studio (Gemini / Nano Banana Pro)
+# Google AI Studio (Gemini)
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
+GOOGLE_CHAT_MODEL = "gemini-2.5-flash"  # Text-Chat für MEMOKI Agent
 GOOGLE_IMAGE_MODEL = "gemini-3-pro-image-preview"
+GOOGLE_IMAGE_MODEL_FAST = "gemini-2.5-flash-image"  # Fallback für Mathe-Karten
 
 # Spielfeld-Defaults
 DEFAULT_PAIR_COUNT = 6  # Anzahl Kartenpaare
-IMAGE_SIZE = "512x512"
+IMAGE_SIZE = "1024x1024"

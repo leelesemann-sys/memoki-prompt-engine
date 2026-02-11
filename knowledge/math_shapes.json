@@ -1,0 +1,218 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Zählsymbole für MEMOKI Mathe Abstrakt",
+    "usage": "User wählt einen Stil ODER 'Überrasch mich' → Agent wählt zufällig aus dieser Liste",
+    "selection_criteria": [
+      "Klar erkennbar auch bei kleiner Darstellung",
+      "Gut zählbar (keine überlappenden Formen)",
+      "Kindgerecht und ansprechend",
+      "Funktioniert für Zahlen 1-10"
+    ]
+  },
+  "shape_categories": {
+    "geometric": {
+      "name_de": "Geometrische Formen",
+      "shapes": [
+        {
+          "id": "circles",
+          "name_de": "Kreise",
+          "name_en": "circles",
+          "symbol": "●",
+          "image_prompt_en": "solid colored circles arranged in a clear pattern",
+          "colors": ["red", "blue", "green", "yellow"]
+        },
+        {
+          "id": "squares",
+          "name_de": "Quadrate",
+          "name_en": "squares",
+          "symbol": "■",
+          "image_prompt_en": "solid colored squares arranged in a grid pattern",
+          "colors": ["red", "blue", "orange", "purple"]
+        },
+        {
+          "id": "triangles",
+          "name_de": "Dreiecke",
+          "name_en": "triangles",
+          "symbol": "▲",
+          "image_prompt_en": "solid colored triangles pointing upward",
+          "colors": ["green", "blue", "red", "yellow"]
+        },
+        {
+          "id": "diamonds",
+          "name_de": "Rauten",
+          "name_en": "diamonds",
+          "symbol": "◆",
+          "image_prompt_en": "solid colored diamond shapes arranged clearly",
+          "colors": ["purple", "blue", "pink", "teal"]
+        },
+        {
+          "id": "hexagons",
+          "name_de": "Sechsecke",
+          "name_en": "hexagons",
+          "symbol": "⬡",
+          "image_prompt_en": "solid colored hexagons like honeycomb cells",
+          "colors": ["yellow", "orange", "amber", "gold"]
+        }
+      ]
+    },
+    "nature": {
+      "name_de": "Natur",
+      "shapes": [
+        {
+          "id": "stars",
+          "name_de": "Sterne",
+          "name_en": "stars",
+          "symbol": "★",
+          "image_prompt_en": "bright golden five-pointed stars",
+          "colors": ["gold", "yellow", "silver"]
+        },
+        {
+          "id": "flowers",
+          "name_de": "Blumen",
+          "name_en": "flowers",
+          "symbol": "✿",
+          "image_prompt_en": "simple cartoon flowers with round petals",
+          "colors": ["pink", "red", "yellow", "purple"]
+        },
+        {
+          "id": "leaves",
+          "name_de": "Blätter",
+          "name_en": "leaves",
+          "symbol": "🍃",
+          "image_prompt_en": "simple green leaves with visible veins",
+          "colors": ["green", "light green", "forest green"]
+        },
+        {
+          "id": "drops",
+          "name_de": "Tropfen",
+          "name_en": "water drops",
+          "symbol": "💧",
+          "image_prompt_en": "shiny blue water droplets",
+          "colors": ["blue", "light blue", "aqua"]
+        },
+        {
+          "id": "suns",
+          "name_de": "Sonnen",
+          "name_en": "suns",
+          "symbol": "☀",
+          "image_prompt_en": "bright yellow cartoon suns with rays",
+          "colors": ["yellow", "orange", "gold"]
+        }
+      ]
+    },
+    "objects": {
+      "name_de": "Objekte",
+      "shapes": [
+        {
+          "id": "hearts",
+          "name_de": "Herzen",
+          "name_en": "hearts",
+          "symbol": "♥",
+          "image_prompt_en": "solid red heart shapes",
+          "colors": ["red", "pink", "magenta"]
+        },
+        {
+          "id": "buttons",
+          "name_de": "Knöpfe",
+          "name_en": "buttons",
+          "symbol": "◉",
+          "image_prompt_en": "colorful round buttons with four holes",
+          "colors": ["red", "blue", "green", "yellow", "orange"]
+        },
+        {
+          "id": "coins",
+          "name_de": "Münzen",
+          "name_en": "coins",
+          "symbol": "🪙",
+          "image_prompt_en": "shiny golden coins",
+          "colors": ["gold", "bronze", "silver"]
+        },
+        {
+          "id": "gems",
+          "name_de": "Edelsteine",
+          "name_en": "gems",
+          "symbol": "💎",
+          "image_prompt_en": "sparkling cut gemstones",
+          "colors": ["blue", "red", "green", "purple", "pink"]
+        },
+        {
+          "id": "balloons",
+          "name_de": "Luftballons",
+          "name_en": "balloons",
+          "symbol": "🎈",
+          "image_prompt_en": "round colorful balloons with strings",
+          "colors": ["red", "blue", "yellow", "green", "pink"]
+        }
+      ]
+    },
+    "hands_and_dice": {
+      "name_de": "Hände & Würfel",
+      "shapes": [
+        {
+          "id": "fingers",
+          "name_de": "Finger",
+          "name_en": "fingers",
+          "symbol": "✋",
+          "image_prompt_en": "cartoon hand showing raised fingers for counting",
+          "special_handling": "1-5 one hand, 6-10 two hands",
+          "colors": ["skin tone", "cartoon style"]
+        },
+        {
+          "id": "dice",
+          "name_de": "Würfelaugen",
+          "name_en": "dice dots",
+          "symbol": "⚅",
+          "image_prompt_en": "classic dice dot pattern on white background",
+          "special_handling": "use standard dice arrangements, 7+ use two dice",
+          "colors": ["black dots on white"]
+        },
+        {
+          "id": "domino",
+          "name_de": "Dominosteine",
+          "name_en": "domino dots",
+          "symbol": "🁣",
+          "image_prompt_en": "domino tile with dots",
+          "special_handling": "use domino dot arrangements",
+          "colors": ["black dots on white"]
+        }
+      ]
+    },
+    "tally_and_blocks": {
+      "name_de": "Strichlisten & Blöcke",
+      "shapes": [
+        {
+          "id": "tally",
+          "name_de": "Strichliste",
+          "name_en": "tally marks",
+          "symbol": "卌",
+          "image_prompt_en": "tally marks with every fifth mark crossing the previous four",
+          "special_handling": "classic tally system: |||| crossed for 5",
+          "colors": ["black", "brown", "dark blue"]
+        },
+        {
+          "id": "blocks",
+          "name_de": "Bauklötze",
+          "name_en": "building blocks",
+          "symbol": "🧱",
+          "image_prompt_en": "colorful stacked toy building blocks",
+          "colors": ["red", "blue", "yellow", "green"]
+        }
+      ]
+    }
+  },
+  "user_choices": [
+    {"id": "circles", "display_de": "Kreise ●"},
+    {"id": "stars", "display_de": "Sterne ★"},
+    {"id": "hearts", "display_de": "Herzen ♥"},
+    {"id": "dice", "display_de": "Würfelaugen ⚅"},
+    {"id": "fingers", "display_de": "Finger ✋"},
+    {"id": "surprise", "display_de": "Überrasch mich! 🎲"}
+  ],
+  "surprise_pool": [
+    "circles", "squares", "triangles", "diamonds", "hexagons",
+    "stars", "flowers", "leaves", "drops", "suns",
+    "hearts", "buttons", "coins", "gems", "balloons",
+    "fingers", "dice", "domino", "tally", "blocks"
+  ]
+}

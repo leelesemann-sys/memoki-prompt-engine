@@ -2,6 +2,9 @@
   "metadata": {
     "version": "1.0",
     "description": "Kuratierte Objektpaare für MEMOKI Paare-Memory",
+    "source": "LLM-generiert basierend auf MEMOKI Paar-Typen-Klassifikation",
+    "methodology": "Option C (Hybrid): Kuratierte Basis-Paare nach Themen, erweiterbar durch LLM",
+    "last_updated": "2026-02-06",
     "quality_criteria": [
       "Beide Objekte werden gemeinsam benutzt",
       "Funktionale Zusammengehörigkeit (nicht nur thematisch)",
@@ -65,7 +68,7 @@
       "pairs": [
         {"a": {"de": "Tennisschläger", "en": "tennis racket"}, "b": {"de": "Tennisball", "en": "tennis ball"}, "type": "complementary"},
         {"a": {"de": "Ski", "en": "skis"}, "b": {"de": "Skistöcke", "en": "ski poles"}, "type": "complementary"},
-        {"a": {"de": "Schlittschuhe", "en": "ice skates"}, "b": {"de": "Kufenschoner", "en": "blade guards"}, "type": "device_accessory"},
+        {"a": {"de": "Schlittschuhe", "en": "ice skates"}, "b": {"de": "Kufenschoner", "en": "colorful rubber ice skate blade guards"}, "type": "device_accessory"},
         {"a": {"de": "Boxhandschuhe", "en": "boxing gloves"}, "b": {"de": "Sandsack", "en": "punching bag"}, "type": "complementary"},
         {"a": {"de": "Golfschläger", "en": "golf club"}, "b": {"de": "Golfball", "en": "golf ball"}, "type": "complementary"},
         {"a": {"de": "Badmintonschläger", "en": "badminton racket"}, "b": {"de": "Federball", "en": "shuttlecock"}, "type": "complementary"},
@@ -106,8 +109,8 @@
       "name_en": "Music",
       "pairs": [
         {"a": {"de": "Gitarre", "en": "acoustic guitar"}, "b": {"de": "Plektrum", "en": "guitar pick"}, "type": "device_accessory"},
-        {"a": {"de": "Geige", "en": "violin"}, "b": {"de": "Geigenbogen", "en": "violin bow"}, "type": "complementary"},
-        {"a": {"de": "Trommel", "en": "drum"}, "b": {"de": "Trommelstock", "en": "drumstick"}, "type": "complementary"},
+        {"a": {"de": "Geige", "en": "violin"}, "b": {"de": "Geigenkoffer", "en": "violin case with distinctive curved shape"}, "type": "container_lid"},
+        {"a": {"de": "Trommel", "en": "drum"}, "b": {"de": "Trommelstock", "en": "wooden drum stick for playing drums"}, "type": "complementary"},
         {"a": {"de": "Klavier", "en": "piano"}, "b": {"de": "Klavierhocker", "en": "piano bench"}, "type": "complementary"},
         {"a": {"de": "Notenständer", "en": "music stand"}, "b": {"de": "Notenblatt", "en": "sheet music"}, "type": "complementary"},
         {"a": {"de": "Mikrofon", "en": "microphone"}, "b": {"de": "Mikrofonständer", "en": "microphone stand"}, "type": "device_accessory"},
@@ -116,7 +119,7 @@
         {"a": {"de": "Triangel", "en": "triangle instrument"}, "b": {"de": "Triangelstab", "en": "triangle beater"}, "type": "complementary"},
         {"a": {"de": "Xylophon", "en": "xylophone"}, "b": {"de": "Schlägel", "en": "mallet"}, "type": "complementary"},
         {"a": {"de": "Saxophon", "en": "saxophone"}, "b": {"de": "Saxophon-Mundstück", "en": "saxophone mouthpiece"}, "type": "device_accessory"},
-        {"a": {"de": "Flöte", "en": "flute"}, "b": {"de": "Flötenkoffer", "en": "flute case"}, "type": "container_lid"},
+        {"a": {"de": "Trompete", "en": "trumpet"}, "b": {"de": "Trompetendämpfer", "en": "trumpet mute"}, "type": "device_accessory"},
         {"a": {"de": "E-Gitarre", "en": "electric guitar"}, "b": {"de": "Verstärker", "en": "guitar amplifier"}, "type": "complementary"},
         {"a": {"de": "Cello", "en": "cello"}, "b": {"de": "Cellobogen", "en": "cello bow"}, "type": "complementary"},
         {"a": {"de": "Metronom", "en": "metronome"}, "b": {"de": "Notenblatt", "en": "sheet music"}, "type": "complementary"}
@@ -135,8 +138,7 @@
         {"a": {"de": "Pflanzenkelle", "en": "garden trowel"}, "b": {"de": "Setzling", "en": "seedling"}, "type": "tool_material"},
         {"a": {"de": "Blumentopf", "en": "flower pot"}, "b": {"de": "Untersetzer", "en": "plant saucer"}, "type": "complementary"},
         {"a": {"de": "Rankgitter", "en": "garden trellis"}, "b": {"de": "Kletterpflanze", "en": "climbing plant"}, "type": "complementary"},
-        {"a": {"de": "Gewächshaus", "en": "greenhouse"}, "b": {"de": "Anzuchttöpfe", "en": "seed starter pots"}, "type": "complementary"},
-        {"a": {"de": "Vogelhaus", "en": "birdhouse"}, "b": {"de": "Vogelfutter", "en": "bird seed"}, "type": "complementary"},
+        {"a": {"de": "Vogelhaus", "en": "birdhouse"}, "b": {"de": "Vogel", "en": "garden bird perched on a branch"}, "type": "complementary"},
         {"a": {"de": "Schubkarre", "en": "wheelbarrow"}, "b": {"de": "Kompost", "en": "compost"}, "type": "complementary"},
         {"a": {"de": "Heckenschere", "en": "hedge shears"}, "b": {"de": "Hecke", "en": "hedge bush"}, "type": "tool_material"},
         {"a": {"de": "Unkrautstecher", "en": "weed puller"}, "b": {"de": "Unkraut", "en": "weeds"}, "type": "tool_material"},
