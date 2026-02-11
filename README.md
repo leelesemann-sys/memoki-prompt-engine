@@ -2,6 +2,8 @@
 
 MEMOKI generates complete, playable Memory card games using generative AI. Users chat with an AI agent to describe their game, and the system produces a full deck of illustrated cards -- with reliably correct image content, exact object counts, and consistent visual style across all cards.
 
+**Bilingual** (German/English) with language-specific knowledge bases and a full i18n system.
+
 The core challenge: getting generative AI to produce **exactly 7 apples** (not 6, not 8) across 20+ cards in a single session. Anyone who has tried counting tasks with DALL-E or Gemini knows how unreliable this is out of the box. MEMOKI solves this through production-grade prompt engineering.
 
 ## What Makes This Project Technically Interesting
@@ -44,17 +46,19 @@ User --> Streamlit UI --> MemokiAgent (Gemini Chat)
                      Deck Assembly --> Play or Download
 ```
 
-- **Clean separation**: agents / prompts / tools / game logic / generators / knowledge bases
+- **Clean separation**: agents / prompts / tools / game logic / generators / knowledge bases / i18n
 - **Abstract generator interface** -- swap image backends without touching game logic
 - **Automatic fallback** -- if the primary model (Gemini 3 Pro) fails, falls back to Gemini 2.5 Flash
 - **Parallel generation** -- 20-40 images generated concurrently via ThreadPoolExecutor
+- **Full i18n** -- bilingual UI with language-specific homonym knowledge bases
 
 ## Tech Stack
 
-- **Frontend**: Streamlit 1.30+
+- **Frontend**: Streamlit 1.39+
 - **Chat Model**: Google Gemini 2.5 Flash (agent orchestration)
 - **Image Model**: Google Gemini 3 Pro (primary) / Gemini 2.5 Flash (fallback)
 - **Language**: Python 3.11+
+- **i18n**: German & English (extensible)
 - **Key Libraries**: google-genai, Pillow, python-dotenv
 
 ## Game Modes
@@ -63,7 +67,7 @@ User --> Streamlit UI --> MemokiAgent (Gemini Chat)
 |------|--------|--------|----------------|
 | **Classic Memory** | Image of object | Identical image | LLM-generated object list |
 | **Pairs Memory** | Object A (e.g. pot) | Related object B (e.g. lid) | Curated knowledge base (10 themes, 150+ pairs) |
-| **Teekesselchen** | Meaning A of word | Meaning B of same word | Curated knowledge base (132 German homophones) |
+| **Teekesselchen / Teapot Memory** | Meaning A of word | Meaning B of same word | Curated knowledge base (DE: 130 homonyms, EN: 119 homonyms) |
 | **Math Memory I** | Number (e.g. "5") | 5 abstract shapes | Curated shape definitions (20+ variations) |
 | **Math Memory II** | Number (e.g. "5") | 5 real objects | LLM-generated countable objects |
 
@@ -111,21 +115,31 @@ memoki-prompt-engine/
     nano_banana.py        Gemini 3 Pro implementation
 
   knowledge/
-    teekesselchen_v2.json 132 curated German homophones (DE + EN translations)
+    teekesselchen_de.json 130 curated German homonyms
+    teekesselchen_en.json 119 curated English homonyms
     pairs_v2.json         10 themes x 15+ object pairs
     math_shapes.json      20+ shape variations across 5 categories
 
+  i18n/
+    __init__.py           Language registry, t() helper function
+    de.py                 German strings + How-It-Works content
+    en.py                 English strings + How-It-Works content
+
   config/
     settings.py           API keys, model config, defaults
+
+  pages/
+    1_How_It_Works.py     Interactive documentation (7 mode pages + architecture)
 ```
 
 ## How It Works
 
-1. **Select a mode** from the sidebar
-2. **Chat with MEMOKI** -- the agent asks for theme, style, and audience
-3. **Generation pipeline** builds mode-specific prompts and generates images in parallel
-4. **Preview** all cards sorted by pair, or **play** a full Memory game in the browser
-5. **Download** the complete deck as a ZIP file
+1. **Pick a language** (Deutsch / English) in the sidebar
+2. **Select a mode** from the sidebar
+3. **Chat with MEMOKI** -- the agent asks for theme, style, and audience
+4. **Generation pipeline** builds mode-specific prompts and generates images in parallel
+5. **Preview** all cards sorted by pair, or **play** a full Memory game in the browser
+6. **Download** the complete deck as a ZIP file
 
 For full technical documentation, see [docs/architecture.md](docs/architecture.md).
 

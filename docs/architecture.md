@@ -2,7 +2,9 @@
 
 ## Overview
 
-MEMOKI is a German-language AI Memory card game generator. The user selects a game mode, chats with an AI agent to specify parameters (theme, art style, audience), and the system generates a complete deck of illustrated Memory cards using Google Gemini models.
+MEMOKI is a bilingual (German/English) AI Memory card game generator. The user selects a game mode, chats with an AI agent to specify parameters (theme, art style, audience), and the system generates a complete deck of illustrated Memory cards using Google Gemini models.
+
+The app features a full internationalization (i18n) system with language-specific knowledge bases, allowing seamless switching between German and English UI and content.
 
 ### System Architecture
 
@@ -28,6 +30,8 @@ graph TD
     ImageGen --> DeckBuilder[Deck Builder<br>game/deck.py]
     DeckBuilder --> UI
     KB[(Knowledge Bases<br>knowledge/*.json)] --> Content
+    UI --> I18N[i18n Layer<br>i18n/*.py]
+    I18N --> UI
 ```
 
 </details>
@@ -67,6 +71,7 @@ graph TD
 The frontend uses a two-column layout:
 - **Left column**: Mode selection cards (5 modes), chat interface
 - **Right column**: Game board (preview or play mode)
+- **Sidebar**: Language selector (Deutsch/English via `st.pills`), mode navigation
 
 **Key responsibilities**:
 - Renders the mode selection UI with animated CSS cards
@@ -92,6 +97,7 @@ The frontend uses a two-column layout:
 | `first_pick` | int or None | Index of first card clicked |
 | `moves` | int | Total moves in current game |
 | `view_mode` | str | "preview" or "play" |
+| `lang` | str | Current UI language ("de" or "en") |
 
 ### app_test.py -- Test / Preview Mode
 
@@ -226,7 +232,7 @@ Both functions call Gemini 2.5 Flash with detailed prompts that include good/bad
 
 | Function | File | Returns |
 |----------|------|---------|
-| `load_teekesselchen(count)` | `teekesselchen_v2.json` | Random selection of homophones with DE/EN translations |
+| `load_teekesselchen(count, lang)` | `teekesselchen_{lang}.json` | Random selection of homophones from language-specific knowledge base (fallback: DE) |
 | `load_pairs(theme, count)` | `pairs_v2.json` | Random selection of object pairs for a theme |
 | `load_pairs_themes()` | `pairs_v2.json` | List of available theme names |
 | `load_math_shape(shape_id)` | `math_shapes.json` | Shape definition dict (supports "surprise" = random) |
@@ -321,21 +327,42 @@ The most sophisticated prompt module, containing:
 
 ## Knowledge Bases
 
-### teekesselchen_v2.json
+### Teekesselchen / Homonym Knowledge Bases
 
-132 curated German homophones (words with multiple meanings), each with:
+MEMOKI uses **language-specific** homonym knowledge bases. Homonyms cannot be translated -- "Schloss" (castle/door lock) has no English equivalent, "Bat" (animal/baseball bat) has no German one.
+
+#### teekesselchen_de.json -- German Homonyms
+
+130 curated German homophones (words with multiple meanings), each with:
 
 ```json
 {
   "id": 1,
   "word": "Bank",
-  "meaning_a": { "de": "Sitzbank", "en": "wooden park bench" },
-  "meaning_b": { "de": "Geldinstitut", "en": "bank building exterior" }
+  "meaning_a": { "de": "Sitzbank", "en": "wooden park bench", "prompt": "wooden park bench in a park" },
+  "meaning_b": { "de": "Geldinstitut", "en": "bank building exterior", "prompt": "bank building exterior with columns" }
 }
 ```
 
 - Source: deutschmeisterei.de, mijan.de, manual curation
 - Criteria: Both meanings must be visually depictable, child-friendly, no abstract concepts
+
+#### teekesselchen_en.json -- English Homonyms
+
+119 curated English homonyms, same structure:
+
+```json
+{
+  "id": 1,
+  "word": "Bat",
+  "meaning_a": { "de": "Fledermaus", "en": "bat (animal)", "prompt": "small flying bat animal with spread wings at night" },
+  "meaning_b": { "de": "Baseballschläger", "en": "baseball bat", "prompt": "wooden baseball bat" }
+}
+```
+
+- Source: manually curated
+- The `prompt` field (always English) is used for image generation; `de`/`en` labels are used for the UI
+- `load_teekesselchen(count, lang)` automatically selects the correct file based on the current language
 
 ### pairs_v2.json
 
@@ -378,7 +405,7 @@ app.py (on JSON action received)
   +--> Load content
   |      Classic:        generate_objects() via LLM
   |      Pairs:          load_pairs() from JSON
-  |      Teekesselchen:  load_teekesselchen() from JSON
+  |      Teekesselchen:  load_teekesselchen(count, lang) from language-specific JSON
   |      Math Abstract:  load_math_shape() from JSON + numbers 1..N
   |      Math Concrete:  generate_countable_objects() via LLM + numbers 1..N
   |
@@ -415,12 +442,13 @@ app.py (on JSON action received)
 - **Deck structure**: Object A paired with related Object B (different images)
 - **User inputs**: Theme (from fixed list of 10), Style, Audience
 
-### 3. Teekesselchen Memory
+### 3. Teekesselchen / Teapot Memory
 
-- **Data source**: `load_teekesselchen(count)` from `teekesselchen_v2.json`
+- **Data source**: `load_teekesselchen(count, lang)` from `teekesselchen_{lang}.json` (DE: 130 entries, EN: 119 entries)
 - **Prompt builder**: `TeekesselchenPromptBuilder` -> `build_image_prompt()`
 - **Deck structure**: Meaning A paired with Meaning B (same word, different images)
 - **User inputs**: Style, Audience (no theme needed)
+- **Language-specific**: German UI loads German homonyms, English UI loads English homonyms
 
 ### 4. Math Memory I (Abstract)
 
@@ -465,6 +493,36 @@ Themed number cards use a constraint to prevent digit reshaping:
 
 ---
 
+## Internationalization (i18n)
+
+MEMOKI supports German and English with a clean i18n architecture:
+
+### Architecture
+
+```
+i18n/
+  __init__.py          Language registry, t() helper function
+  de.py                German: STRINGS dict + MODE_DATA (How-It-Works content)
+  en.py                English: STRINGS dict + MODE_DATA (How-It-Works content)
+```
+
+### Key concepts
+
+- **`STRINGS` dict**: Flat, dot-notated keys (`"greeting.hello"`, `"gen.tk.status"`) for all UI texts
+- **`t(key, **kwargs)` function**: Returns the localized string, replaces `{placeholders}` via `.format()`, returns the key itself for missing translations (debugging aid)
+- **`MODE_DATA` dict**: How-It-Works documentation per game mode (icon, title, what, how, prompt_engineering, challenges, learnings)
+- **Language selector**: Compact `st.pills` widget in sidebar (Deutsch | English), stored in `st.session_state.lang`
+- **Language-specific knowledge bases**: `teekesselchen_de.json` (130 entries) and `teekesselchen_en.json` (119 entries) -- homonyms are curated per language, not translated
+- **Image prompts stay English**: The `prompt` field in all knowledge base entries is always English, since image generation models perform best in English
+
+### Adding a new language
+
+1. Copy and translate a language file (e.g. `i18n/fr.py`)
+2. Register it in `i18n/__init__.py`
+3. Optionally create a language-specific knowledge base (`teekesselchen_fr.json`)
+
+---
+
 ## Configuration & Deployment
 
 ### Local development
@@ -480,7 +538,7 @@ The app reads secrets via `st.secrets` when deployed on Streamlit Cloud. Add `GO
 ### Dependencies
 
 ```
-streamlit>=1.30.0
+streamlit>=1.39.0
 openai>=1.10.0
 google-genai>=1.0.0
 python-dotenv>=1.0.0
@@ -488,3 +546,4 @@ Pillow>=10.0.0
 ```
 
 > Note: `openai` is listed as a dependency but not actively used -- Gemini handles all LLM tasks.
+> Note: `streamlit>=1.39.0` is required for `st.pills` (used for the language selector).
