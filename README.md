@@ -1,5 +1,7 @@
 # MEMOKI -- AI Memory Game Generator
 
+**[▶ Live Demo](https://memoki-prompt-engine.streamlit.app/)**
+
 MEMOKI generates complete, playable Memory card games using generative AI. Users chat with an AI agent to describe their game, and the system produces a full deck of illustrated cards -- with reliably correct image content, exact object counts, and consistent visual style across all cards.
 
 **Bilingual** (German/English) with language-specific knowledge bases and a full i18n system.
